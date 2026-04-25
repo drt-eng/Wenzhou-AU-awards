@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WAU Africa Day Awards 2026 | Wenzhou A<link rel="icon" type="image/png" href="logo.png" />frican Union</title>
+  <meta name="description" content="Wenzhou African Union - Africa Day 2026 Awards. Celebrating African Excellence in Wenzhou, China. Nominate, vote, and join us for the AU Day Gala on May 23, 2026." />
+  <meta property="og:title" content="WAU Africa Day Awards 2026" />
+  <meta property="og:description" content="Celebrating African Excellence in Wenzhou, China. Join us May 23, 2026." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes scrollFlags {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0); }
+      50%       { transform: translate(30px, 50px); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0); }
+      50%       { transform: translate(-30px, -50px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50%       { box-shadow: 0 0 0 15px rgba(34,197,94,0); }
+    }
+    @keyframes shimmer {
+      0%   { left: -75%; }
+      100% { left: 125%; }
+    }
+    @keyframes matchPulse {
+      0%, 100% { background-color: rgba(34,197,94,0.1); }
+      50%       { background-color: rgba(34,197,94,0.25); }
+    }
+    @keyframes finalGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(234,179,8,0.5); }
+      50%       { box-shadow: 0 0 20px 10px rgba(234,179,8,0.2); }
+    }
+
+    .animate-flag-scroll { animation: scrollFlags 60s linear infinite; }
+    .blob1 { animation: float1 8s ease-in-out infinite; }
+    .blob2 { animation: float2 10s ease-in-out infinite; }
+    .animate-fade-up { animation: fadeInUp 0.8s ease forwards; }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .match-live { animation: matchPulse 2s ease-in-out infinite; }
+    .final-glow { animation: finalGlow 2s ease-in-out infinite; }
+
+    .reveal { opacity: 0; }
+    .reveal.visible { opacity: 1; }
+
+    html { scroll-behavior: smooth; }
+
+    .text-gradient-g2y {
+      background: linear-gradient(to right, #16a34a, #ca8a04);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .text-gradient-g2r {
+      background: linear-gradient(to right, #16a34a, #ca8a04, #dc2626);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .text-gradient-purple {
+      background: linear-gradient(to right, #9333ea, #db2777);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-hover {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+
+    .digit-box {
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      min-width: 64px;
+      text-align: center;
+    }
+
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    #mobile-menu.open { max-height: 500px; }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #16a34a !important;
+      box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
+    }
+
+    .upload-area:hover { border-color: #16a34a; background: #f0fdf4; }
+    .gallery-item { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .gallery-item:hover { transform: scale(1.05); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+    .schedule-item { display: flex; align-items: flex-start; gap: 1rem; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 3px; }
+
+    .btn-shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-shimmer::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -75%;
+      width: 50%; height: 200%;
+      background: rgba(255,255,255,0.2);
+      transform: skewX(-20deg);
+      animation: shimmer 3s infinite;
+    }
+
+    select option { color: #1f2937; background: #fff; }
+
+    .match-card {
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+    .match-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .match-card.group-stage { border-left-color: #16a34a; }
+    .match-card.semi-final  { border-left-color: #2563eb; }
+    .match-card.third-place { border-left-color: #b45309; }
+    .match-card.final       { border-left-color: #ca8a04; }
+
+    .status-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .status-upcoming { background: #e0f2fe; color: #0369a1; }
+    .status-live     { background: #dcfce7; color: #15803d; }
+    .status-finished { background: #f1f5f9; color: #64748b; }
+
+    .date-badge {
+      min-width: 52px;
+      text-align: center;
+      border-radius: 0.75rem;
+      padding: 6px 4px;
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: white;
+      font-weight: 800;
+      font-size: 0.75rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    .fixture-tab {
+      transition: all 0.25s ease;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .fixture-tab.active {
+      border-bottom-color: #16a34a;
+      color: #16a34a;
+      font-weight: 700;
+    }
+    .fixture-tab:hover:not(.active) {
+      border-bottom-color: #86efac;
+      color: #15803d;
+    }
+
+    .round-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    .vs-divider {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #94a3b8;
+      letter-spacing: 0.1em;
+    }
+
+    .team-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.2;
+    }
+
+    .supporter-flag {
+      display: inline-block;
+      font-size: 1.8rem;
+      transition: transform 0.2s;
+    }
+    .supporter-flag:hover { transform: scale(1.3) rotate(-5deg); }
+
+    /* Bafana multi-flag stack */
+    .bafana-flags {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+      background: linear-gradient(135deg,#f0fdf4,#fefce8);
+      border: 1px solid #d1fae5;
+      border-radius: 6px;
+      padding: 2px 5px;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .bafana-flags .flag-sep {
+      font-size: 0.55rem;
+      color: #94a3b8;
+      font-weight: 900;
+      margin: 0 1px;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
+
+<!-- HEADER -->
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="#home" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center"
+             style="background:linear-gradient(135deg,#16a34a,#ca8a04,#dc2626)">
+          <svg class="w-6 h-6" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M8 21h8M12 17v4M5 3l7 7 7-7M5 3h14M5 3v5a7 7 0 0014 0V3"/>
+          </svg>
+        </div>
+        <span class="text-xl font-bold text-gradient-g2r">WAU</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+        <a href="#home"       class="text-gray-700 hover:text-green-600 transition" data-en="Home"           data-fr="Accueil">Home</a>
+        <a href="#about"      class="text-gray-700 hover:text-green-600 transition" data-en="About"          data-fr="À Propos">About</a>
+        <a href="#categories" class="text-gray-700 hover:text-green-600 transition" data-en="Categories"     data-fr="Catégories">Categories</a>
+        <a href="#nominate"   class="text-gray-700 hover:text-green-600 transition" data-en="Nominate"       data-fr="Nommer">Nominate</a>
+        <a href="#vote"       class="text-gray-700 hover:text-green-600 transition" data-en="Vote"           data-fr="Voter">Vote</a>
+        <a href="#fixtures"   class="text-gray-700 hover:text-green-600 transition" data-en="AFCON Fixtures" data-fr="Matchs AFCON">AFCON Fixtures</a>
+        <a href="#gallery"    class="text-gray-700 hover:text-green-600 transition" data-en="Gallery"        data-fr="Galerie">Gallery</a>
+        <a href="#contact"    class="text-gray-700 hover:text-green-600 transition" data-en="Contact"        data-fr="Contact">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button id="lang-btn"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 transition text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+          </svg>
+          <span id="lang-label">FR</span>
+        </button>
+        <button id="hamburger" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition">
+          <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden bg-white border-t">
+    <nav class="flex flex-col p-4 gap-1">
+      <a href="#home"       class="px-4 py-2 rounded-lg hover:bg-gray-100 transition" data-en="Home"            data-fr="Accueil"       onclick="closeMobileMenu()">Home</a>
+      <a href="#about"      class="px-4 py-2 rounded-lg hover:bg-gray-100 transition" data-en="About"           data-fr="À Propos"      onclick="closeMobileMenu()">About</a>
+      <a href="#categories" class="px-4 py-2 rounded-lg hover:bg-gray-100 transition" data-en="Categories"      data-fr="Catégories"    onclick="closeMobileMenu()">Categories</a>
+      <a href="#nominate"   class="px-4 py-2 rounded-lg hover:bg-gray-100 transition" data-en="Nominate"        data-fr="Nommer"        onclick="closeMobileMenu()">Nominate</a>
+      <a href="#vote"       class="px-4 py-2 rounded-lg hover:bg-gray-100 transition" data-en="Vote"            data-fr="Voter"         onclick="closeMobileMenu()">Vote</a>
+      <a href="#fixtures"   class="px-4 py-2 rounded-lg hover:bg-gray-100 transition" data-en="AFCON Fixtures"  data-fr="Matchs AFCON"  onclick="closeMobileMenu()">AFCON Fixtures</a>
+      <a href="#gallery"    class="px-4 py-2 rounded-lg hover:bg-gray-100 transition" data-en="Gallery"         data-fr="Galerie"       onclick="closeMobileMenu()">Gallery</a>
+      <a href="#contact"    class="px-4 py-2 rounded-lg hover:bg-gray-100 transition" data-en="Contact"         data-fr="Contact"       onclick="closeMobileMenu()">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- SCROLLING FLAGS BANNER -->
+<div class="fixed top-16 left-0 right-0 z-40 py-2 overflow-hidden"
+     style="background:linear-gradient(to right,#16a34a,#ca8a04,#dc2626)">
+  <div class="animate-flag-scroll flex gap-4 whitespace-nowrap" style="width:max-content">
+    <span class="text-2xl">🇩🇿</span><span class="text-2xl">🇦🇴</span><span class="text-2xl">🇧🇯</span>
+    <span class="text-2xl">🇧🇼</span><span class="text-2xl">🇧🇫</span><span class="text-2xl">🇧🇮</span>
+    <span class="text-2xl">🇨🇻</span><span class="text-2xl">🇨🇲</span><span class="text-2xl">🇨🇫</span>
+    <span class="text-2xl">🇹🇩</span><span class="text-2xl">🇰🇲</span><span class="text-2xl">🇨🇬</span>
+    <span class="text-2xl">🇨🇩</span><span class="text-2xl">🇨🇮</span><span class="text-2xl">🇩🇯</span>
+    <span class="text-2xl">🇪🇬</span><span class="text-2xl">🇬🇶</span><span class="text-2xl">🇪🇷</span>
+    <span class="text-2xl">🇸🇿</span><span class="text-2xl">🇪🇹</span><span class="text-2xl">🇬🇦</span>
+    <span class="text-2xl">🇬🇲</span><span class="text-2xl">🇬🇭</span><span class="text-2xl">🇬🇳</span>
+    <span class="text-2xl">🇬🇼</span><span class="text-2xl">🇰🇪</span><span class="text-2xl">🇱🇸</span>
+    <span class="text-2xl">🇱🇷</span><span class="text-2xl">🇱🇾</span><span class="text-2xl">🇲🇬</span>
+    <span class="text-2xl">🇲🇼</span><span class="text-2xl">🇲🇱</span><span class="text-2xl">🇲🇷</span>
+    <span class="text-2xl">🇲🇺</span><span class="text-2xl">🇲🇦</span><span class="text-2xl">🇲🇿</span>
+    <span class="text-2xl">🇳🇦</span><span class="text-2xl">🇳🇪</span><span class="text-2xl">🇳🇬</span>
+    <span class="text-2xl">🇷🇼</span><span class="text-2xl">🇸🇹</span><span class="text-2xl">🇸🇳</span>
+    <span class="text-2xl">🇸🇨</span><span class="text-2xl">🇸🇱</span><span class="text-2xl">🇸🇴</span>
+    <span class="text-2xl">🇿🇦</span><span class="text-2xl">🇸🇸</span><span class="text-2xl">🇸🇩</span>
+    <span class="text-2xl">🇹🇿</span><span class="text-2xl">🇹🇬</span><span class="text-2xl">🇹🇳</span>
+    <span class="text-2xl">🇺🇬</span><span class="text-2xl">🇿🇲</span><span class="text-2xl">🇿🇼</span>
+    <span class="text-2xl">🇩🇿</span><span class="text-2xl">🇦🇴</span><span class="text-2xl">🇧🇯</span>
+    <span class="text-2xl">🇧🇼</span><span class="text-2xl">🇧🇫</span><span class="text-2xl">🇧🇮</span>
+    <span class="text-2xl">🇨🇻</span><span class="text-2xl">🇨🇲</span><span class="text-2xl">🇨🇫</span>
+    <span class="text-2xl">🇹🇩</span><span class="text-2xl">🇰🇲</span><span class="text-2xl">🇨🇬</span>
+    <span class="text-2xl">🇨🇩</span><span class="text-2xl">🇨🇮</span><span class="text-2xl">🇩🇯</span>
+    <span class="text-2xl">🇪🇬</span><span class="text-2xl">🇬🇶</span><span class="text-2xl">🇪🇷</span>
+    <span class="text-2xl">🇸🇿</span><span class="text-2xl">🇪🇹</span><span class="text-2xl">🇬🇦</span>
+    <span class="text-2xl">🇬🇲</span><span class="text-2xl">🇬🇭</span><span class="text-2xl">🇬🇳</span>
+    <span class="text-2xl">🇬🇼</span><span class="text-2xl">🇰🇪</span><span class="text-2xl">🇱🇸</span>
+    <span class="text-2xl">🇱🇷</span><span class="text-2xl">🇱🇾</span><span class="text-2xl">🇲🇬</span>
+    <span class="text-2xl">🇲🇼</span><span class="text-2xl">🇲🇱</span><span class="text-2xl">🇲🇷</span>
+    <span class="text-2xl">🇲🇺</span><span class="text-2xl">🇲🇦</span><span class="text-2xl">🇲🇿</span>
+    <span class="text-2xl">🇳🇦</span><span class="text-2xl">🇳🇪</span><span class="text-2xl">🇳🇬</span>
+    <span class="text-2xl">🇷🇼</span><span class="text-2xl">🇸🇹</span><span class="text-2xl">🇸🇳</span>
+    <span class="text-2xl">🇸🇨</span><span class="text-2xl">🇸🇱</span><span class="text-2xl">🇸🇴</span>
+    <span class="text-2xl">🇿🇦</span><span class="text-2xl">🇸🇸</span><span class="text-2xl">🇸🇩</span>
+    <span class="text-2xl">🇹🇿</span><span class="text-2xl">🇹🇬</span><span class="text-2xl">🇹🇳</span>
+    <span class="text-2xl">🇺🇬</span><span class="text-2xl">🇿🇲</span><span class="text-2xl">🇿🇼</span>
+  </div>
+</div>
+
+<main class="pt-28">
+
+  <!-- HERO -->
+  <section id="home" class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+    <div class="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl blob1 pointer-events-none"
+         style="background:rgba(74,222,128,0.2)"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl blob2 pointer-events-none"
+         style="background:rgba(250,204,21,0.2)"></div>
+
+    <div class="max-w-5xl mx-auto text-center relative z-10 animate-fade-up">
+      <div class="mb-8 flex justify-center">
+        <div class="w-24 h-24 rounded-full flex items-center justify-center shadow-2xl pulse-glow"
+             style="background:linear-gradient(135deg,#16a34a,#ca8a04,#dc2626)">
+          <svg class="w-12 h-12" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M8 21h8M12 17v4M5 3l7 7 7-7M5 3h14M5 3v5a7 7 0 0014 0V3"/>
+          </svg>
+        </div>
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient-g2r"
+          data-en="Wenzhou African Union" data-fr="Union Africaine de Wenzhou">
+        Wenzhou African Union
+      </h1>
+      <p class="text-2xl md:text-3xl text-gray-700 mb-12"
+         data-en="Africa Day 2026 Awards" data-fr="Prix de la Journée de l'Afrique 2026">
+        Africa Day 2026 Awards
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        <div class="bg-white rounded-2xl shadow-xl p-6">
+          <h3 class="text-lg font-bold text-center mb-4 text-gray-800"
+              data-en="Voting Starts In" data-fr="Le Vote Commence Dans">Voting Starts In</h3>
+          <div id="voting-countdown" class="grid grid-cols-4 gap-3">
+            <div class="text-center">
+              <div class="digit-box text-white" style="background:linear-gradient(135deg,#16a34a,#15803d)">
+                <div id="v-days" class="text-3xl font-bold">--</div>
+              </div>
+              <div class="text-xs mt-1 text-gray-600" data-en="Days" data-fr="Jours">Days</div>
+            </div>
+            <div class="text-center">
+              <div class="digit-box text-white" style="background:linear-gradient(135deg,#ca8a04,#a16207)">
+                <div id="v-hours" class="text-3xl font-bold">--</div>
+              </div>
+              <div class="text-xs mt-1 text-gray-600" data-en="Hours" data-fr="Heures">Hours</div>
+            </div>
+            <div class="text-center">
+              <div class="digit-box text-white" style="background:linear-gradient(135deg,#dc2626,#b91c1c)">
+                <div id="v-minutes" class="text-3xl font-bold">--</div>
+              </div>
+              <div class="text-xs mt-1 text-gray-600" data-en="Minutes" data-fr="Minutes">Minutes</div>
+            </div>
+            <div class="text-center">
+              <div class="digit-box text-white" style="background:linear-gradient(135deg,#9333ea,#7e22ce)">
+                <div id="v-seconds" class="text-3xl font-bold">--</div>
+              </div>
+              <div class="text-xs mt-1 text-gray-600" data-en="Seconds" data-fr="Secondes">Seconds</div>
+            </div>
+          </div>
+          <div id="voting-open-msg" class="hidden text-center">
+            <p class="text-2xl font-bold text-green-600" data-en="Voting is Now Open!" data-fr="Le Vote est Ouvert!">Voting is Now Open!</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-6">
+          <h3 class="text-lg font-bold text-center mb-4 text-gray-800"
+              data-en="AU Day Gala — The Main Event" data-fr="Gala de la Journée UA — L'Événement Principal">
+            AU Day Gala — The Main Event
+          </h3>
+          <div id="event-countdown" class="grid grid-cols-4 gap-3">
+            <div class="text-center">
+              <div class="digit-box text-white" style="background:linear-gradient(135deg,#16a34a,#15803d)">
+                <div id="e-days" class="text-3xl font-bold">--</div>
+              </div>
+              <div class="text-xs mt-1 text-gray-600" data-en="Days" data-fr="Jours">Days</div>
+            </div>
+            <div class="text-center">
+              <div class="digit-box text-white" style="background:linear-gradient(135deg,#ca8a04,#a16207)">
+                <div id="e-hours" class="text-3xl font-bold">--</div>
+              </div>
+              <div class="text-xs mt-1 text-gray-600" data-en="Hours" data-fr="Heures">Hours</div>
+            </div>
+            <div class="text-center">
+              <div class="digit-box text-white" style="background:linear-gradient(135deg,#dc2626,#b91c1c)">
+                <div id="e-minutes" class="text-3xl font-bold">--</div>
+              </div>
+              <div class="text-xs mt-1 text-gray-600" data-en="Minutes" data-fr="Minutes">Minutes</div>
+            </div>
+            <div class="text-center">
+              <div class="digit-box text-white" style="background:linear-gradient(135deg,#9333ea,#7e22ce)">
+                <div id="e-seconds" class="text-3xl font-bold">--</div>
+              </div>
+              <div class="text-xs mt-1 text-gray-600" data-en="Seconds" data-fr="Secondes">Seconds</div>
+            </div>
+          </div>
+          <div id="event-today-msg" class="hidden text-center">
+            <p class="text-2xl font-bold text-green-600" data-en="Event is Today!" data-fr="L'Événement est Aujourd'hui!">Event is Today!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#nominate"
+           class="btn-shimmer group px-8 py-4 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+           style="background:linear-gradient(to right,#16a34a,#15803d)">
+          <span data-en="Nominate Now" data-fr="Nommer Maintenant">Nominate Now</span>
+          <svg class="w-5 h-5 group-hover:translate-x-1 transition" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </a>
+        <a href="#vote"
+           class="px-8 py-4 bg-white text-green-700 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 border-2 border-green-200 hover:border-green-500">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span data-en="Vote" data-fr="Voter">Vote</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-bold mb-4">Est. 2022</div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y"
+            data-en="About WAU" data-fr="À Propos de WAU">About WAU</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg reveal card-hover">
+          <div class="text-4xl mb-4">👁️</div>
+          <h3 class="text-2xl font-bold mb-4 text-gray-800" data-en="Our Vision" data-fr="Notre Vision">Our Vision</h3>
+          <p class="text-gray-700 leading-relaxed"
+             data-en="A thriving, united African community in Wenzhou where every member has the opportunity to succeed, connect, and celebrate our rich cultural heritage while building bridges with our Chinese hosts."
+             data-fr="Une communauté africaine prospère et unie à Wenzhou où chaque membre a l'opportunité de réussir, de se connecter et de célébrer notre riche patrimoine culturel tout en construisant des ponts avec nos hôtes chinois.">
+            A thriving, united African community in Wenzhou where every member has the opportunity to succeed, connect, and celebrate our rich cultural heritage while building bridges with our Chinese hosts.
+          </p>
+        </div>
+        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl shadow-lg reveal card-hover">
+          <div class="text-4xl mb-4">🌍</div>
+          <h3 class="text-2xl font-bold mb-4 text-gray-800" data-en="Our Mission" data-fr="Notre Mission">Our Mission</h3>
+          <p class="text-gray-700 leading-relaxed"
+             data-en="The Wenzhou African Union exists to unite, empower, and celebrate the African community in Wenzhou, China. We foster cultural exchange, support African businesses, and create a home away from home for every African residing in this vibrant city."
+             data-fr="L'Union Africaine de Wenzhou existe pour unir, autonomiser et célébrer la communauté africaine à Wenzhou, en Chine. Nous favorisons les échanges culturels, soutenons les entreprises africaines et créons un chez-soi loin de chez soi pour chaque Africain résidant dans cette ville dynamique.">
+            The Wenzhou African Union exists to unite, empower, and celebrate the African community in Wenzhou, China. We foster cultural exchange, support African businesses, and create a home away from home for every African residing in this vibrant city.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-red-50 to-orange-100 p-8 md:p-12 rounded-2xl shadow-xl mb-12 reveal">
+        <div class="text-5xl mb-4">📅</div>
+        <h3 class="text-3xl font-bold mb-6 text-gray-800"
+            data-en="About Africa Day" data-fr="À Propos de la Journée de l'Afrique">About Africa Day</h3>
+        <div class="space-y-4 text-gray-700 leading-relaxed">
+          <p data-en="Africa Day, celebrated on May 25th each year, commemorates the founding of the Organisation of African Unity (now the African Union) in 1963. It's a day to celebrate the progress, culture, and unity of the African continent."
+             data-fr="La Journée de l'Afrique, célébrée le 25 mai de chaque année, commémore la fondation de l'Organisation de l'Unité Africaine (maintenant l'Union Africaine) en 1963. C'est un jour pour célébrer le progrès, la culture et l'unité du continent africain.">
+            Africa Day, celebrated on May 25th each year, commemorates the founding of the Organisation of African Unity (now the African Union) in 1963. It's a day to celebrate the progress, culture, and unity of the African continent.
+          </p>
+          <p class="font-semibold text-lg"
+             data-en="Our 2026 celebration in Wenzhou brings together all 54 African nations' representatives for a day of recognition, celebration, and community building."
+             data-fr="Notre célébration 2026 à Wenzhou rassemble les représentants des 54 nations africaines pour une journée de reconnaissance, de célébration et de construction communautaire.">
+            Our 2026 celebration in Wenzhou brings together all 54 African nations' representatives for a day of recognition, celebration, and community building.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-6 reveal">
+          <svg class="w-12 h-12 text-green-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+          </svg>
+          <h3 class="text-xl font-bold mb-2 text-gray-800" data-en="Excellence" data-fr="Excellence">Excellence</h3>
+          <p class="text-gray-600" data-en="Recognizing outstanding achievements in our community" data-fr="Reconnaître les réalisations exceptionnelles dans notre communauté">
+            Recognizing outstanding achievements in our community
+          </p>
+        </div>
+        <div class="text-center p-6 reveal">
+          <svg class="w-12 h-12 text-yellow-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+          <h3 class="text-xl font-bold mb-2 text-gray-800" data-en="Unity" data-fr="Unité">Unity</h3>
+          <p class="text-gray-600" data-en="Bringing together Africans from all 54 nations" data-fr="Rassembler les Africains des 54 nations">
+            Bringing together Africans from all 54 nations
+          </p>
+        </div>
+        <div class="text-center p-6 reveal">
+          <svg class="w-12 h-12 text-red-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+          <h3 class="text-xl font-bold mb-2 text-gray-800" data-en="Culture" data-fr="Culture">Culture</h3>
+          <p class="text-gray-600" data-en="Celebrating our rich African heritage and traditions" data-fr="Célébrer notre riche patrimoine et traditions africaines">
+            Celebrating our rich African heritage and traditions
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories" class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y"
+            data-en="Award Categories" data-fr="Catégories de Prix">Award Categories</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
+          <div class="text-5xl mb-4">💼</div>
+          <h3 class="text-xl font-bold mb-3 text-gray-800" data-en="Business of the Year" data-fr="Entreprise de l'Année">Business of the Year</h3>
+          <ul class="space-y-2 mt-3">
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Food &amp; Catering" data-fr="Alimentation &amp; Restauration">Food &amp; Catering</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Hair &amp; Beauty" data-fr="Coiffure &amp; Beauté">Hair &amp; Beauty</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Event Planning &amp; Decor" data-fr="Planification d'Événements &amp; Décoration">Event Planning &amp; Decor</span></li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
+          <div class="text-5xl mb-4">🚀</div>
+          <h3 class="text-xl font-bold mb-3 text-gray-800" data-en="Entrepreneur of the Year" data-fr="Entrepreneur de l'Année">Entrepreneur of the Year</h3>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
+          <div class="text-5xl mb-4">💪</div>
+          <h3 class="text-xl font-bold mb-3 text-gray-800" data-en="Health &amp; Fitness Excellence Award" data-fr="Prix d'Excellence Santé &amp; Fitness">Health &amp; Fitness Excellence Award</h3>
+          <ul class="space-y-2 mt-3">
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Personal Trainer of the Year" data-fr="Entraîneur Personnel de l'Année">Personal Trainer of the Year</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Wellness Advocate of the Year" data-fr="Défenseur du Bien-être de l'Année">Wellness Advocate of the Year</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Healthcare Professional of the Year" data-fr="Professionnel de la Santé de l'Année">Healthcare Professional of the Year</span></li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
+          <div class="text-5xl mb-4">🤝</div>
+          <h3 class="text-xl font-bold mb-3 text-gray-800" data-en="Social Impact Award" data-fr="Prix d'Impact Social">Social Impact Award</h3>
+          <ul class="space-y-2 mt-3">
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Community Service" data-fr="Service Communautaire">Community Service</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Volunteer of the Year" data-fr="Bénévole de l'Année">Volunteer of the Year</span></li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
+          <div class="text-5xl mb-4">🎭</div>
+          <h3 class="text-xl font-bold mb-3 text-gray-800" data-en="African Talent of the Year" data-fr="Talent Africain de l'Année">African Talent of the Year</h3>
+          <ul class="space-y-2 mt-3">
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Music Talent" data-fr="Talent Musical">Music Talent</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Dance Talent" data-fr="Talent de Danse">Dance Talent</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Photography and Videography" data-fr="Photographie et Vidéographie">Photography and Videography</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Social Media Personality" data-fr="Personnalité des Médias Sociaux">Social Media Personality</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Sports Talent" data-fr="Talent Sportif">Sports Talent</span></li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
+          <div class="text-5xl mb-4">🏆</div>
+          <h3 class="text-xl font-bold mb-3 text-gray-800" data-en="Long-Term Dedication Award" data-fr="Prix de Dévouement à Long Terme">Long-Term Dedication Award</h3>
+          <ul class="space-y-2 mt-3">
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Community Leadership" data-fr="Leadership Communautaire">Community Leadership</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Consistent Service" data-fr="Service Cohérent">Consistent Service</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Mentorship Legacy" data-fr="Héritage de Mentorat">Mentorship Legacy</span></li>
+            <li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500 mt-0.5">•</span><span data-en="Lifetime Commitment" data-fr="Engagement à Vie">Lifetime Commitment</span></li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal lg:col-span-3 md:col-span-2">
+          <div class="text-5xl mb-4">🌟</div>
+          <h3 class="text-xl font-bold mb-3 text-gray-800" data-en="People's Choice Award" data-fr="Prix Choix du Public">People's Choice Award</h3>
+          <div class="flex flex-wrap gap-4 mt-3">
+            <span class="flex items-center gap-2 text-sm text-gray-600 bg-green-50 px-3 py-1.5 rounded-full"><span class="text-green-500">•</span><span data-en="Favorite Personality" data-fr="Personnalité Préférée">Favorite Personality</span></span>
+            <span class="flex items-center gap-2 text-sm text-gray-600 bg-yellow-50 px-3 py-1.5 rounded-full"><span class="text-yellow-500">•</span><span data-en="Favorite Entertainer" data-fr="Artiste Préféré">Favorite Entertainer</span></span>
+            <span class="flex items-center gap-2 text-sm text-gray-600 bg-red-50 px-3 py-1.5 rounded-full"><span class="text-red-500">•</span><span data-en="Favorite Community Leader" data-fr="Leader Communautaire Préféré">Favorite Community Leader</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOMINATE -->
+  <section id="nominate" class="py-20 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y"
+            data-en="Submit a Nomination" data-fr="Soumettre une Nomination">Submit a Nomination</h2>
+        <div class="bg-green-50 border-2 border-green-500 rounded-xl p-6 mb-8 max-w-2xl mx-auto">
+          <div class="flex items-center gap-3 mb-3 justify-center">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <p class="text-lg font-semibold text-green-900" data-en="Nominations Go Live Immediately!" data-fr="Les Nominations Sont En Direct Immédiatement!">Nominations Go Live Immediately!</p>
+          </div>
+          <p class="text-gray-700" data-en="Your nomination and photo will appear on the voting page instantly. No approval needed." data-fr="Votre nomination et photo apparaîtront sur la page de vote instantanément. Aucune approbation nécessaire.">
+            Your nomination and photo will appear on the voting page instantly. No approval needed.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-green-50 to-yellow-50 p-8 rounded-2xl shadow-xl reveal">
+        <form id="nominate-form" class="space-y-6" onsubmit="handleNominateSubmit(event)">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Select Category *" data-fr="Sélectionner Catégorie *">Select Category *</label>
+            <select id="category-select" required onchange="handleCategoryChange(this.value)"
+              class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition">
+              <option value="" data-en="Choose a category..." data-fr="Choisir une catégorie...">Choose a category...</option>
+              <option value="0" data-en="💼 Business of the Year" data-fr="💼 Entreprise de l'Année">💼 Business of the Year</option>
+              <option value="1" data-en="🚀 Entrepreneur of the Year" data-fr="🚀 Entrepreneur de l'Année">🚀 Entrepreneur of the Year</option>
+              <option value="2" data-en="💪 Health &amp; Fitness Excellence" data-fr="💪 Prix d'Excellence Santé &amp; Fitness">💪 Health &amp; Fitness Excellence</option>
+              <option value="3" data-en="🤝 Social Impact Award" data-fr="🤝 Prix d'Impact Social">🤝 Social Impact Award</option>
+              <option value="4" data-en="🎭 African Talent of the Year" data-fr="🎭 Talent Africain de l'Année">🎭 African Talent of the Year</option>
+              <option value="5" data-en="🏆 Long-Term Dedication Award" data-fr="🏆 Prix de Dévouement à Long Terme">🏆 Long-Term Dedication Award</option>
+              <option value="6" data-en="🌟 People's Choice Award" data-fr="🌟 Prix Choix du Public">🌟 People's Choice Award</option>
+            </select>
+          </div>
+
+          <div id="subcategory-wrap" class="hidden">
+            <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Select Subcategory *" data-fr="Sélectionner Sous-catégorie *">Select Subcategory *</label>
+            <select id="subcategory-select" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition"></select>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Nominee Name *" data-fr="Nom du Nominé *">Nominee Name *</label>
+              <input type="text" required placeholder="Full name" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Nationality *" data-fr="Nationalité *">Nationality *</label>
+              <select required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition">
+                <option value="" data-en="Select country..." data-fr="Sélectionner pays...">Select country...</option>
+                <option>🇩🇿 Algeria</option><option>🇦🇴 Angola</option><option>🇧🇯 Benin</option>
+                <option>🇧🇼 Botswana</option><option>🇧🇫 Burkina Faso</option><option>🇧🇮 Burundi</option>
+                <option>🇨🇻 Cabo Verde</option><option>🇨🇲 Cameroon</option><option>🇨🇫 Central African Republic</option>
+                <option>🇹🇩 Chad</option><option>🇰🇲 Comoros</option><option>🇨🇬 Congo</option>
+                <option>🇨🇩 DR Congo</option><option>🇨🇮 Côte d'Ivoire</option><option>🇩🇯 Djibouti</option>
+                <option>🇪🇬 Egypt</option><option>🇬🇶 Equatorial Guinea</option><option>🇪🇷 Eritrea</option>
+                <option>🇸🇿 Eswatini</option><option>🇪🇹 Ethiopia</option><option>🇬🇦 Gabon</option>
+                <option>🇬🇲 Gambia</option><option>🇬🇭 Ghana</option><option>🇬🇳 Guinea</option>
+                <option>🇬🇼 Guinea-Bissau</option><option>🇰🇪 Kenya</option><option>🇱🇸 Lesotho</option>
+                <option>🇱🇷 Liberia</option><option>🇱🇾 Libya</option><option>🇲🇬 Madagascar</option>
+                <option>🇲🇼 Malawi</option><option>🇲🇱 Mali</option><option>🇲🇷 Mauritania</option>
+                <option>🇲🇺 Mauritius</option><option>🇲🇦 Morocco</option><option>🇲🇿 Mozambique</option>
+                <option>🇳🇦 Namibia</option><option>🇳🇪 Niger</option><option>🇳🇬 Nigeria</option>
+                <option>🇷🇼 Rwanda</option><option>🇸🇹 São Tomé and Príncipe</option><option>🇸🇳 Senegal</option>
+                <option>🇸🇨 Seychelles</option><option>🇸🇱 Sierra Leone</option><option>🇸🇴 Somalia</option>
+                <option>🇿🇦 South Africa</option><option>🇸🇸 South Sudan</option><option>🇸🇩 Sudan</option>
+                <option>🇹🇿 Tanzania</option><option>🇹🇬 Togo</option><option>🇹🇳 Tunisia</option>
+                <option>🇺🇬 Uganda</option><option>🇿🇲 Zambia</option><option>🇿🇼 Zimbabwe</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Nominee Email" data-fr="Email du Nominé">Nominee Email</label>
+              <input type="email" placeholder="nominee@example.com" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Nominee Phone" data-fr="Téléphone du Nominé">Nominee Phone</label>
+              <input type="tel" placeholder="+86 ..." class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Nominee Photo *" data-fr="Photo du Nominé *">Nominee Photo *</label>
+            <label for="photo-upload" class="upload-area border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer transition block">
+              <svg class="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+              </svg>
+              <p class="text-gray-600 mb-1" id="upload-label" data-en="Click to upload or drag and drop" data-fr="Cliquez pour télécharger ou glisser-déposer">Click to upload or drag and drop</p>
+              <p class="text-sm text-gray-500">JPG, PNG, WebP (max 5MB)</p>
+            </label>
+            <input id="photo-upload" type="file" accept="image/*" class="hidden" onchange="previewPhoto(this)">
+            <div id="photo-preview" class="hidden mt-3">
+              <img id="preview-img" class="w-32 h-32 object-cover rounded-xl shadow-lg mx-auto" src="" alt="Preview">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Brief Bio" data-fr="Biographie Brève">Brief Bio</label>
+            <textarea rows="3" placeholder="Tell us about this person..." class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Why do they deserve this award? *" data-fr="Pourquoi méritent-ils ce prix? *">Why do they deserve this award? *</label>
+            <textarea rows="4" required placeholder="Describe their achievements and contributions..." class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition"></textarea>
+          </div>
+
+          <div class="border-t-2 border-gray-200 pt-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4" data-en="Your Information" data-fr="Vos Informations">Your Information</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Your Name *" data-fr="Votre Nom *">Your Name *</label>
+                <input type="text" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" data-en="Your Email *" data-fr="Votre Email *">Your Email *</label>
+                <input type="email" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-green-500 transition">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-shimmer w-full py-4 text-white rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+            style="background:linear-gradient(to right,#16a34a,#15803d)">
+            <svg class="w-6 h-6" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span data-en="Submit Nomination (Goes Live Instantly)" data-fr="Soumettre Nomination (En Direct Instantanément)">Submit Nomination (Goes Live Instantly)</span>
+          </button>
+
+          <div id="nominate-success" class="hidden bg-green-50 border-2 border-green-500 rounded-xl p-6 text-center">
+            <div class="text-4xl mb-3">🎉</div>
+            <p class="text-xl font-bold text-green-800" data-en="Nomination submitted successfully!" data-fr="Nomination soumise avec succès!">Nomination submitted successfully!</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOTE -->
+  <section id="vote" class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y"
+            data-en="Vote for Nominees" data-fr="Voter pour les Nominés">Vote for Nominees</h2>
+        <div class="bg-yellow-50 border-2 border-yellow-500 rounded-xl p-6 max-w-2xl mx-auto">
+          <svg class="w-8 h-8 text-yellow-600 mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+          <p class="text-lg font-semibold text-gray-800 mb-2" data-en="Voting Period" data-fr="Période de Vote">Voting Period</p>
+          <p class="text-2xl font-bold text-yellow-700" data-en="April 27 – May 12, 2026" data-fr="27 Avril – 12 Mai 2026">April 27 – May 12, 2026</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-12 text-center reveal">
+        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-3"
+            data-en="No nominees yet. Be the first to nominate someone!"
+            data-fr="Aucun nominé pour le moment. Soyez le premier à nommer quelqu'un!">No nominees yet. Be the first to nominate someone!</h3>
+        <p class="text-gray-600 mb-6"
+           data-en="When nominations are submitted, they will appear here instantly for voting."
+           data-fr="Lorsque des nominations sont soumises, elles apparaîtront ici instantanément pour le vote.">
+          When nominations are submitted, they will appear here instantly for voting.
+        </p>
+        <a href="#nominate" class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition"
+           style="background:linear-gradient(to right,#16a34a,#15803d)">
+          <svg class="w-5 h-5" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+          </svg>
+          <span data-en="Nominate Someone" data-fr="Nommer Quelqu'un">Nominate Someone</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AFCON FIXTURES -->
+  <section id="fixtures" class="py-20 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-10 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-3 text-gradient-g2y"
+            data-en="AFCON 2026 Fixtures" data-fr="Matchs AFCON 2026">AFCON 2026 Fixtures</h2>
+        <p class="text-gray-500 text-base flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span data-en="Wenzhou Kean University Stadium" data-fr="Stade de l'Université Kean de Wenzhou">Wenzhou Kean University Stadium</span>
+        </p>
+      </div>
+
+      <!-- Groups -->
+      <div class="grid md:grid-cols-2 gap-6 mb-10">
+
+        <!-- ── GROUP A ── updated Bafana row -->
+        <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-2xl shadow-lg reveal card-hover">
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-green-800">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M8 21h8M12 17v4M5 3l7 7 7-7M5 3h14M5 3v5a7 7 0 0014 0V3"/>
+            </svg>
+            <span data-en="Group A" data-fr="Groupe A">Group A</span>
+          </h3>
+          <div class="space-y-2">
+            <div class="bg-white px-4 py-3 rounded-lg shadow-sm flex items-center gap-3 hover:bg-green-50 transition">
+              <span class="text-xl">🇬🇭</span>
+              <span class="font-semibold text-gray-800">Ghana</span>
+            </div>
+            <!-- BAFANA BAFANA — 3 country flags -->
+            <div class="bg-white px-4 py-3 rounded-lg shadow-sm flex items-center gap-3 hover:bg-green-50 transition">
+              <span class="bafana-flags">
+                🇿🇦<span class="flag-sep">·</span>🇿🇼<span class="flag-sep">·</span>🇧🇼
+              </span>
+              <div>
+                <span class="font-semibold text-gray-800">Bafana Bafana</span>
+                <div class="text-xs text-gray-400 font-medium mt-0.5">South Africa · Zimbabwe · Botswana</div>
+              </div>
+            </div>
+            <div class="bg-white px-4 py-3 rounded-lg shadow-sm flex items-center gap-3 hover:bg-green-50 transition">
+              <span class="text-xl">🟢</span><span class="font-semibold text-gray-800">Sahel United</span>
+            </div>
+            <div class="bg-white px-4 py-3 rounded-lg shadow-sm flex items-center gap-3 hover:bg-green-50 transition">
+              <span class="text-xl">⚡</span><span class="font-semibold text-gray-800">Ubuntu</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group B — unchanged -->
+        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-5 rounded-2xl shadow-lg reveal card-hover">
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-yellow-800">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M8 21h8M12 17v4M5 3l7 7 7-7M5 3h14M5 3v5a7 7 0 0014 0V3"/>
+            </svg>
+            <span data-en="Group B" data-fr="Groupe B">Group B</span>
+          </h3>
+          <div class="space-y-2">
+            <div class="bg-white px-4 py-3 rounded-lg shadow-sm flex items-center gap-3 hover:bg-yellow-50 transition">
+              <span class="text-xl">🇨🇲</span><span class="font-semibold text-gray-800">Cameroon</span>
+            </div>
+            <div class="bg-white px-4 py-3 rounded-lg shadow-sm flex items-center gap-3 hover:bg-yellow-50 transition">
+              <span class="text-xl">⚽</span><span class="font-semibold text-gray-800">Central Asia FC</span>
+            </div>
+            <div class="bg-white px-4 py-3 rounded-lg shadow-sm flex items-center gap-3 hover:bg-yellow-50 transition">
+              <span class="text-xl">🇳🇬</span><span class="font-semibold text-gray-800">Nigeria</span>
+            </div>
+            <div class="bg-white px-4 py-3 rounded-lg shadow-sm flex items-center gap-3 hover:bg-yellow-50 transition">
+              <span class="text-xl">🇲🇦</span><span class="font-semibold text-gray-800">Morocco</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MATCH SCHEDULE -->
+      <div class="reveal">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+            <span data-en="Match Schedule" data-fr="Calendrier des Matchs">Match Schedule</span>
+          </h3>
+          <div class="hidden sm:flex items-center gap-1 bg-gray-100 rounded-xl p-1 text-sm overflow-x-auto">
+            <button onclick="filterFixtures('all')"    class="fixture-tab active px-3 py-1.5 rounded-lg font-medium text-gray-700" data-en="All" data-fr="Tous">All</button>
+            <button onclick="filterFixtures('groupA')" class="fixture-tab px-3 py-1.5 rounded-lg font-medium text-gray-700" data-en="Group A" data-fr="Groupe A">Group A</button>
+            <button onclick="filterFixtures('groupB')" class="fixture-tab px-3 py-1.5 rounded-lg font-medium text-gray-700" data-en="Group B" data-fr="Groupe B">Group B</button>
+            <button onclick="filterFixtures('ko')"     class="fixture-tab px-3 py-1.5 rounded-lg font-medium text-gray-700" data-en="Knockouts" data-fr="Phases finales">Knockouts</button>
+          </div>
+        </div>
+
+        <div class="sm:hidden mb-4">
+          <select onchange="filterFixtures(this.value)" class="w-full px-4 py-2 rounded-lg border-2 border-gray-200 bg-white text-sm font-medium">
+            <option value="all">All Matches</option>
+            <option value="groupA">Group A</option>
+            <option value="groupB">Group B</option>
+            <option value="ko">Knockouts</option>
+          </select>
+        </div>
+
+        <div id="fixture-list" class="space-y-3">
+
+          <!-- ══ APR 25 ══ -->
+
+          <!-- APR 25 · Group A · Ghana vs Bafana Bafana — UPDATED FLAGS -->
+          <div class="fixture-item" data-group="groupA">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge"><div>APR</div><div class="text-lg">25</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#dcfce7;color:#15803d;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group A</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">🇬🇭</span>
+                  <span class="team-name">Ghana</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="bafana-flags">🇿🇦<span class="flag-sep">·</span>🇿🇼<span class="flag-sep">·</span>🇧🇼</span>
+                  <span class="team-name">Bafana Bafana</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">11:30 AM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- APR 25 · Group A · Sahel United vs Ubuntu -->
+          <div class="fixture-item" data-group="groupA">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge"><div>APR</div><div class="text-lg">25</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#dcfce7;color:#15803d;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group A</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">🟢</span><span class="team-name">Sahel United</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">⚡</span><span class="team-name">Ubuntu</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">1:00 PM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- APR 25 · Group B · Cameroon vs Central Asia FC -->
+          <div class="fixture-item" data-group="groupB">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge"><div>APR</div><div class="text-lg">25</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#fef9c3;color:#a16207;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group B</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">🇨🇲</span><span class="team-name">Cameroon</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">⚽</span><span class="team-name">Central Asia FC</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">11:30 AM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- APR 25 · Group B · Nigeria vs Morocco -->
+          <div class="fixture-item" data-group="groupB">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge"><div>APR</div><div class="text-lg">25</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#fef9c3;color:#a16207;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group B</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">🇳🇬</span><span class="team-name">Nigeria</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">🇲🇦</span><span class="team-name">Morocco</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">1:00 PM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ MAY 1 ══ -->
+
+          <!-- MAY 1 · Group B · Nigeria vs Morocco FC -->
+          <div class="fixture-item" data-group="groupB">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><div>MAY</div><div class="text-lg">1</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#fef9c3;color:#a16207;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group B</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">🇳🇬</span><span class="team-name">Nigeria</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">🇲🇦</span><span class="team-name">Morocco FC</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">11:30 AM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAY 1 · Group A · Sahel United vs Ubuntu -->
+          <div class="fixture-item" data-group="groupA">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><div>MAY</div><div class="text-lg">1</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#dcfce7;color:#15803d;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group A</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">🟢</span><span class="team-name">Sahel United</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">⚡</span><span class="team-name">Ubuntu</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">1:00 PM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ MAY 2 ══ -->
+
+          <!-- MAY 2 · Group A · Ghana vs Sahel United -->
+          <div class="fixture-item" data-group="groupA">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><div>MAY</div><div class="text-lg">2</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#dcfce7;color:#15803d;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group A</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">🇬🇭</span><span class="team-name">Ghana</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">🟢</span><span class="team-name">Sahel United</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">11:30 AM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAY 2 · Group B · Cameroon vs Morocco -->
+          <div class="fixture-item" data-group="groupB">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><div>MAY</div><div class="text-lg">2</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#fef9c3;color:#a16207;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group B</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">🇨🇲</span><span class="team-name">Cameroon</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">🇲🇦</span><span class="team-name">Morocco</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">1:00 PM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ MAY 3 ══ -->
+
+          <!-- MAY 3 · Group A · Bafana Bafana vs Ubuntu — UPDATED FLAGS -->
+          <div class="fixture-item" data-group="groupA">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><div>MAY</div><div class="text-lg">3</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#dcfce7;color:#15803d;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group A</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="bafana-flags">🇿🇦<span class="flag-sep">·</span>🇿🇼<span class="flag-sep">·</span>🇧🇼</span>
+                  <span class="team-name">Bafana Bafana</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">⚡</span><span class="team-name">Ubuntu</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">11:30 AM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAY 3 · Group B · Central Asia FC vs Nigeria -->
+          <div class="fixture-item" data-group="groupB">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><div>MAY</div><div class="text-lg">3</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#fef9c3;color:#a16207;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group B</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">⚽</span><span class="team-name">Central Asia FC</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">🇳🇬</span><span class="team-name">Nigeria</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">1:00 PM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ MAY 4 ══ -->
+
+          <!-- MAY 4 · Group A · Bafana Bafana vs Sahel United — UPDATED FLAGS -->
+          <div class="fixture-item" data-group="groupA">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><div>MAY</div><div class="text-lg">4</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#dcfce7;color:#15803d;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group A</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="bafana-flags">🇿🇦<span class="flag-sep">·</span>🇿🇼<span class="flag-sep">·</span>🇧🇼</span>
+                  <span class="team-name">Bafana Bafana</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">🟢</span><span class="team-name">Sahel United</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">11:30 AM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAY 4 · Group B · Central Asia FC vs Morocco -->
+          <div class="fixture-item" data-group="groupB">
+            <div class="match-card group-stage bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><div>MAY</div><div class="text-lg">4</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#fef9c3;color:#a16207;padding:2px 10px;font-size:0.68rem">⚽ Group Stage · Group B</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xl">⚽</span><span class="team-name">Central Asia FC</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="text-xl">🇲🇦</span><span class="team-name">Morocco</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-gray-700 mb-1">1:00 PM</div>
+                <span class="status-badge status-upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ MAY 5 — SEMI-FINALS ══ -->
+          <div class="fixture-item" data-group="ko">
+            <div class="match-card semi-final rounded-xl p-4 shadow-md flex items-center gap-3"
+                 style="background:linear-gradient(to right,#eff6ff,#dbeafe)">
+              <div class="date-badge" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)"><div>MAY</div><div class="text-lg">5</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#dbeafe;color:#1d4ed8;padding:2px 10px;font-size:0.68rem">🏟️ Semi-Final 1</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="team-name text-blue-800">Winner Group A</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="team-name text-blue-800">Runner-up Group B</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-blue-700 mb-1">11:30 AM</div>
+                <span class="status-badge" style="background:#dbeafe;color:#1d4ed8">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fixture-item" data-group="ko">
+            <div class="match-card semi-final rounded-xl p-4 shadow-md flex items-center gap-3"
+                 style="background:linear-gradient(to right,#eff6ff,#dbeafe)">
+              <div class="date-badge" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)"><div>MAY</div><div class="text-lg">5</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#dbeafe;color:#1d4ed8;padding:2px 10px;font-size:0.68rem">🏟️ Semi-Final 2</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="team-name text-blue-800">Winner Group B</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="team-name text-blue-800">Runner-up Group A</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-blue-700 mb-1">1:00 PM</div>
+                <span class="status-badge" style="background:#dbeafe;color:#1d4ed8">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ MAY 16 — THIRD PLACE ══ -->
+          <div class="fixture-item" data-group="ko">
+            <div class="match-card third-place rounded-xl p-4 shadow-md flex items-center gap-3"
+                 style="background:linear-gradient(to right,#fffbeb,#fef3c7)">
+              <div class="date-badge" style="background:linear-gradient(135deg,#b45309,#92400e)"><div>MAY</div><div class="text-lg">16</div></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="round-header" style="background:#fde68a;color:#92400e;padding:2px 10px;font-size:0.68rem">🥉 Third Place Match</span>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="team-name text-amber-800">Semi-Final 1 Loser</span>
+                  <span class="vs-divider">VS</span>
+                  <span class="team-name text-amber-800">Semi-Final 2 Loser</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-bold text-amber-700 mb-1">12:00 PM</div>
+                <span class="status-badge" style="background:#fde68a;color:#92400e">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ MAY 22 — FINAL ══ -->
+          <div class="fixture-item" data-group="ko">
+            <div class="match-card final rounded-xl p-5 shadow-xl flex items-center gap-4 final-glow"
+                 style="background:linear-gradient(135deg,#1c1917,#292524);color:white;border-left-color:#ca8a04">
+              <div class="date-badge" style="background:linear-gradient(135deg,#ca8a04,#854d0e);min-width:60px">
+                <div>MAY</div><div class="text-xl font-black">22</div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-2">
+                  <span style="background:rgba(202,138,4,0.3);color:#fbbf24;font-size:0.75rem;font-weight:800;padding:3px 12px;border-radius:999px;letter-spacing:0.1em;text-transform:uppercase">
+                    🏆 GRAND FINAL
+                  </span>
+                </div>
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span class="text-3xl">🏆</span>
+                  <span style="font-size:1.1rem;font-weight:800;color:#fbbf24">AFCON 2026 FINAL MATCH</span>
+                  <span class="text-3xl">🏆</span>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div style="font-size:1rem;font-weight:800;color:#fbbf24;margin-bottom:4px">4:30 PM</div>
+                <span style="background:rgba(202,138,4,0.3);color:#fbbf24;font-size:0.7rem;font-weight:700;padding:2px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.05em">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end fixture-list -->
+      </div><!-- end reveal -->
+
+      <!-- SUPPORTER BANNER -->
+      <div class="mt-12 reveal">
+        <div class="rounded-2xl p-8 text-center shadow-xl overflow-hidden relative"
+             style="background:linear-gradient(135deg,#14532d,#15803d,#166534)">
+          <div class="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10" style="background:white;transform:translate(30%,-30%)"></div>
+          <div class="absolute bottom-0 left-0 w-32 h-32 rounded-full opacity-10" style="background:white;transform:translate(-30%,30%)"></div>
+          <div class="relative z-10">
+            <p class="text-4xl mb-4 flex justify-center gap-1 flex-wrap">
+              <span class="supporter-flag">🇩🇿</span><span class="supporter-flag">🇳🇬</span>
+              <span class="supporter-flag">🇬🇭</span><span class="supporter-flag">🇿🇦</span>
+              <span class="supporter-flag">🇨🇲</span><span class="supporter-flag">🇲🇦</span>
+              <span class="supporter-flag">🇸🇳</span><span class="supporter-flag">🇰🇪</span>
+              <span class="supporter-flag">🇿🇲</span><span class="supporter-flag">🇹🇿</span>
+              <span class="supporter-flag">🇿🇼</span><span class="supporter-flag">🇧🇼</span>
+            </p>
+            <h3 class="text-2xl md:text-3xl font-black text-white mb-2 tracking-wide">
+              SHOW UP. SHOW OUT. SUPPORT YOUR TEAM.
+            </h3>
+            <p class="text-green-200 text-lg font-medium flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              Wenzhou Kean University Stadium
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALA EVENT -->
+  <section class="py-20 px-4 text-white" style="background:linear-gradient(135deg,#14532d,#713f12,#7f1d1d)">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12 reveal">
+        <div class="text-6xl mb-6">🎉</div>
+        <h2 class="text-4xl md:text-6xl font-bold mb-4" data-en="23rd May 2026" data-fr="23 Mai 2026">23rd May 2026</h2>
+        <h3 class="text-2xl md:text-3xl font-semibold mb-6"
+            data-en="AU Day Gala — The Main Event" data-fr="Gala de la Journée UA — L'Événement Principal">
+          AU Day Gala — The Main Event
+        </h3>
+        <div class="flex items-center justify-center gap-2 text-xl mb-8">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span data-en="Tai Che Hotel, Wenzhou" data-fr="Hôtel Tai Che, Wenzhou">Tai Che Hotel, Wenzhou</span>
+        </div>
+        <div class="max-w-2xl mx-auto">
+          <div class="grid grid-cols-4 gap-3">
+            <div class="text-center"><div class="digit-box" style="background:rgba(255,255,255,0.15)"><div id="g-days" class="text-3xl font-bold">--</div></div><div class="text-xs mt-1 text-white/70" data-en="Days" data-fr="Jours">Days</div></div>
+            <div class="text-center"><div class="digit-box" style="background:rgba(255,255,255,0.15)"><div id="g-hours" class="text-3xl font-bold">--</div></div><div class="text-xs mt-1 text-white/70" data-en="Hours" data-fr="Heures">Hours</div></div>
+            <div class="text-center"><div class="digit-box" style="background:rgba(255,255,255,0.15)"><div id="g-minutes" class="text-3xl font-bold">--</div></div><div class="text-xs mt-1 text-white/70" data-en="Minutes" data-fr="Minutes">Minutes</div></div>
+            <div class="text-center"><div class="digit-box" style="background:rgba(255,255,255,0.15)"><div id="g-seconds" class="text-3xl font-bold">--</div></div><div class="text-xs mt-1 text-white/70" data-en="Seconds" data-fr="Secondes">Seconds</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-16">
+        <h3 class="text-3xl font-bold text-center mb-8" data-en="Event Highlights" data-fr="Points Forts de l'Événement">Event Highlights</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-6 rounded-xl card-hover reveal" style="background:rgba(255,255,255,0.1)">
+            <div class="text-5xl mb-4">🍲</div>
+            <h4 class="text-xl font-bold mb-2" data-en="African Cuisine" data-fr="Cuisine Africaine">African Cuisine</h4>
+            <p class="text-white/90" data-en="Jollof, Fufu, Egusi, Plantains, and more authentic dishes" data-fr="Jollof, Fufu, Egusi, Plantains, et plus de plats authentiques">Jollof, Fufu, Egusi, Plantains, and more authentic dishes</p>
+          </div>
+          <div class="p-6 rounded-xl card-hover reveal" style="background:rgba(255,255,255,0.1)">
+            <div class="text-5xl mb-4">🎤</div>
+            <h4 class="text-xl font-bold mb-2" data-en="Cultural Performances" data-fr="Performances Culturelles">Cultural Performances</h4>
+            <p class="text-white/90" data-en="Dance, music, poetry, and artistic expressions" data-fr="Danse, musique, poésie et expressions artistiques">Dance, music, poetry, and artistic expressions</p>
+          </div>
+          <div class="p-6 rounded-xl card-hover reveal" style="background:rgba(255,255,255,0.1)">
+            <div class="text-5xl mb-4">🏆</div>
+            <h4 class="text-xl font-bold mb-2" data-en="Awards Ceremony" data-fr="Cérémonie de Remise des Prix">Awards Ceremony</h4>
+            <p class="text-white/90" data-en="All 7 award categories announced live on stage" data-fr="Toutes les 7 catégories annoncées en direct sur scène">All 7 award categories announced live on stage</p>
+          </div>
+          <div class="p-6 rounded-xl card-hover reveal" style="background:rgba(255,255,255,0.1)">
+            <div class="text-5xl mb-4">🤝</div>
+            <h4 class="text-xl font-bold mb-2" data-en="Community Connection" data-fr="Connexion Communautaire">Community Connection</h4>
+            <p class="text-white/90" data-en="Network, celebrate, and unite with our community" data-fr="Réseauter, célébrer et s'unir avec notre communauté">Network, celebrate, and unite with our community</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-3xl mx-auto mb-16 reveal">
+        <h3 class="text-3xl font-bold text-center mb-8" data-en="Evening Schedule" data-fr="Programme de la Soirée">Evening Schedule</h3>
+        <div class="p-8 rounded-2xl space-y-5" style="background:rgba(255,255,255,0.1)">
+          <div class="schedule-item"><svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><p class="text-lg" data-en="6:00 PM — Doors Open &amp; Welcome Reception" data-fr="18h00 — Ouverture &amp; Réception de Bienvenue">6:00 PM — Doors Open &amp; Welcome Reception</p></div>
+          <div class="schedule-item"><svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><p class="text-lg" data-en="7:00 PM — Dinner Service — Jollof, Fufu, Egusi, Plantains..." data-fr="19h00 — Service du Dîner — Jollof, Fufu, Egusi, Plantains...">7:00 PM — Dinner Service — Jollof, Fufu, Egusi, Plantains...</p></div>
+          <div class="schedule-item"><svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><p class="text-lg" data-en="8:00 PM — Cultural Performances — Dance, Music, Poetry" data-fr="20h00 — Performances Culturelles — Danse, Musique, Poésie">8:00 PM — Cultural Performances — Dance, Music, Poetry</p></div>
+          <div class="schedule-item"><svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><p class="text-lg" data-en="9:00 PM — Award Ceremony — All categories announced" data-fr="21h00 — Cérémonie des Prix — Toutes catégories annoncées">9:00 PM — Award Ceremony — All categories announced</p></div>
+          <div class="schedule-item"><svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><p class="text-lg" data-en="10:30 PM — Networking &amp; Celebration" data-fr="22h30 — Réseautage &amp; Célébration">10:30 PM — Networking &amp; Celebration</p></div>
+          <div class="schedule-item"><svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><p class="text-lg" data-en="11:30 PM — Closing &amp; Group Photo" data-fr="23h30 — Clôture &amp; Photo de Groupe">11:30 PM — Closing &amp; Group Photo</p></div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="#contact" class="inline-flex items-center gap-2 px-12 py-4 bg-white text-green-700 rounded-full font-bold text-xl shadow-2xl hover:scale-105 transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span data-en="Register / RSVP" data-fr="S'inscrire / RSVP">Register / RSVP</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRESS CODE -->
+  <section class="py-20 px-4 bg-gradient-to-br from-purple-50 to-pink-50">
+    <div class="max-w-4xl mx-auto text-center reveal">
+      <div class="text-6xl mb-6">👗🎩</div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-purple" data-en="Dress Code" data-fr="Code Vestimentaire">Dress Code</h2>
+      <div class="bg-white p-8 rounded-2xl shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-gray-800"
+            data-en="DRESS TO REPRESENT YOUR COUNTRY - Show out. Taste home. Celebrate together."
+            data-fr="HABILLEZ-VOUS POUR REPRÉSENTER VOTRE PAYS - Montrez-vous. Goûtez chez vous. Célébrez ensemble.">
+          DRESS TO REPRESENT YOUR COUNTRY — Show out. Taste home. Celebrate together.
+        </h3>
+        <p class="text-lg text-gray-700 mb-6"
+           data-en="Wear your national colors, traditional attire, or your African best. This is OUR night."
+           data-fr="Portez vos couleurs nationales, tenue traditionnelle, ou votre meilleur africain. C'est NOTRE soirée.">
+          Wear your national colors, traditional attire, or your African best. This is OUR night.
+        </p>
+        <div class="bg-gradient-to-r from-purple-100 to-pink-100 p-6 rounded-xl">
+          <p class="text-lg font-semibold text-gray-800">Ankara • Kente • Dashiki • Kaftan • Traditional Bridal • National Colors</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="py-20 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y" data-en="Event Gallery" data-fr="Galerie d'Événements">Event Gallery</h2>
+        <p class="text-gray-600 text-lg" data-en="Memories from previous events" data-fr="Souvenirs d'événements précédents">Memories from previous events</p>
+      </div>
+     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+  <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg">
+    <img src="gallery/gallery-1.jpg" class="w-full h-full object-cover" alt="Gallery 1">
+  </div>
+
+  <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg">
+    <img src="gallery/gallery-2.jpg" class="w-full h-full object-cover" alt="Gallery 2">
+  </div>
+
+  <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg">
+    <img src="gallery/gallery-3.jpg" class="w-full h-full object-cover" alt="Gallery 3">
+  </div>
+
+  <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg">
+    <img src="gallery/gallery-4.jpg" class="w-full h-full object-cover" alt="Gallery 4">
+  </div>
+
+  <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg">
+    <img src="gallery/gallery-5.jpg" class="w-full h-full object-cover" alt="Gallery 5">
+  </div>
+
+  <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg">
+    <img src="gallery/gallery-6.jpg" class="w-full h-full object-cover" alt="Gallery 6">
+  </div>
+
+  <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg">
+    <img src="gallery/gallery-7.jpg" class="w-full h-full object-cover" alt="Gallery 7">
+  </div>
+
+  <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg">
+    <img src="gallery/gallery-8.jpg" class="w-full h-full object-cover" alt="Gallery 8">
+  </div>
+
+</div>
+      <p class="text-center text-gray-500 text-sm mt-10"
+         data-en="📝 To add gallery photos: place images in public/gallery/ and name them gallery-1.jpg, gallery-2.jpg, etc."
+         data-fr="📝 Pour ajouter des photos : placez les images dans public/gallery/ et nommez-les gallery-1.jpg, gallery-2.jpg, etc.">
+        📝 To add gallery photos: place images in public/gallery/ and name them gallery-1.jpg, gallery-2.jpg, etc.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 px-4 bg-gradient-to-br from-green-50 to-yellow-50">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y" data-en="Contact Us" data-fr="Contactez-Nous">Contact Us</h2>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-xl reveal">
+        <div class="text-center mb-8">
+          <p class="text-lg text-gray-700 mb-4"
+             data-en="For more information or to sponsor, contact the Organizing Secretary"
+             data-fr="Pour plus d'informations ou pour parrainer, contactez le Secrétaire Organisateur">
+            For more information or to sponsor, contact the Organizing Secretary
+          </p>
+          <h3 class="text-3xl font-bold text-green-700">Dr Tinnoe</h3>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="flex items-center gap-4 p-4 bg-green-50 rounded-xl card-hover">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            <div><p class="text-sm text-gray-600 font-semibold" data-en="Phone" data-fr="Téléphone">Phone</p><p class="text-lg font-bold text-gray-800">+86 15057766855</p></div>
+          </div>
+          <div class="flex items-center gap-4 p-4 bg-pink-50 rounded-xl card-hover">
+            <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <div><p class="text-sm text-gray-600 font-semibold">Instagram</p><p class="text-lg font-bold text-gray-800">@wenzhou_au</p></div>
+          </div>
+          <div class="flex items-center gap-4 p-4 bg-blue-50 rounded-xl card-hover">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div><p class="text-sm text-gray-600 font-semibold">Email</p><p class="text-lg font-bold text-gray-800">info@wauwenzhou.org</p></div>
+          </div>
+          <div class="flex items-center gap-4 p-4 bg-yellow-50 rounded-xl card-hover">
+            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><p class="text-sm text-gray-600 font-semibold" data-en="Location" data-fr="Localisation">Location</p><p class="text-lg font-bold text-gray-800">Wenzhou, Zhejiang, China</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="text-white py-12 px-4" style="background:linear-gradient(to right,#14532d,#713f12,#7f1d1d)">
+  <div class="max-w-6xl mx-auto text-center">
+    <div class="mb-6">
+      <div class="inline-flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M8 21h8M12 17v4M5 3l7 7 7-7M5 3h14M5 3v5a7 7 0 0014 0V3"/>
+          </svg>
+        </div>
+        <span class="text-2xl font-bold">WAU Africa Day Awards</span>
+      </div>
+    </div>
+    <p class="text-green-100 mb-4" data-en="Celebrating African Excellence in Wenzhou, China" data-fr="Célébrer l'Excellence Africaine à Wenzhou, Chine">
+      Celebrating African Excellence in Wenzhou, China
+    </p>
+    <p class="text-sm text-green-200">
+      &copy; 2026 Wenzhou African Union.
+      <span data-en="All rights reserved." data-fr="Tous droits réservés.">All rights reserved.</span>
+    </p>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+/* ── LANGUAGE ── */
+let currentLang = 'en';
+function applyLanguage(lang) {
+  currentLang = lang;
+  document.getElementById('lang-label').textContent = lang === 'en' ? 'FR' : 'EN';
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const text = el.getAttribute('data-' + lang);
+    if (text !== null) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = text;
+      else el.textContent = text;
+    }
+  });
+}
+document.getElementById('lang-btn').addEventListener('click', () => {
+  applyLanguage(currentLang === 'en' ? 'fr' : 'en');
+});
+
+/* ── MOBILE MENU ── */
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+const iconMenu   = document.getElementById('icon-menu');
+const iconClose  = document.getElementById('icon-close');
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  iconMenu.classList.toggle('hidden', isOpen);
+  iconClose.classList.toggle('hidden', !isOpen);
+});
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  iconMenu.classList.remove('hidden');
+  iconClose.classList.add('hidden');
+}
+
+/* ── COUNTDOWNS ── */
+const VOTING_START = new Date('2026-04-27T00:00:00');
+const EVENT_DATE   = new Date('2026-05-23T18:00:00');
+function getTimeLeft(target) {
+  const diff = target.getTime() - Date.now();
+  if (diff <= 0) return null;
+  return {
+    days:    Math.floor(diff / (1000*60*60*24)),
+    hours:   Math.floor((diff / (1000*60*60)) % 24),
+    minutes: Math.floor((diff / (1000*60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60)
+  };
+}
+function pad(n) { return String(n).padStart(2,'0'); }
+function updateCountdowns() {
+  const vt = getTimeLeft(VOTING_START);
+  if (!vt) {
+    document.getElementById('voting-countdown').classList.add('hidden');
+    document.getElementById('voting-open-msg').classList.remove('hidden');
+  } else {
+    document.getElementById('v-days').textContent    = pad(vt.days);
+    document.getElementById('v-hours').textContent   = pad(vt.hours);
+    document.getElementById('v-minutes').textContent = pad(vt.minutes);
+    document.getElementById('v-seconds').textContent = pad(vt.seconds);
+  }
+  const et = getTimeLeft(EVENT_DATE);
+  if (!et) {
+    document.getElementById('event-countdown').classList.add('hidden');
+    document.getElementById('event-today-msg').classList.remove('hidden');
+    ['g-days','g-hours','g-minutes','g-seconds'].forEach(id => document.getElementById(id).textContent = '00');
+  } else {
+    document.getElementById('e-days').textContent    = pad(et.days);
+    document.getElementById('e-hours').textContent   = pad(et.hours);
+    document.getElementById('e-minutes').textContent = pad(et.minutes);
+    document.getElementById('e-seconds').textContent = pad(et.seconds);
+    document.getElementById('g-days').textContent    = pad(et.days);
+    document.getElementById('g-hours').textContent   = pad(et.hours);
+    document.getElementById('g-minutes').textContent = pad(et.minutes);
+    document.getElementById('g-seconds').textContent = pad(et.seconds);
+  }
+}
+updateCountdowns();
+setInterval(updateCountdowns, 1000);
+
+/* ── FIXTURE FILTER ── */
+function filterFixtures(group) {
+  document.querySelectorAll('.fixture-tab').forEach(tab => {
+    tab.classList.remove('active');
+    if (
+      (group === 'all'    && tab.getAttribute('data-en') === 'All')       ||
+      (group === 'groupA' && tab.getAttribute('data-en') === 'Group A')   ||
+      (group === 'groupB' && tab.getAttribute('data-en') === 'Group B')   ||
+      (group === 'ko'     && tab.getAttribute('data-en') === 'Knockouts')
+    ) tab.classList.add('active');
+  });
+  document.querySelectorAll('.fixture-item').forEach(item => {
+    const g = item.getAttribute('data-group');
+    item.style.display = (group === 'all' || g === group) ? '' : 'none';
+    if (item.style.display !== 'none') {
+      item.style.animation = 'none';
+      item.offsetHeight;
+      item.style.animation = 'fadeInUp 0.4s ease forwards';
+    }
+  });
+}
+
+/* ── SUBCATEGORIES ── */
+const SUBCATEGORIES = {
+  en: {
+    0: ['Food & Catering','Hair & Beauty','Event Planning & Decor'],
+    1: [],
+    2: ['Personal Trainer of the Year','Wellness Advocate of the Year','Healthcare Professional of the Year'],
+    3: ['Community Service','Volunteer of the Year'],
+    4: ['Music Talent','Dance Talent','Photography and Videography','Social Media Personality','Sports Talent'],
+    5: ['Community Leadership','Consistent Service','Mentorship Legacy','Lifetime Commitment'],
+    6: ['Favorite Personality','Favorite Entertainer','Favorite Community Leader']
+  },
+  fr: {
+    0: ["Alimentation & Restauration","Coiffure & Beauté","Planification d'Événements & Décoration"],
+    1: [],
+    2: ["Entraîneur Personnel de l'Année","Défenseur du Bien-être de l'Année","Professionnel de la Santé de l'Année"],
+    3: ["Service Communautaire","Bénévole de l'Année"],
+    4: ["Talent Musical","Talent de Danse","Photographie et Vidéographie","Personnalité des Médias Sociaux","Talent Sportif"],
+    5: ["Leadership Communautaire","Service Cohérent","Héritage de Mentorat","Engagement à Vie"],
+    6: ["Personnalité Préférée","Artiste Préféré","Leader Communautaire Préféré"]
+  }
+};
+function handleCategoryChange(val) {
+  const wrap = document.getElementById('subcategory-wrap');
+  const sel  = document.getElementById('subcategory-select');
+  if (!val) { wrap.classList.add('hidden'); return; }
+  const idx  = parseInt(val);
+  const subs = SUBCATEGORIES[currentLang][idx] || [];
+  if (!subs.length) { wrap.classList.add('hidden'); return; }
+  sel.innerHTML = `<option value="">${currentLang === 'en' ? 'Choose a subcategory...' : 'Choisir une sous-catégorie...'}</option>`;
+  subs.forEach((s,i) => { const o = document.createElement('option'); o.value=i; o.textContent=s; sel.appendChild(o); });
+  wrap.classList.remove('hidden');
+}
+
+/* ── PHOTO PREVIEW ── */
+function previewPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('preview-img').src = e.target.result;
+    document.getElementById('photo-preview').classList.remove('hidden');
+    document.getElementById('upload-label').textContent = currentLang === 'en' ? 'Photo selected ✓' : 'Photo sélectionnée ✓';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+/* ── DRAG AND DROP ── */
+const uploadLabel = document.querySelector('label[for="photo-upload"]');
+if (uploadLabel) {
+  uploadLabel.addEventListener('dragover', e => { e.preventDefault(); uploadLabel.style.borderColor='#16a34a'; uploadLabel.style.background='#f0fdf4'; });
+  uploadLabel.addEventListener('dragleave', () => { uploadLabel.style.borderColor=''; uploadLabel.style.background=''; });
+  uploadLabel.addEventListener('drop', e => {
+    e.preventDefault(); uploadLabel.style.borderColor=''; uploadLabel.style.background='';
+    const files = e.dataTransfer.files;
+    if (files.length > 0) { document.getElementById('photo-upload').files = files; previewPhoto(document.getElementById('photo-upload')); }
+  });
+}
+
+/* ── NOMINATE FORM ── */
+function handleNominateSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const success = document.getElementById('nominate-success');
+  btn.disabled = true; btn.style.opacity = '0.7';
+  setTimeout(() => {
+    success.classList.remove('hidden');
+    btn.disabled = false; btn.style.opacity = '1';
+    e.target.reset();
+    document.getElementById('subcategory-wrap').classList.add('hidden');
+    document.getElementById('photo-preview').classList.add('hidden');
+    document.getElementById('upload-label').textContent = currentLang === 'en' ? 'Click to upload or drag and drop' : 'Cliquez pour télécharger ou glisser-déposer';
+    success.scrollIntoView({ behavior:'smooth', block:'center' });
+  }, 800);
+}
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      entry.target.style.animation = 'fadeInUp 0.7s ease forwards';
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── ACTIVE NAV ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(a => {
+    a.classList.toggle('text-green-600', a.getAttribute('href') === '#' + current);
+    a.classList.toggle('font-bold',      a.getAttribute('href') === '#' + current);
+  });
+}, { passive:true });
+
+/* ── HEADER SHADOW ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('main-header').classList.toggle('shadow-xl', window.scrollY > 20);
+}, { passive:true });
+</script>
+</body>
+</html>

@@ -8,136 +8,65 @@
   <link rel="icon" type="image/png" href="logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @keyframes scrollFlags {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    @keyframes float1 {
-      0%, 100% { transform: translate(0, 0); }
-      50%       { transform: translate(30px, 50px); }
-    }
-    @keyframes float2 {
-      0%, 100% { transform: translate(0, 0); }
-      50%       { transform: translate(-30px, -50px); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-      50%       { box-shadow: 0 0 0 15px rgba(34,197,94,0); }
-    }
-    @keyframes shimmer {
-      0%   { left: -75%; }
-      100% { left: 125%; }
-    }
-    @keyframes finalGlow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(234,179,8,0.5); }
-      50%       { box-shadow: 0 0 20px 10px rgba(234,179,8,0.2); }
-    }
+    @keyframes scrollFlags { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 50% { box-shadow: 0 0 0 15px rgba(34,197,94,0); } }
+    @keyframes float1 { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(30px,50px); } }
+    @keyframes float2 { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-30px,-50px); } }
+    @keyframes shimmer { 0% { left: -75%; } 100% { left: 125%; } }
+    @keyframes finalGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,179,8,0.5); } 50% { box-shadow: 0 0 20px 10px rgba(234,179,8,0.2); } }
 
     .animate-flag-scroll { animation: scrollFlags 60s linear infinite; }
-    .blob1 { animation: float1 8s ease-in-out infinite; }
-    .blob2 { animation: float2 10s ease-in-out infinite; }
     .animate-fade-up { animation: fadeInUp 0.8s ease forwards; }
     .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .blob1 { animation: float1 8s ease-in-out infinite; }
+    .blob2 { animation: float2 10s ease-in-out infinite; }
     .final-glow { animation: finalGlow 2s ease-in-out infinite; }
-
     .reveal { opacity: 0; }
     .reveal.visible { opacity: 1; }
     html { scroll-behavior: smooth; }
 
-    .text-gradient-g2y {
-      background: linear-gradient(to right, #16a34a, #ca8a04);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .text-gradient-g2r {
-      background: linear-gradient(to right, #16a34a, #ca8a04, #dc2626);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .text-gradient-purple {
-      background: linear-gradient(to right, #9333ea, #db2777);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
+    .text-gradient-g2y { background: linear-gradient(to right, #16a34a, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .text-gradient-g2r { background: linear-gradient(to right, #16a34a, #ca8a04, #dc2626); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .text-gradient-purple { background: linear-gradient(to right, #9333ea, #db2777); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
     .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
-
     .digit-box { border-radius: 0.5rem; padding: 0.75rem; min-width: 64px; text-align: center; }
-
     #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
     #mobile-menu.open { max-height: 500px; }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none; border-color: #16a34a !important;
-      box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
-    }
-
-    .upload-area:hover { border-color: #16a34a; background: #f0fdf4; }
     .gallery-item { transition: transform 0.25s ease, box-shadow 0.25s ease; }
     .gallery-item:hover { transform: scale(1.05); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
     .schedule-item { display: flex; align-items: flex-start; gap: 1rem; }
-
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f1f5f9; }
     ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 3px; }
-
     .btn-shimmer { position: relative; overflow: hidden; }
-    .btn-shimmer::after {
-      content: ''; position: absolute; top: -50%; left: -75%;
-      width: 50%; height: 200%; background: rgba(255,255,255,0.2);
-      transform: skewX(-20deg); animation: shimmer 3s infinite;
-    }
-
+    .btn-shimmer::after { content: ''; position: absolute; top: -50%; left: -75%; width: 50%; height: 200%; background: rgba(255,255,255,0.2); transform: skewX(-20deg); animation: shimmer 3s infinite; }
     select option { color: #1f2937; background: #fff; }
 
     .match-card { transition: all 0.3s ease; border-left: 4px solid transparent; }
     .match-card:hover { transform: translateX(4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
     .match-card.group-stage { border-left-color: #16a34a; }
-    .match-card.semi-final  { border-left-color: #2563eb; }
+    .match-card.semi-final { border-left-color: #2563eb; }
     .match-card.third-place { border-left-color: #b45309; }
-    .match-card.final       { border-left-color: #ca8a04; }
-
+    .match-card.final { border-left-color: #ca8a04; }
     .status-badge { font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; letter-spacing: 0.05em; text-transform: uppercase; }
     .status-upcoming { background: #e0f2fe; color: #0369a1; }
-
-    .date-badge {
-      min-width: 52px; text-align: center; border-radius: 0.75rem; padding: 6px 4px;
-      background: linear-gradient(135deg, #16a34a, #15803d);
-      color: white; font-weight: 800; font-size: 0.75rem; line-height: 1.2; flex-shrink: 0;
-    }
-
+    .date-badge { min-width: 52px; text-align: center; border-radius: 0.75rem; padding: 6px 4px; background: linear-gradient(135deg, #16a34a, #15803d); color: white; font-weight: 800; font-size: 0.75rem; line-height: 1.2; flex-shrink: 0; }
     .fixture-tab { transition: all 0.25s ease; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
     .fixture-tab.active { border-bottom-color: #16a34a; color: #16a34a; font-weight: 700; }
     .fixture-tab:hover:not(.active) { border-bottom-color: #86efac; color: #15803d; }
-
     .vs-divider { font-size: 0.7rem; font-weight: 800; color: #94a3b8; letter-spacing: 0.1em; }
     .team-name { font-size: 0.9rem; font-weight: 700; color: #1e293b; line-height: 1.2; }
     .supporter-flag { display: inline-block; font-size: 1.8rem; transition: transform 0.2s; }
     .supporter-flag:hover { transform: scale(1.3) rotate(-5deg); }
-
-    .bafana-flags {
-      display: inline-flex; align-items: center; gap: 1px;
-      background: linear-gradient(135deg,#f0fdf4,#fefce8);
-      border: 1px solid #d1fae5; border-radius: 6px; padding: 2px 5px; font-size: 1rem; line-height: 1;
-    }
+    .bafana-flags { display: inline-flex; align-items: center; gap: 1px; background: linear-gradient(135deg,#f0fdf4,#fefce8); border: 1px solid #d1fae5; border-radius: 6px; padding: 2px 5px; font-size: 1rem; line-height: 1; }
     .bafana-flags .flag-sep { font-size: 0.55rem; color: #94a3b8; font-weight: 900; margin: 0 1px; }
 
-    /* Admin Panel Styles */
-    .admin-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center; }
-    .admin-panel { background: white; border-radius: 1rem; max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto; padding: 2rem; }
-    .nominee-card { border: 2px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; transition: all 0.3s; }
-    .nominee-card:hover { border-color: #16a34a; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .nominee-card.approved { border-color: #16a34a; background: #f0fdf4; }
-    .nominee-card.rejected { border-color: #dc2626; background: #fef2f2; opacity: 0.6; }
-    .vote-card { border: 2px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; transition: all 0.3s; cursor: pointer; }
+    .vote-card { border: 2px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; transition: all 0.3s; }
     .vote-card:hover { border-color: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
     .vote-card.voted { border-color: #16a34a; background: #f0fdf4; }
-
-    /* Requirement list for special categories */
-    .requirement-item { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.5rem 0; }
-    .requirement-item::before { content: '✅'; flex-shrink: 0; }
   </style>
 </head>
 
@@ -147,102 +76,45 @@
 <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <!-- LOGO -->
       <a href="#home" class="flex items-center gap-3">
         <img src="logo.png" alt="WAU Logo" class="w-12 h-12 rounded-full object-cover shadow-md" />
         <span class="text-xl font-bold text-gradient-g2r">WAU</span>
       </a>
-
       <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
-        <a href="#home" class="text-gray-700 hover:text-green-600 transition" data-en="Home" data-fr="Accueil">Home</a>
-        <a href="#about" class="text-gray-700 hover:text-green-600 transition" data-en="About" data-fr="À Propos">About</a>
-        <a href="#categories" class="text-gray-700 hover:text-green-600 transition" data-en="Categories" data-fr="Catégories">Categories</a>
-        <a href="#nominate" class="text-gray-700 hover:text-green-600 transition" data-en="Nominate" data-fr="Nommer">Nominate</a>
-        <a href="#vote" class="text-gray-700 hover:text-green-600 transition" data-en="Vote" data-fr="Voter">Vote</a>
-        <a href="#fixtures" class="text-gray-700 hover:text-green-600 transition" data-en="AFCON Fixtures" data-fr="Matchs AFCON">AFCON Fixtures</a>
-        <a href="#gallery" class="text-gray-700 hover:text-green-600 transition" data-en="Gallery" data-fr="Galerie">Gallery</a>
-        <a href="#contact" class="text-gray-700 hover:text-green-600 transition" data-en="Contact" data-fr="Contact">Contact</a>
+        <a href="#home" class="text-gray-700 hover:text-green-600 transition">Home</a>
+        <a href="#about" class="text-gray-700 hover:text-green-600 transition">About</a>
+        <a href="#categories" class="text-gray-700 hover:text-green-600 transition">Categories</a>
+        <a href="#nominate" class="text-gray-700 hover:text-green-600 transition">Nominate</a>
+        <a href="#vote" class="text-gray-700 hover:text-green-600 transition">Vote</a>
+        <a href="#fixtures" class="text-gray-700 hover:text-green-600 transition">AFCON</a>
+        <a href="#gallery" class="text-gray-700 hover:text-green-600 transition">Gallery</a>
+        <a href="#contact" class="text-gray-700 hover:text-green-600 transition">Contact</a>
       </nav>
-
-      <div class="flex items-center gap-3">
-        <button id="lang-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 transition text-sm font-medium">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
-          </svg>
-          <span id="lang-label">FR</span>
-        </button>
-        <!-- Admin Button (hidden, press Ctrl+Shift+A to toggle) -->
-        <button id="admin-btn" class="hidden px-3 py-1.5 rounded-full bg-red-100 hover:bg-red-200 transition text-sm font-bold text-red-700" onclick="openAdminPanel()">
-          ⚙️ Admin
-        </button>
-        <button id="hamburger" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition">
-          <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
+      <button id="hamburger" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+        <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
     </div>
   </div>
-
   <div id="mobile-menu" class="md:hidden bg-white border-t">
     <nav class="flex flex-col p-4 gap-1">
-      <a href="#home" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobileMenu()">Home</a>
-      <a href="#about" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobileMenu()">About</a>
-      <a href="#categories" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobileMenu()">Categories</a>
-      <a href="#nominate" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobileMenu()">Nominate</a>
-      <a href="#vote" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobileMenu()">Vote</a>
-      <a href="#fixtures" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobileMenu()">AFCON Fixtures</a>
-      <a href="#gallery" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobileMenu()">Gallery</a>
-      <a href="#contact" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobileMenu()">Contact</a>
+      <a href="#home" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Home</a>
+      <a href="#about" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">About</a>
+      <a href="#categories" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Categories</a>
+      <a href="#nominate" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Nominate</a>
+      <a href="#vote" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Vote</a>
+      <a href="#fixtures" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">AFCON</a>
+      <a href="#gallery" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Gallery</a>
+      <a href="#contact" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Contact</a>
     </nav>
   </div>
 </header>
 
-<!-- SCROLLING FLAGS -->
+<!-- FLAGS -->
 <div class="fixed top-16 left-0 right-0 z-40 py-2 overflow-hidden" style="background:linear-gradient(to right,#16a34a,#ca8a04,#dc2626)">
   <div class="animate-flag-scroll flex gap-4 whitespace-nowrap" style="width:max-content">
     <span class="text-2xl">🇩🇿</span><span class="text-2xl">🇦🇴</span><span class="text-2xl">🇧🇯</span><span class="text-2xl">🇧🇼</span><span class="text-2xl">🇧🇫</span><span class="text-2xl">🇧🇮</span><span class="text-2xl">🇨🇻</span><span class="text-2xl">🇨🇲</span><span class="text-2xl">🇨🇫</span><span class="text-2xl">🇹🇩</span><span class="text-2xl">🇰🇲</span><span class="text-2xl">🇨🇬</span><span class="text-2xl">🇨🇩</span><span class="text-2xl">🇨🇮</span><span class="text-2xl">🇩🇯</span><span class="text-2xl">🇪🇬</span><span class="text-2xl">🇬🇶</span><span class="text-2xl">🇪🇷</span><span class="text-2xl">🇸🇿</span><span class="text-2xl">🇪🇹</span><span class="text-2xl">🇬🇦</span><span class="text-2xl">🇬🇲</span><span class="text-2xl">🇬🇭</span><span class="text-2xl">🇬🇳</span><span class="text-2xl">🇬🇼</span><span class="text-2xl">🇰🇪</span><span class="text-2xl">🇱🇸</span><span class="text-2xl">🇱🇷</span><span class="text-2xl">🇱🇾</span><span class="text-2xl">🇲🇬</span><span class="text-2xl">🇲🇼</span><span class="text-2xl">🇲🇱</span><span class="text-2xl">🇲🇷</span><span class="text-2xl">🇲🇺</span><span class="text-2xl">🇲🇦</span><span class="text-2xl">🇲🇿</span><span class="text-2xl">🇳🇦</span><span class="text-2xl">🇳🇪</span><span class="text-2xl">🇳🇬</span><span class="text-2xl">🇷🇼</span><span class="text-2xl">🇸🇹</span><span class="text-2xl">🇸🇳</span><span class="text-2xl">🇸🇨</span><span class="text-2xl">🇸🇱</span><span class="text-2xl">🇸🇴</span><span class="text-2xl">🇿🇦</span><span class="text-2xl">🇸🇸</span><span class="text-2xl">🇸🇩</span><span class="text-2xl">🇹🇿</span><span class="text-2xl">🇹🇬</span><span class="text-2xl">🇹🇳</span><span class="text-2xl">🇺🇬</span><span class="text-2xl">🇿🇲</span><span class="text-2xl">🇿🇼</span>
     <span class="text-2xl">🇩🇿</span><span class="text-2xl">🇦🇴</span><span class="text-2xl">🇧🇯</span><span class="text-2xl">🇧🇼</span><span class="text-2xl">🇧🇫</span><span class="text-2xl">🇧🇮</span><span class="text-2xl">🇨🇻</span><span class="text-2xl">🇨🇲</span><span class="text-2xl">🇨🇫</span><span class="text-2xl">🇹🇩</span><span class="text-2xl">🇰🇲</span><span class="text-2xl">🇨🇬</span><span class="text-2xl">🇨🇩</span><span class="text-2xl">🇨🇮</span><span class="text-2xl">🇩🇯</span><span class="text-2xl">🇪🇬</span><span class="text-2xl">🇬🇶</span><span class="text-2xl">🇪🇷</span><span class="text-2xl">🇸🇿</span><span class="text-2xl">🇪🇹</span><span class="text-2xl">🇬🇦</span><span class="text-2xl">🇬🇲</span><span class="text-2xl">🇬🇭</span><span class="text-2xl">🇬🇳</span><span class="text-2xl">🇬🇼</span><span class="text-2xl">🇰🇪</span><span class="text-2xl">🇱🇸</span><span class="text-2xl">🇱🇷</span><span class="text-2xl">🇱🇾</span><span class="text-2xl">🇲🇬</span><span class="text-2xl">🇲🇼</span><span class="text-2xl">🇲🇱</span><span class="text-2xl">🇲🇷</span><span class="text-2xl">🇲🇺</span><span class="text-2xl">🇲🇦</span><span class="text-2xl">🇲🇿</span><span class="text-2xl">🇳🇦</span><span class="text-2xl">🇳🇪</span><span class="text-2xl">🇳🇬</span><span class="text-2xl">🇷🇼</span><span class="text-2xl">🇸🇹</span><span class="text-2xl">🇸🇳</span><span class="text-2xl">🇸🇨</span><span class="text-2xl">🇸🇱</span><span class="text-2xl">🇸🇴</span><span class="text-2xl">🇿🇦</span><span class="text-2xl">🇸🇸</span><span class="text-2xl">🇸🇩</span><span class="text-2xl">🇹🇿</span><span class="text-2xl">🇹🇬</span><span class="text-2xl">🇹🇳</span><span class="text-2xl">🇺🇬</span><span class="text-2xl">🇿🇲</span><span class="text-2xl">🇿🇼</span>
-  </div>
-</div>
-
-<!-- ADMIN PANEL (Hidden by default) -->
-<div id="admin-panel" class="admin-overlay hidden">
-  <div class="admin-panel">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-bold text-gray-800">⚙️ Admin Panel — Manage Nominations</h2>
-      <button onclick="closeAdminPanel()" class="p-2 rounded-lg hover:bg-gray-100 text-gray-600">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-    </div>
-
-    <!-- Stats -->
-    <div class="grid grid-cols-3 gap-4 mb-6">
-      <div class="bg-yellow-50 p-4 rounded-xl text-center">
-        <div id="pending-count" class="text-3xl font-bold text-yellow-600">0</div>
-        <div class="text-sm text-gray-600">Pending</div>
-      </div>
-      <div class="bg-green-50 p-4 rounded-xl text-center">
-        <div id="approved-count" class="text-3xl font-bold text-green-600">0</div>
-        <div class="text-sm text-gray-600">Approved</div>
-      </div>
-      <div class="bg-red-50 p-4 rounded-xl text-center">
-        <div id="rejected-count" class="text-3xl font-bold text-red-600">0</div>
-        <div class="text-sm text-gray-600">Rejected</div>
-      </div>
-    </div>
-
-    <!-- Filter -->
-    <div class="flex gap-2 mb-6">
-      <button onclick="filterAdmin('all')" class="px-4 py-2 rounded-lg bg-gray-200 font-medium text-sm hover:bg-gray-300">All</button>
-      <button onclick="filterAdmin('pending')" class="px-4 py-2 rounded-lg bg-yellow-200 font-medium text-sm hover:bg-yellow-300">Pending</button>
-      <button onclick="filterAdmin('approved')" class="px-4 py-2 rounded-lg bg-green-200 font-medium text-sm hover:bg-green-300">Approved</button>
-      <button onclick="filterAdmin('rejected')" class="px-4 py-2 rounded-lg bg-red-200 font-medium text-sm hover:bg-red-300">Rejected</button>
-    </div>
-
-    <!-- Nominations List -->
-    <div id="admin-nominations" class="space-y-4">
-      <p class="text-gray-500 text-center py-8">No nominations yet.</p>
-    </div>
   </div>
 </div>
 
@@ -252,71 +124,61 @@
   <section id="home" class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
     <div class="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl blob1 pointer-events-none" style="background:rgba(74,222,128,0.2)"></div>
     <div class="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl blob2 pointer-events-none" style="background:rgba(250,204,21,0.2)"></div>
-
     <div class="max-w-5xl mx-auto text-center relative z-10 animate-fade-up">
       <div class="mb-8 flex justify-center">
         <div class="w-24 h-24 rounded-full overflow-hidden shadow-2xl pulse-glow">
-          <img src="logo.png" alt="WAU Logo" class="w-full h-full object-cover" />
+          <img src="logo.png" alt="WAU" class="w-full h-full object-cover" />
         </div>
       </div>
+      <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient-g2r">Wenzhou African Union</h1>
+      <p class="text-2xl md:text-3xl text-gray-700 mb-12">Africa Day 2026 Awards</p>
 
-      <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient-g2r" data-en="Wenzhou African Union" data-fr="Union Africaine de Wenzhou">Wenzhou African Union</h1>
-      <p class="text-2xl md:text-3xl text-gray-700 mb-12" data-en="Africa Day 2026 Awards" data-fr="Prix de la Journée de l'Afrique 2026">Africa Day 2026 Awards</p>
-
-      <!-- KEY DATES -->
+      <!-- 3 Countdowns -->
       <div class="grid md:grid-cols-3 gap-4 mb-12">
-        <!-- Nomination Period -->
+        <!-- Nomination -->
         <div class="bg-white rounded-2xl shadow-xl p-5">
           <div class="text-3xl mb-2">📝</div>
-          <h3 class="text-sm font-bold text-gray-600 mb-1" data-en="Nomination Period" data-fr="Période de Nomination">Nomination Period</h3>
-          <p class="text-lg font-bold text-green-700">Apr 26 – May 2, 2026</p>
+          <h3 class="text-sm font-bold text-gray-600 mb-1">Nomination Period</h3>
+          <p class="text-lg font-bold text-green-700">Apr 26 – May 2</p>
           <div id="nom-status" class="mt-2 text-sm font-semibold"></div>
-          <div id="nom-countdown" class="grid grid-cols-4 gap-2 mt-3">
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#16a34a,#15803d)"><span id="n-days">--</span></div><div class="text-xs mt-1 text-gray-500">Days</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><span id="n-hours">--</span></div><div class="text-xs mt-1 text-gray-500">Hrs</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><span id="n-mins">--</span></div><div class="text-xs mt-1 text-gray-500">Min</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#9333ea,#7e22ce)"><span id="n-secs">--</span></div><div class="text-xs mt-1 text-gray-500">Sec</div></div>
+          <div id="nom-cd" class="grid grid-cols-4 gap-2 mt-3">
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#16a34a,#15803d)"><span id="n-d">--</span></div><div class="text-xs mt-1 text-gray-500">D</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><span id="n-h">--</span></div><div class="text-xs mt-1 text-gray-500">H</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><span id="n-m">--</span></div><div class="text-xs mt-1 text-gray-500">M</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#9333ea,#7e22ce)"><span id="n-s">--</span></div><div class="text-xs mt-1 text-gray-500">S</div></div>
           </div>
         </div>
-
-        <!-- Voting Period -->
+        <!-- Voting -->
         <div class="bg-white rounded-2xl shadow-xl p-5">
           <div class="text-3xl mb-2">🗳️</div>
-          <h3 class="text-sm font-bold text-gray-600 mb-1" data-en="Voting Period" data-fr="Période de Vote">Voting Period</h3>
-          <p class="text-lg font-bold text-yellow-700">May 5 – May 10, 2026</p>
-          <div id="vote-status" class="mt-2 text-sm font-semibold"></div>
-          <div id="vote-countdown" class="grid grid-cols-4 gap-2 mt-3">
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#16a34a,#15803d)"><span id="vo-days">--</span></div><div class="text-xs mt-1 text-gray-500">Days</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><span id="vo-hours">--</span></div><div class="text-xs mt-1 text-gray-500">Hrs</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><span id="vo-mins">--</span></div><div class="text-xs mt-1 text-gray-500">Min</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#9333ea,#7e22ce)"><span id="vo-secs">--</span></div><div class="text-xs mt-1 text-gray-500">Sec</div></div>
+          <h3 class="text-sm font-bold text-gray-600 mb-1">Voting Period</h3>
+          <p class="text-lg font-bold text-yellow-700">May 5 – May 10</p>
+          <div id="vote-hero-status" class="mt-2 text-sm font-semibold"></div>
+          <div id="vote-cd" class="grid grid-cols-4 gap-2 mt-3">
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#16a34a,#15803d)"><span id="v-d">--</span></div><div class="text-xs mt-1 text-gray-500">D</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><span id="v-h">--</span></div><div class="text-xs mt-1 text-gray-500">H</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><span id="v-m">--</span></div><div class="text-xs mt-1 text-gray-500">M</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#9333ea,#7e22ce)"><span id="v-s">--</span></div><div class="text-xs mt-1 text-gray-500">S</div></div>
           </div>
         </div>
-
-        <!-- Gala Event -->
+        <!-- Gala -->
         <div class="bg-white rounded-2xl shadow-xl p-5">
           <div class="text-3xl mb-2">🎉</div>
-          <h3 class="text-sm font-bold text-gray-600 mb-1" data-en="AU Day Gala" data-fr="Gala Journée UA">AU Day Gala</h3>
+          <h3 class="text-sm font-bold text-gray-600 mb-1">AU Day Gala</h3>
           <p class="text-lg font-bold text-red-700">May 23, 2026</p>
           <div id="gala-status" class="mt-2 text-sm font-semibold"></div>
-          <div id="gala-countdown" class="grid grid-cols-4 gap-2 mt-3">
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#16a34a,#15803d)"><span id="g-days">--</span></div><div class="text-xs mt-1 text-gray-500">Days</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><span id="g-hours">--</span></div><div class="text-xs mt-1 text-gray-500">Hrs</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><span id="g-mins">--</span></div><div class="text-xs mt-1 text-gray-500">Min</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#9333ea,#7e22ce)"><span id="g-secs">--</span></div><div class="text-xs mt-1 text-gray-500">Sec</div></div>
+          <div id="gala-cd" class="grid grid-cols-4 gap-2 mt-3">
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#16a34a,#15803d)"><span id="g-d">--</span></div><div class="text-xs mt-1 text-gray-500">D</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><span id="g-h">--</span></div><div class="text-xs mt-1 text-gray-500">H</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><span id="g-m">--</span></div><div class="text-xs mt-1 text-gray-500">M</div></div>
+            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#9333ea,#7e22ce)"><span id="g-s">--</span></div><div class="text-xs mt-1 text-gray-500">S</div></div>
           </div>
         </div>
       </div>
 
       <div class="flex flex-wrap gap-4 justify-center">
-        <a href="#nominate" class="btn-shimmer group px-8 py-4 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2" style="background:linear-gradient(to right,#16a34a,#15803d)">
-          <span data-en="Nominate Now" data-fr="Nommer Maintenant">Nominate Now</span>
-          <svg class="w-5 h-5 group-hover:translate-x-1 transition" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-        <a href="#vote" class="px-8 py-4 bg-white text-green-700 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 border-2 border-green-200 hover:border-green-500">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <span data-en="Vote" data-fr="Voter">Vote</span>
-        </a>
+        <a href="#nominate" class="btn-shimmer px-8 py-4 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2" style="background:linear-gradient(to right,#16a34a,#15803d)">📝 Nominate Now</a>
+        <a href="#vote" class="px-8 py-4 bg-white text-green-700 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 border-2 border-green-200 hover:border-green-500">🗳️ Vote</a>
       </div>
     </div>
   </section>
@@ -326,7 +188,7 @@
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16 reveal">
         <div class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-bold mb-4">Est. 2022</div>
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y" data-en="About WAU" data-fr="À Propos de WAU">About WAU</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">About WAU</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-8 mb-12">
         <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg reveal card-hover">
@@ -340,28 +202,16 @@
           <p class="text-gray-700 leading-relaxed">The Wenzhou African Union exists to unite, empower, and celebrate the African community in Wenzhou, China. We foster cultural exchange, support African businesses, and create a home away from home.</p>
         </div>
       </div>
-      <div class="bg-gradient-to-br from-red-50 to-orange-100 p-8 md:p-12 rounded-2xl shadow-xl mb-12 reveal">
+      <div class="bg-gradient-to-br from-red-50 to-orange-100 p-8 md:p-12 rounded-2xl shadow-xl reveal">
         <div class="text-5xl mb-4">📅</div>
-        <h3 class="text-3xl font-bold mb-6 text-gray-800">About Africa Day</h3>
+        <h3 class="text-3xl font-bold mb-4 text-gray-800">About Africa Day</h3>
         <p class="text-gray-700 leading-relaxed mb-4">Africa Day, celebrated on May 25th each year, commemorates the founding of the Organisation of African Unity (now the African Union) in 1963.</p>
         <p class="font-semibold text-lg text-gray-800">Our 2026 celebration brings together all 54 African nations' representatives for recognition, celebration, and community building.</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center p-6 reveal">
-          <svg class="w-12 h-12 text-green-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-          <h3 class="text-xl font-bold mb-2 text-gray-800">Excellence</h3>
-          <p class="text-gray-600">Recognizing outstanding achievements in our community</p>
-        </div>
-        <div class="text-center p-6 reveal">
-          <svg class="w-12 h-12 text-yellow-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          <h3 class="text-xl font-bold mb-2 text-gray-800">Unity</h3>
-          <p class="text-gray-600">Bringing together Africans from all 54 nations</p>
-        </div>
-        <div class="text-center p-6 reveal">
-          <svg class="w-12 h-12 text-red-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          <h3 class="text-xl font-bold mb-2 text-gray-800">Culture</h3>
-          <p class="text-gray-600">Celebrating our rich African heritage and traditions</p>
-        </div>
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <div class="text-center p-6 reveal"><svg class="w-12 h-12 text-green-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg><h3 class="text-xl font-bold mb-2">Excellence</h3><p class="text-gray-600">Recognizing outstanding achievements</p></div>
+        <div class="text-center p-6 reveal"><svg class="w-12 h-12 text-yellow-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg><h3 class="text-xl font-bold mb-2">Unity</h3><p class="text-gray-600">Bringing together all 54 nations</p></div>
+        <div class="text-center p-6 reveal"><svg class="w-12 h-12 text-red-600 mb-4 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><h3 class="text-xl font-bold mb-2">Culture</h3><p class="text-gray-600">Celebrating our heritage</p></div>
       </div>
     </div>
   </section>
@@ -369,213 +219,71 @@
   <!-- CATEGORIES -->
   <section id="categories" class="py-20 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16 reveal">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Award Categories</h2>
-      </div>
+      <div class="text-center mb-16 reveal"><h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Award Categories</h2></div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
-          <div class="text-5xl mb-4">💼</div>
-          <h3 class="text-xl font-bold mb-3 text-gray-800">Business of the Year</h3>
-          <ul class="space-y-2 mt-3"><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Food &amp; Catering</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Hair &amp; Beauty</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Event Planning &amp; Decor</li></ul>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
-          <div class="text-5xl mb-4">🚀</div>
-          <h3 class="text-xl font-bold mb-3 text-gray-800">Entrepreneur of the Year</h3>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
-          <div class="text-5xl mb-4">💪</div>
-          <h3 class="text-xl font-bold mb-3 text-gray-800">Health &amp; Fitness Excellence</h3>
-          <ul class="space-y-2 mt-3"><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Personal Trainer</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Wellness Advocate</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Healthcare Professional</li></ul>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
-          <div class="text-5xl mb-4">🤝</div>
-          <h3 class="text-xl font-bold mb-3 text-gray-800">Social Impact Award</h3>
-          <ul class="space-y-2 mt-3"><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Community Service ⭐</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Volunteer of the Year ⭐</li></ul>
-          <p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions list</p>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
-          <div class="text-5xl mb-4">🎭</div>
-          <h3 class="text-xl font-bold mb-3 text-gray-800">African Talent of the Year</h3>
-          <ul class="space-y-2 mt-3"><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Music</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Dance</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Photography &amp; Videography</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Social Media Personality</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Sports</li></ul>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal">
-          <div class="text-5xl mb-4">🏆</div>
-          <h3 class="text-xl font-bold mb-3 text-gray-800">Long-Term Dedication Award</h3>
-          <ul class="space-y-2 mt-3"><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Community Leadership ⭐</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Consistent Service ⭐</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Mentorship Legacy ⭐</li><li class="flex items-start gap-2 text-sm text-gray-600"><span class="text-green-500">•</span>Lifetime Commitment ⭐</li></ul>
-          <p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions list</p>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal lg:col-span-3 md:col-span-2">
-          <div class="text-5xl mb-4">🌟</div>
-          <h3 class="text-xl font-bold mb-3 text-gray-800">People's Choice Award</h3>
-          <div class="flex flex-wrap gap-4 mt-3">
-            <span class="flex items-center gap-2 text-sm text-gray-600 bg-green-50 px-3 py-1.5 rounded-full"><span class="text-green-500">•</span>Favorite Personality</span>
-            <span class="flex items-center gap-2 text-sm text-gray-600 bg-yellow-50 px-3 py-1.5 rounded-full"><span class="text-yellow-500">•</span>Favorite Entertainer</span>
-            <span class="flex items-center gap-2 text-sm text-gray-600 bg-red-50 px-3 py-1.5 rounded-full"><span class="text-red-500">•</span>Favorite Community Leader</span>
-          </div>
-        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">💼</div><h3 class="text-xl font-bold mb-3">Business of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Food &amp; Catering</li><li>• Hair &amp; Beauty</li><li>• Event Planning &amp; Decor</li></ul></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🚀</div><h3 class="text-xl font-bold mb-3">Entrepreneur of the Year</h3></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">💪</div><h3 class="text-xl font-bold mb-3">Health &amp; Fitness Excellence</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Personal Trainer</li><li>• Wellness Advocate</li><li>• Healthcare Professional</li></ul></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🤝</div><h3 class="text-xl font-bold mb-3">Social Impact Award</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Service ⭐</li><li>• Volunteer of the Year ⭐</li></ul><p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions</p></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🎭</div><h3 class="text-xl font-bold mb-3">African Talent of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Music</li><li>• Dance</li><li>• Photography &amp; Video</li><li>• Social Media</li><li>• Sports</li></ul></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🏆</div><h3 class="text-xl font-bold mb-3">Long-Term Dedication</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Leadership ⭐</li><li>• Consistent Service ⭐</li><li>• Mentorship Legacy ⭐</li><li>• Lifetime Commitment ⭐</li></ul><p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions</p></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal lg:col-span-3 md:col-span-2"><div class="text-5xl mb-4">🌟</div><h3 class="text-xl font-bold mb-3">People's Choice Award</h3><div class="flex flex-wrap gap-3 mt-3"><span class="text-sm bg-green-50 px-3 py-1.5 rounded-full">Favorite Personality</span><span class="text-sm bg-yellow-50 px-3 py-1.5 rounded-full">Favorite Entertainer</span><span class="text-sm bg-red-50 px-3 py-1.5 rounded-full">Favorite Community Leader</span></div></div>
       </div>
     </div>
   </section>
 
-  <!-- NOMINATE -->
+  <!-- NOMINATE — GOOGLE FORM EMBEDDED -->
   <section id="nominate" class="py-20 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12 reveal">
+      <div class="text-center mb-8 reveal">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Submit a Nomination</h2>
-
-        <!-- Period Info -->
         <div class="bg-green-50 border-2 border-green-500 rounded-xl p-6 mb-4 max-w-2xl mx-auto">
-          <div class="flex items-center gap-3 justify-center mb-2">
-            <span class="text-2xl">📝</span>
-            <p class="text-lg font-bold text-green-900">Nomination Period: April 26 – May 2, 2026</p>
-          </div>
-          <p class="text-gray-700">All nominations will be reviewed and approved by the admin before appearing for voting.</p>
+          <p class="text-lg font-bold text-green-900">📝 Nomination Period: April 26 – May 2, 2026</p>
+          <p class="text-gray-700 mt-2">All nominations are reviewed by the WAU admin team. Approved nominees will appear on the voting page.</p>
         </div>
-
-        <!-- Status Banner -->
         <div id="nom-form-status" class="max-w-2xl mx-auto mb-4"></div>
       </div>
 
-      <!-- Nomination Form -->
-      <div id="nomination-form-wrap" class="bg-gradient-to-br from-green-50 to-yellow-50 p-8 rounded-2xl shadow-xl reveal">
-        <form id="nominate-form" class="space-y-6" onsubmit="handleNominateSubmit(event)">
+      <div id="nom-form-wrap" class="reveal">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-green-200">
 
-          <!-- Category -->
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Select Category *</label>
-            <select id="category-select" required onchange="handleCategoryChange(this.value)" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white">
-              <option value="">Choose a category...</option>
-              <option value="0">💼 Business of the Year</option>
-              <option value="1">🚀 Entrepreneur of the Year</option>
-              <option value="2">💪 Health &amp; Fitness Excellence</option>
-              <option value="3">🤝 Social Impact Award</option>
-              <option value="4">🎭 African Talent of the Year</option>
-              <option value="5">🏆 Long-Term Dedication Award</option>
-              <option value="6">🌟 People's Choice Award</option>
-            </select>
-          </div>
-
-          <!-- Subcategory -->
-          <div id="subcategory-wrap" class="hidden">
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Select Subcategory *</label>
-            <select id="subcategory-select" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white"></select>
-          </div>
-
-          <!-- Special Category Notice -->
-          <div id="special-category-notice" class="hidden bg-orange-50 border-2 border-orange-400 rounded-xl p-5">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="text-xl">⚠️</span>
-              <p class="font-bold text-orange-800">This category requires specific details!</p>
-            </div>
-            <p class="text-sm text-orange-700 mb-3">For this subcategory, you MUST list the specific things this person has done. Generic reasons will be rejected.</p>
-            <div class="text-sm text-orange-800 font-semibold">Examples of what to include:</div>
-            <ul class="text-sm text-orange-700 mt-2 space-y-1">
-              <li>• Organized community events (list which ones)</li>
-              <li>• Led initiatives or projects (describe them)</li>
-              <li>• Volunteered time for specific causes (name them)</li>
-              <li>• Mentored specific individuals or groups</li>
-              <li>• Made measurable impact (numbers, outcomes)</li>
-            </ul>
-          </div>
-
-          <!-- Nominee Info -->
-          <div class="grid md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Nominee Name *</label>
-              <input id="nom-name" type="text" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white">
-            </div>
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Nationality *</label>
-              <select id="nom-nationality" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white">
-                <option value="">Select country...</option>
-                <option>🇩🇿 Algeria</option><option>🇦🇴 Angola</option><option>🇧🇯 Benin</option><option>🇧🇼 Botswana</option><option>🇧🇫 Burkina Faso</option><option>🇧🇮 Burundi</option><option>🇨🇻 Cabo Verde</option><option>🇨🇲 Cameroon</option><option>🇨🇫 Central African Republic</option><option>🇹🇩 Chad</option><option>🇰🇲 Comoros</option><option>🇨🇬 Congo</option><option>🇨🇩 DR Congo</option><option>🇨🇮 Côte d'Ivoire</option><option>🇩🇯 Djibouti</option><option>🇪🇬 Egypt</option><option>🇬🇶 Equatorial Guinea</option><option>🇪🇷 Eritrea</option><option>🇸🇿 Eswatini</option><option>🇪🇹 Ethiopia</option><option>🇬🇦 Gabon</option><option>🇬🇲 Gambia</option><option>🇬🇭 Ghana</option><option>🇬🇳 Guinea</option><option>🇬🇼 Guinea-Bissau</option><option>🇰🇪 Kenya</option><option>🇱🇸 Lesotho</option><option>🇱🇷 Liberia</option><option>🇱🇾 Libya</option><option>🇲🇬 Madagascar</option><option>🇲🇼 Malawi</option><option>🇲🇱 Mali</option><option>🇲🇷 Mauritania</option><option>🇲🇺 Mauritius</option><option>🇲🇦 Morocco</option><option>🇲🇿 Mozambique</option><option>🇳🇦 Namibia</option><option>🇳🇪 Niger</option><option>🇳🇬 Nigeria</option><option>🇷🇼 Rwanda</option><option>🇸🇹 São Tomé</option><option>🇸🇳 Senegal</option><option>🇸🇨 Seychelles</option><option>🇸🇱 Sierra Leone</option><option>🇸🇴 Somalia</option><option>🇿🇦 South Africa</option><option>🇸🇸 South Sudan</option><option>🇸🇩 Sudan</option><option>🇹🇿 Tanzania</option><option>🇹🇬 Togo</option><option>🇹🇳 Tunisia</option><option>🇺🇬 Uganda</option><option>🇿🇲 Zambia</option><option>🇿🇼 Zimbabwe</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Nominee Email</label>
-              <input id="nom-email" type="email" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white">
-            </div>
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Nominee Phone</label>
-              <input id="nom-phone" type="tel" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white">
-            </div>
-          </div>
-
-          <!-- Photo Upload -->
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Nominee Photo *</label>
-            <label for="photo-upload" class="upload-area border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer transition block">
-              <svg class="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-              <p class="text-gray-600 mb-1" id="upload-label">Click to upload or drag and drop</p>
-              <p class="text-sm text-gray-500">JPG, PNG, WebP (max 5MB)</p>
-            </label>
-            <input id="photo-upload" type="file" accept="image/*" class="hidden" onchange="previewPhoto(this)">
-            <div id="photo-preview" class="hidden mt-3"><img id="preview-img" class="w-32 h-32 object-cover rounded-xl shadow-lg mx-auto" src="" alt="Preview"></div>
-          </div>
-
-          <!-- Brief Bio -->
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Brief Bio</label>
-            <textarea id="nom-bio" rows="3" placeholder="Tell us about this person..." class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white"></textarea>
-          </div>
-
-          <!-- Why they deserve the award -->
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Why do they deserve this award? * <span id="reason-required-tag" class="hidden text-orange-600">(Specific contributions required!)</span></label>
-            <textarea id="nom-reason" rows="5" required placeholder="Describe their achievements and contributions..." class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white"></textarea>
-            <p id="reason-help-text" class="hidden text-sm text-orange-600 mt-2 font-medium">⚠️ Please list specific actions, events organized, people helped, or projects led. Vague answers will be rejected.</p>
-          </div>
-
-          <!-- Specific Contributions (for special categories) -->
-          <div id="contributions-section" class="hidden border-2 border-orange-300 rounded-xl p-6 bg-orange-50">
-            <h3 class="text-lg font-bold text-orange-800 mb-4">📋 List Specific Contributions *</h3>
-            <p class="text-sm text-orange-700 mb-4">Add at least 3 specific things this person has done:</p>
-            <div id="contributions-list" class="space-y-3">
-              <div class="flex gap-2">
-                <span class="text-orange-500 font-bold mt-2">1.</span>
-                <input type="text" class="contribution-input w-full px-3 py-2 rounded-lg border-2 border-orange-200 bg-white" placeholder="e.g. Organized Africa Day celebration 2024">
-              </div>
-              <div class="flex gap-2">
-                <span class="text-orange-500 font-bold mt-2">2.</span>
-                <input type="text" class="contribution-input w-full px-3 py-2 rounded-lg border-2 border-orange-200 bg-white" placeholder="e.g. Mentored 15 new African students in Wenzhou">
-              </div>
-              <div class="flex gap-2">
-                <span class="text-orange-500 font-bold mt-2">3.</span>
-                <input type="text" class="contribution-input w-full px-3 py-2 rounded-lg border-2 border-orange-200 bg-white" placeholder="e.g. Led weekly community meetings for 2 years">
-              </div>
-            </div>
-            <button type="button" onclick="addContribution()" class="mt-3 px-4 py-2 bg-orange-200 text-orange-800 rounded-lg text-sm font-semibold hover:bg-orange-300 transition">+ Add More</button>
-          </div>
-
-          <!-- Nominator Info -->
-          <div class="border-t-2 border-gray-200 pt-6">
-            <h3 class="text-lg font-bold text-gray-800 mb-4">Your Information</h3>
-            <div class="grid md:grid-cols-2 gap-4">
+          <!-- Instructions -->
+          <div class="bg-gradient-to-r from-green-50 to-yellow-50 p-6 border-b-2 border-green-100">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="text-2xl">📋</span>
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Your Name *</label>
-                <input id="nominator-name" type="text" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white">
+                <p class="font-bold text-gray-800 mb-1">How Nominations Work:</p>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>✅ Fill out the form below with nominee details</li>
+                  <li>✅ Your nomination goes directly to the WAU admin team</li>
+                  <li>✅ Approved nominees will appear on the voting page</li>
+                  <li>✅ You will be notified when your nominee is approved</li>
+                </ul>
               </div>
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Your Email *</label>
-                <input id="nominator-email" type="email" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white">
-              </div>
+            </div>
+            <div class="bg-orange-50 border border-orange-300 rounded-lg p-4">
+              <p class="text-sm font-semibold text-orange-800">⚠️ For categories like Community Service, Volunteer of the Year, Community Leadership, Consistent Service, Mentorship Legacy, and Lifetime Commitment — you MUST list specific things the person has done. Generic answers will be rejected.</p>
             </div>
           </div>
 
-          <button type="submit" class="btn-shimmer w-full py-4 text-white rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2" style="background:linear-gradient(to right,#16a34a,#15803d)">
-            <svg class="w-6 h-6" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            Submit Nomination (Admin Approval Required)
-          </button>
+          <!--
+            ╔══════════════════════════════════════════════════╗
+            ║  REPLACE THE URL BELOW WITH YOUR GOOGLE FORM URL ║
+            ╚══════════════════════════════════════════════════╝
+          -->
+          <iframe
+            id="google-form"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfRR-umfg80dWS4gMpyBaphTuCJu079M4FhibL2OcQp9pDgwg/viewform?embedded=true"
+            width="100%"
+            height="2400"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            style="border:none; min-height:1200px;"
+            loading="lazy"
+          >Loading form…</iframe>
 
-          <div id="nominate-success" class="hidden bg-green-50 border-2 border-green-500 rounded-xl p-6 text-center">
-            <div class="text-4xl mb-3">🎉</div>
-            <p class="text-xl font-bold text-green-800">Nomination submitted!</p>
-            <p class="text-gray-600 mt-2">Your nomination is pending admin approval. It will appear on the voting page once approved.</p>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </section>
@@ -586,31 +294,24 @@
       <div class="text-center mb-12 reveal">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Vote for Nominees</h2>
         <div class="bg-yellow-50 border-2 border-yellow-500 rounded-xl p-6 max-w-2xl mx-auto mb-4">
-          <span class="text-2xl">🗳️</span>
-          <p class="text-lg font-semibold text-gray-800 mb-1">Voting Period</p>
+          <p class="text-lg font-semibold text-gray-800">🗳️ Voting Period</p>
           <p class="text-2xl font-bold text-yellow-700">May 5 – May 10, 2026</p>
         </div>
         <div id="vote-section-status" class="max-w-2xl mx-auto"></div>
       </div>
 
-      <!-- Category Filter for Voting -->
-      <div id="vote-category-filter" class="flex flex-wrap gap-2 justify-center mb-8">
-        <button onclick="filterVoteCategory('all')" class="px-4 py-2 rounded-full bg-green-600 text-white font-medium text-sm">All</button>
-      </div>
+      <!-- Category Filter -->
+      <div id="vote-filter" class="flex flex-wrap gap-2 justify-center mb-8"></div>
 
-      <!-- Approved Nominees Grid -->
-      <div id="vote-nominees-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Nominees will be populated by JavaScript -->
-      </div>
+      <!-- Nominees Grid -->
+      <div id="vote-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
       <!-- Empty State -->
       <div id="vote-empty" class="bg-white rounded-2xl shadow-lg p-12 text-center">
-        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
+        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">👤</div>
         <h3 class="text-2xl font-bold text-gray-800 mb-3">No approved nominees yet</h3>
-        <p class="text-gray-600 mb-6">Nominees will appear here after admin approval.</p>
-        <a href="#nominate" class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition" style="background:linear-gradient(to right,#16a34a,#15803d)">Nominate Someone</a>
+        <p class="text-gray-600 mb-6">Approved nominees will appear here for voting.</p>
+        <a href="#nominate" class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold shadow-lg" style="background:linear-gradient(to right,#16a34a,#15803d)">Nominate Someone</a>
       </div>
     </div>
   </section>
@@ -620,13 +321,8 @@
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-10 reveal">
         <h2 class="text-4xl md:text-5xl font-bold mb-3 text-gradient-g2y">AFCON 2026 Fixtures</h2>
-        <p class="text-gray-500 flex items-center justify-center gap-2">
-          <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Wenzhou Kean University Stadium
-        </p>
+        <p class="text-gray-500 flex items-center justify-center gap-2">📍 Wenzhou Kean University Stadium</p>
       </div>
-
-      <!-- Groups -->
       <div class="grid md:grid-cols-2 gap-6 mb-10">
         <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-2xl shadow-lg reveal card-hover">
           <h3 class="text-xl font-bold mb-4 text-green-800">🏆 Group A</h3>
@@ -647,17 +343,11 @@
           </div>
         </div>
       </div>
-
-      <!-- Supporter Banner -->
       <div class="reveal">
-        <div class="rounded-2xl p-8 text-center shadow-xl overflow-hidden relative" style="background:linear-gradient(135deg,#14532d,#15803d)">
-          <div class="relative z-10">
-            <p class="text-4xl mb-4 flex justify-center gap-1 flex-wrap">
-              <span class="supporter-flag">🇩🇿</span><span class="supporter-flag">🇳🇬</span><span class="supporter-flag">🇬🇭</span><span class="supporter-flag">🇿🇦</span><span class="supporter-flag">🇨🇲</span><span class="supporter-flag">🇲🇦</span><span class="supporter-flag">🇸🇳</span><span class="supporter-flag">🇰🇪</span><span class="supporter-flag">🇿🇲</span><span class="supporter-flag">🇹🇿</span><span class="supporter-flag">🇿🇼</span><span class="supporter-flag">🇧🇼</span>
-            </p>
-            <h3 class="text-2xl md:text-3xl font-black text-white mb-2">SHOW UP. SHOW OUT. SUPPORT YOUR TEAM.</h3>
-            <p class="text-green-200 text-lg">📍 Wenzhou Kean University Stadium</p>
-          </div>
+        <div class="rounded-2xl p-8 text-center shadow-xl" style="background:linear-gradient(135deg,#14532d,#15803d)">
+          <p class="text-4xl mb-4 flex justify-center gap-1 flex-wrap"><span class="supporter-flag">🇩🇿</span><span class="supporter-flag">🇳🇬</span><span class="supporter-flag">🇬🇭</span><span class="supporter-flag">🇿🇦</span><span class="supporter-flag">🇨🇲</span><span class="supporter-flag">🇲🇦</span><span class="supporter-flag">🇸🇳</span><span class="supporter-flag">🇰🇪</span><span class="supporter-flag">🇿🇲</span><span class="supporter-flag">🇹🇿</span><span class="supporter-flag">🇿🇼</span><span class="supporter-flag">🇧🇼</span></p>
+          <h3 class="text-2xl md:text-3xl font-black text-white mb-2">SHOW UP. SHOW OUT. SUPPORT YOUR TEAM.</h3>
+          <p class="text-green-200 text-lg">📍 Wenzhou Kean University Stadium</p>
         </div>
       </div>
     </div>
@@ -670,31 +360,26 @@
         <div class="text-6xl mb-6">🎉</div>
         <h2 class="text-4xl md:text-6xl font-bold mb-4">23rd May 2026</h2>
         <h3 class="text-2xl md:text-3xl font-semibold mb-6">AU Day Gala — The Main Event</h3>
-        <p class="flex items-center justify-center gap-2 text-xl mb-8">📍 Tai Che Hotel, Wenzhou</p>
+        <p class="text-xl mb-8">📍 Tai Che Hotel, Wenzhou</p>
       </div>
-
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-        <div class="p-6 rounded-xl reveal" style="background:rgba(255,255,255,0.1)"><div class="text-5xl mb-4">🍲</div><h4 class="text-xl font-bold mb-2">African Cuisine</h4><p class="text-white/90">Jollof, Fufu, Egusi, Plantains and more</p></div>
-        <div class="p-6 rounded-xl reveal" style="background:rgba(255,255,255,0.1)"><div class="text-5xl mb-4">🎤</div><h4 class="text-xl font-bold mb-2">Cultural Performances</h4><p class="text-white/90">Dance, music, poetry</p></div>
-        <div class="p-6 rounded-xl reveal" style="background:rgba(255,255,255,0.1)"><div class="text-5xl mb-4">🏆</div><h4 class="text-xl font-bold mb-2">Awards Ceremony</h4><p class="text-white/90">All 7 categories announced live</p></div>
-        <div class="p-6 rounded-xl reveal" style="background:rgba(255,255,255,0.1)"><div class="text-5xl mb-4">🤝</div><h4 class="text-xl font-bold mb-2">Community Connection</h4><p class="text-white/90">Network, celebrate, unite</p></div>
+        <div class="p-6 rounded-xl reveal" style="background:rgba(255,255,255,0.1)"><div class="text-5xl mb-4">🍲</div><h4 class="text-xl font-bold mb-2">African Cuisine</h4><p class="text-white/90">Jollof, Fufu, Egusi, Plantains</p></div>
+        <div class="p-6 rounded-xl reveal" style="background:rgba(255,255,255,0.1)"><div class="text-5xl mb-4">🎤</div><h4 class="text-xl font-bold mb-2">Cultural Shows</h4><p class="text-white/90">Dance, music, poetry</p></div>
+        <div class="p-6 rounded-xl reveal" style="background:rgba(255,255,255,0.1)"><div class="text-5xl mb-4">🏆</div><h4 class="text-xl font-bold mb-2">Awards Ceremony</h4><p class="text-white/90">All 7 categories live</p></div>
+        <div class="p-6 rounded-xl reveal" style="background:rgba(255,255,255,0.1)"><div class="text-5xl mb-4">🤝</div><h4 class="text-xl font-bold mb-2">Community</h4><p class="text-white/90">Network, celebrate, unite</p></div>
       </div>
-
       <div class="max-w-3xl mx-auto mb-16 reveal">
         <h3 class="text-3xl font-bold text-center mb-8">Evening Schedule</h3>
         <div class="p-8 rounded-2xl space-y-5" style="background:rgba(255,255,255,0.1)">
-          <div class="schedule-item"><span>🕕</span><p class="text-lg">6:00 PM — Doors Open &amp; Welcome</p></div>
+          <div class="schedule-item"><span>🕕</span><p class="text-lg">6:00 PM — Doors Open</p></div>
           <div class="schedule-item"><span>🕖</span><p class="text-lg">7:00 PM — Dinner Service</p></div>
           <div class="schedule-item"><span>🕗</span><p class="text-lg">8:00 PM — Cultural Performances</p></div>
           <div class="schedule-item"><span>🕘</span><p class="text-lg">9:00 PM — Award Ceremony</p></div>
-          <div class="schedule-item"><span>🕙</span><p class="text-lg">10:30 PM — Networking &amp; Celebration</p></div>
-          <div class="schedule-item"><span>🕚</span><p class="text-lg">11:30 PM — Closing &amp; Group Photo</p></div>
+          <div class="schedule-item"><span>🕙</span><p class="text-lg">10:30 PM — Networking</p></div>
+          <div class="schedule-item"><span>🕚</span><p class="text-lg">11:30 PM — Closing &amp; Photo</p></div>
         </div>
       </div>
-
-      <div class="text-center">
-        <a href="#contact" class="inline-flex items-center gap-2 px-12 py-4 bg-white text-green-700 rounded-full font-bold text-xl shadow-2xl hover:scale-105 transition-all">✅ Register / RSVP</a>
-      </div>
+      <div class="text-center"><a href="#contact" class="inline-flex items-center gap-2 px-12 py-4 bg-white text-green-700 rounded-full font-bold text-xl shadow-2xl hover:scale-105 transition-all">✅ Register / RSVP</a></div>
     </div>
   </section>
 
@@ -716,19 +401,16 @@
   <!-- GALLERY -->
   <section id="gallery" class="py-20 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12 reveal">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Event Gallery</h2>
-        <p class="text-gray-600 text-lg">Memories from previous events</p>
-      </div>
+      <div class="text-center mb-12 reveal"><h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Event Gallery</h2><p class="text-gray-600 text-lg">Memories from previous events</p></div>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-1.jpg" class="w-full h-full object-cover" alt="WAU Event 1"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-2.jpg" class="w-full h-full object-cover" alt="WAU Event 2"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-3.jpg" class="w-full h-full object-cover" alt="WAU Event 3"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-4.jpg" class="w-full h-full object-cover" alt="WAU Event 4"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-5.jpg" class="w-full h-full object-cover" alt="WAU Event 5"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-6.jpg" class="w-full h-full object-cover" alt="WAU Event 6"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-7.jpg" class="w-full h-full object-cover" alt="WAU Event 7"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-8.jpg" class="w-full h-full object-cover" alt="WAU Event 8"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-1.jpg" class="w-full h-full object-cover" alt="1"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-2.jpg" class="w-full h-full object-cover" alt="2"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-3.jpg" class="w-full h-full object-cover" alt="3"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-4.jpg" class="w-full h-full object-cover" alt="4"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-5.jpg" class="w-full h-full object-cover" alt="5"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-6.jpg" class="w-full h-full object-cover" alt="6"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-7.jpg" class="w-full h-full object-cover" alt="7"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-8.jpg" class="w-full h-full object-cover" alt="8"></div>
       </div>
     </div>
   </section>
@@ -736,31 +418,14 @@
   <!-- CONTACT -->
   <section id="contact" class="py-20 px-4 bg-gradient-to-br from-green-50 to-yellow-50">
     <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12 reveal">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Contact Us</h2>
-      </div>
+      <div class="text-center mb-12 reveal"><h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Contact Us</h2></div>
       <div class="bg-white p-8 rounded-2xl shadow-xl reveal">
-        <div class="text-center mb-8">
-          <p class="text-lg text-gray-700 mb-4">For more information or to sponsor, contact the Organizing Secretary</p>
-          <h3 class="text-3xl font-bold text-green-700">Dr Tinnoe</h3>
-        </div>
+        <div class="text-center mb-8"><p class="text-lg text-gray-700 mb-2">Organizing Secretary</p><h3 class="text-3xl font-bold text-green-700">Dr Tinnoe</h3></div>
         <div class="grid md:grid-cols-2 gap-6">
-          <div class="flex items-center gap-4 p-4 bg-green-50 rounded-xl card-hover">
-            <span class="text-2xl">📞</span>
-            <div><p class="text-sm text-gray-600 font-semibold">Phone</p><p class="text-lg font-bold text-gray-800">+86 15057766855</p></div>
-          </div>
-          <div class="flex items-center gap-4 p-4 bg-pink-50 rounded-xl card-hover">
-            <span class="text-2xl">📸</span>
-            <div><p class="text-sm text-gray-600 font-semibold">Instagram</p><p class="text-lg font-bold text-gray-800">@wenzhou_au</p></div>
-          </div>
-          <div class="flex items-center gap-4 p-4 bg-blue-50 rounded-xl card-hover">
-            <span class="text-2xl">✉️</span>
-            <div><p class="text-sm text-gray-600 font-semibold">Email</p><p class="text-lg font-bold text-gray-800">info@wauwenzhou.org</p></div>
-          </div>
-          <div class="flex items-center gap-4 p-4 bg-yellow-50 rounded-xl card-hover">
-            <span class="text-2xl">📍</span>
-            <div><p class="text-sm text-gray-600 font-semibold">Location</p><p class="text-lg font-bold text-gray-800">Wenzhou, Zhejiang, China</p></div>
-          </div>
+          <div class="flex items-center gap-4 p-4 bg-green-50 rounded-xl card-hover"><span class="text-2xl">📞</span><div><p class="text-sm text-gray-600 font-semibold">Phone</p><p class="text-lg font-bold">+86 15057766855</p></div></div>
+          <div class="flex items-center gap-4 p-4 bg-pink-50 rounded-xl card-hover"><span class="text-2xl">📸</span><div><p class="text-sm text-gray-600 font-semibold">Instagram</p><p class="text-lg font-bold">@wenzhou_au</p></div></div>
+          <div class="flex items-center gap-4 p-4 bg-blue-50 rounded-xl card-hover"><span class="text-2xl">✉️</span><div><p class="text-sm text-gray-600 font-semibold">Email</p><p class="text-lg font-bold">info@wauwenzhou.org</p></div></div>
+          <div class="flex items-center gap-4 p-4 bg-yellow-50 rounded-xl card-hover"><span class="text-2xl">📍</span><div><p class="text-sm text-gray-600 font-semibold">Location</p><p class="text-lg font-bold">Wenzhou, China</p></div></div>
         </div>
       </div>
     </div>
@@ -771,10 +436,7 @@
 <!-- FOOTER -->
 <footer class="text-white py-12 px-4" style="background:linear-gradient(to right,#14532d,#713f12,#7f1d1d)">
   <div class="max-w-6xl mx-auto text-center">
-    <div class="mb-6 inline-flex items-center gap-3">
-      <div class="w-12 h-12 rounded-full overflow-hidden shadow-md"><img src="logo.png" alt="WAU" class="w-full h-full object-cover" /></div>
-      <span class="text-2xl font-bold">WAU Africa Day Awards</span>
-    </div>
+    <div class="mb-6 inline-flex items-center gap-3"><div class="w-12 h-12 rounded-full overflow-hidden"><img src="logo.png" alt="WAU" class="w-full h-full object-cover"></div><span class="text-2xl font-bold">WAU Africa Day Awards</span></div>
     <p class="text-green-100 mb-4">Celebrating African Excellence in Wenzhou, China</p>
     <p class="text-sm text-green-200">&copy; 2026 Wenzhou African Union. All rights reserved.</p>
   </div>
@@ -783,506 +445,194 @@
 <script>
 'use strict';
 
-/* ═══════════════════════════════════════════════
-   DATES
-═══════════════════════════════════════════════ */
+/* ═══ DATES ═══ */
 const NOM_START  = new Date('2026-04-26T00:00:00');
 const NOM_END    = new Date('2026-05-02T23:59:59');
 const VOTE_START = new Date('2026-05-05T00:00:00');
 const VOTE_END   = new Date('2026-05-10T23:59:59');
-const GALA_DATE  = new Date('2026-05-23T18:00:00');
+const GALA       = new Date('2026-05-23T18:00:00');
 
-/* ═══════════════════════════════════════════════
-   SUBCATEGORIES
-═══════════════════════════════════════════════ */
-const SUBCATEGORIES = {
-  0: ['Food & Catering','Hair & Beauty','Event Planning & Decor'],
-  1: [],
-  2: ['Personal Trainer of the Year','Wellness Advocate of the Year','Healthcare Professional of the Year'],
-  3: ['Community Service','Volunteer of the Year'],
-  4: ['Music Talent','Dance Talent','Photography & Videography','Social Media Personality','Sports Talent'],
-  5: ['Community Leadership','Consistent Service','Mentorship Legacy','Lifetime Commitment'],
-  6: ['Favorite Personality','Favorite Entertainer','Favorite Community Leader']
-};
-
-const CATEGORY_NAMES = [
-  '💼 Business of the Year','🚀 Entrepreneur of the Year','💪 Health & Fitness Excellence',
-  '🤝 Social Impact Award','🎭 African Talent of the Year','🏆 Long-Term Dedication Award','🌟 People\'s Choice Award'
-];
-
-// Subcategories that require specific contributions
-const SPECIAL_SUBCATEGORIES = [
-  'Community Service','Volunteer of the Year','Community Leadership',
-  'Consistent Service','Mentorship Legacy','Lifetime Commitment'
-];
-
-/* ═══════════════════════════════════════════════
-   DATA STORE (localStorage)
-═══════════════════════════════════════════════ */
-function getNominations() {
-  return JSON.parse(localStorage.getItem('wau_nominations') || '[]');
-}
-function saveNominations(data) {
-  localStorage.setItem('wau_nominations', JSON.stringify(data));
-}
-function getVotes() {
-  return JSON.parse(localStorage.getItem('wau_votes') || '{}');
-}
-function saveVotes(data) {
-  localStorage.setItem('wau_votes', JSON.stringify(data));
-}
-
-/* ═══════════════════════════════════════════════
-   LANGUAGE
-═══════════════════════════════════════════════ */
-let currentLang = 'en';
-document.getElementById('lang-btn').addEventListener('click', () => {
-  currentLang = currentLang === 'en' ? 'fr' : 'en';
-  document.getElementById('lang-label').textContent = currentLang === 'en' ? 'FR' : 'EN';
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const t = el.getAttribute('data-' + currentLang);
-    if (t) el.textContent = t;
-  });
+/* ═══ MOBILE MENU ═══ */
+document.getElementById('hamburger').addEventListener('click', () => {
+  const o = document.getElementById('mobile-menu').classList.toggle('open');
+  document.getElementById('icon-menu').classList.toggle('hidden', o);
+  document.getElementById('icon-close').classList.toggle('hidden', !o);
 });
-
-/* ═══════════════════════════════════════════════
-   MOBILE MENU
-═══════════════════════════════════════════════ */
-const hamburger  = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-const iconMenu   = document.getElementById('icon-menu');
-const iconClose  = document.getElementById('icon-close');
-hamburger.addEventListener('click', () => {
-  const o = mobileMenu.classList.toggle('open');
-  iconMenu.classList.toggle('hidden', o);
-  iconClose.classList.toggle('hidden', !o);
-});
-function closeMobileMenu() {
-  mobileMenu.classList.remove('open');
-  iconMenu.classList.remove('hidden');
-  iconClose.classList.add('hidden');
+function closeMobile() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('icon-menu').classList.remove('hidden');
+  document.getElementById('icon-close').classList.add('hidden');
 }
 
-/* ═══════════════════════════════════════════════
-   COUNTDOWNS
-═══════════════════════════════════════════════ */
-function pad(n) { return String(n).padStart(2,'0'); }
-function getTimeLeft(t) {
+/* ═══ COUNTDOWN HELPERS ═══ */
+function pad(n) { return String(n).padStart(2, '0'); }
+function timeLeft(t) {
   const d = t.getTime() - Date.now();
   if (d <= 0) return null;
-  return { days: Math.floor(d/864e5), hours: Math.floor(d/36e5%24), minutes: Math.floor(d/6e4%60), seconds: Math.floor(d/1e3%60) };
+  return { d: Math.floor(d/864e5), h: Math.floor(d/36e5%24), m: Math.floor(d/6e4%60), s: Math.floor(d/1e3%60) };
 }
-
-function getPeriodStatus(start, end) {
-  const now = Date.now();
-  if (now < start.getTime()) return 'upcoming';
-  if (now <= end.getTime()) return 'active';
+function periodStatus(s, e) {
+  const n = Date.now();
+  if (n < s.getTime()) return 'upcoming';
+  if (n <= e.getTime()) return 'active';
   return 'ended';
 }
 
-function updateAllCountdowns() {
-  const now = Date.now();
-
-  // Nomination countdown
-  const nomStatus = getPeriodStatus(NOM_START, NOM_END);
-  const nomStatusEl = document.getElementById('nom-status');
-  if (nomStatus === 'upcoming') {
-    nomStatusEl.innerHTML = '<span class="text-blue-600">⏳ Opens Soon</span>';
-    const tl = getTimeLeft(NOM_START);
-    if (tl) { document.getElementById('n-days').textContent=pad(tl.days); document.getElementById('n-hours').textContent=pad(tl.hours); document.getElementById('n-mins').textContent=pad(tl.minutes); document.getElementById('n-secs').textContent=pad(tl.seconds); }
-  } else if (nomStatus === 'active') {
-    nomStatusEl.innerHTML = '<span class="text-green-600">✅ OPEN NOW!</span>';
-    const tl = getTimeLeft(NOM_END);
-    if (tl) { document.getElementById('n-days').textContent=pad(tl.days); document.getElementById('n-hours').textContent=pad(tl.hours); document.getElementById('n-mins').textContent=pad(tl.minutes); document.getElementById('n-secs').textContent=pad(tl.seconds); }
+/* ═══ UPDATE COUNTDOWNS ═══ */
+function updateCountdowns() {
+  // Nomination
+  const ns = periodStatus(NOM_START, NOM_END);
+  const nEl = document.getElementById('nom-status');
+  if (ns === 'upcoming') {
+    nEl.innerHTML = '<span class="text-blue-600">⏳ Opens Apr 26</span>';
+    const t = timeLeft(NOM_START);
+    if (t) { document.getElementById('n-d').textContent=pad(t.d); document.getElementById('n-h').textContent=pad(t.h); document.getElementById('n-m').textContent=pad(t.m); document.getElementById('n-s').textContent=pad(t.s); }
+  } else if (ns === 'active') {
+    nEl.innerHTML = '<span class="text-green-600">✅ OPEN NOW!</span>';
+    const t = timeLeft(NOM_END);
+    if (t) { document.getElementById('n-d').textContent=pad(t.d); document.getElementById('n-h').textContent=pad(t.h); document.getElementById('n-m').textContent=pad(t.m); document.getElementById('n-s').textContent=pad(t.s); }
   } else {
-    nomStatusEl.innerHTML = '<span class="text-red-600">❌ Closed</span>';
-    document.getElementById('nom-countdown').classList.add('hidden');
+    nEl.innerHTML = '<span class="text-red-600">❌ Closed</span>';
+    document.getElementById('nom-cd').classList.add('hidden');
   }
 
-  // Voting countdown
-  const voteStatus = getPeriodStatus(VOTE_START, VOTE_END);
-  const voteStatusEl = document.getElementById('vote-status');
-  if (voteStatus === 'upcoming') {
-    voteStatusEl.innerHTML = '<span class="text-blue-600">⏳ Opens May 5</span>';
-    const tl = getTimeLeft(VOTE_START);
-    if (tl) { document.getElementById('vo-days').textContent=pad(tl.days); document.getElementById('vo-hours').textContent=pad(tl.hours); document.getElementById('vo-mins').textContent=pad(tl.minutes); document.getElementById('vo-secs').textContent=pad(tl.seconds); }
-  } else if (voteStatus === 'active') {
-    voteStatusEl.innerHTML = '<span class="text-green-600">✅ VOTING OPEN!</span>';
-    const tl = getTimeLeft(VOTE_END);
-    if (tl) { document.getElementById('vo-days').textContent=pad(tl.days); document.getElementById('vo-hours').textContent=pad(tl.hours); document.getElementById('vo-mins').textContent=pad(tl.minutes); document.getElementById('vo-secs').textContent=pad(tl.seconds); }
+  // Voting
+  const vs = periodStatus(VOTE_START, VOTE_END);
+  const vEl = document.getElementById('vote-hero-status');
+  if (vs === 'upcoming') {
+    vEl.innerHTML = '<span class="text-blue-600">⏳ Opens May 5</span>';
+    const t = timeLeft(VOTE_START);
+    if (t) { document.getElementById('v-d').textContent=pad(t.d); document.getElementById('v-h').textContent=pad(t.h); document.getElementById('v-m').textContent=pad(t.m); document.getElementById('v-s').textContent=pad(t.s); }
+  } else if (vs === 'active') {
+    vEl.innerHTML = '<span class="text-green-600">✅ VOTING OPEN!</span>';
+    const t = timeLeft(VOTE_END);
+    if (t) { document.getElementById('v-d').textContent=pad(t.d); document.getElementById('v-h').textContent=pad(t.h); document.getElementById('v-m').textContent=pad(t.m); document.getElementById('v-s').textContent=pad(t.s); }
   } else {
-    voteStatusEl.innerHTML = '<span class="text-red-600">❌ Closed</span>';
-    document.getElementById('vote-countdown').classList.add('hidden');
+    vEl.innerHTML = '<span class="text-red-600">❌ Closed</span>';
+    document.getElementById('vote-cd').classList.add('hidden');
   }
 
-  // Gala countdown
-  const gt = getTimeLeft(GALA_DATE);
-  const galaStatusEl = document.getElementById('gala-status');
+  // Gala
+  const gt = timeLeft(GALA);
+  const gEl = document.getElementById('gala-status');
   if (gt) {
-    galaStatusEl.innerHTML = '<span class="text-blue-600">⏳ Coming Soon</span>';
-    document.getElementById('g-days').textContent=pad(gt.days); document.getElementById('g-hours').textContent=pad(gt.hours); document.getElementById('g-mins').textContent=pad(gt.minutes); document.getElementById('g-secs').textContent=pad(gt.seconds);
+    gEl.innerHTML = '<span class="text-blue-600">⏳ Coming</span>';
+    document.getElementById('g-d').textContent=pad(gt.d); document.getElementById('g-h').textContent=pad(gt.h); document.getElementById('g-m').textContent=pad(gt.m); document.getElementById('g-s').textContent=pad(gt.s);
   } else {
-    galaStatusEl.innerHTML = '<span class="text-green-600">🎉 TODAY!</span>';
-    document.getElementById('gala-countdown').classList.add('hidden');
+    gEl.innerHTML = '<span class="text-green-600">🎉 TODAY!</span>';
+    document.getElementById('gala-cd').classList.add('hidden');
   }
 
-  // Update form status
-  updateNomFormStatus();
-  updateVoteSectionStatus();
-}
-
-function updateNomFormStatus() {
-  const status = getPeriodStatus(NOM_START, NOM_END);
-  const el = document.getElementById('nom-form-status');
-  const form = document.getElementById('nomination-form-wrap');
-  if (status === 'upcoming') {
-    el.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Nominations open on April 26, 2026</span></div>';
-    form.style.opacity = '0.5'; form.style.pointerEvents = 'none';
-  } else if (status === 'active') {
-    el.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ Nominations are OPEN! Submit yours now.</span></div>';
-    form.style.opacity = '1'; form.style.pointerEvents = 'auto';
+  // Lock nomination form
+  const fw = document.getElementById('nom-form-wrap');
+  const fs = document.getElementById('nom-form-status');
+  if (ns === 'upcoming') {
+    fs.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Nominations open April 26, 2026</span></div>';
+    fw.style.opacity = '0.5'; fw.style.pointerEvents = 'none';
+  } else if (ns === 'active') {
+    fs.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ Nominations are OPEN! Fill the form below.</span></div>';
+    fw.style.opacity = '1'; fw.style.pointerEvents = 'auto';
   } else {
-    el.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Nomination period has ended (April 26 – May 2)</span></div>';
-    form.style.opacity = '0.5'; form.style.pointerEvents = 'none';
+    fs.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Nomination period has ended (Apr 26 – May 2)</span></div>';
+    fw.style.opacity = '0.5'; fw.style.pointerEvents = 'none';
   }
+
+  // Vote section status
+  const vsEl = document.getElementById('vote-section-status');
+  if (vs === 'upcoming') vsEl.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Voting opens May 5, 2026</span></div>';
+  else if (vs === 'active') vsEl.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ VOTING IS OPEN! Cast your vote now.</span></div>';
+  else vsEl.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Voting has ended (May 5 – May 10)</span></div>';
 }
 
-function updateVoteSectionStatus() {
-  const status = getPeriodStatus(VOTE_START, VOTE_END);
-  const el = document.getElementById('vote-section-status');
-  if (status === 'upcoming') {
-    el.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Voting opens on May 5, 2026</span></div>';
-  } else if (status === 'active') {
-    el.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ Voting is OPEN! Cast your vote now.</span></div>';
-  } else {
-    el.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Voting has ended (May 5 – May 10)</span></div>';
-  }
-}
+setInterval(updateCountdowns, 1000);
+updateCountdowns();
 
-setInterval(updateAllCountdowns, 1000);
-updateAllCountdowns();
+/* ═══ VOTING — LOADS FROM nominees.json ═══ */
+let approvedNominees = [];
 
-/* ═══════════════════════════════════════════════
-   CATEGORY CHANGE
-═══════════════════════════════════════════════ */
-let currentCategory = null;
-let currentSubcategory = null;
-let isSpecialCategory = false;
+function getVotes() { return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}'); }
+function saveVotes(v) { localStorage.setItem('wau_votes_2026', JSON.stringify(v)); }
 
-function handleCategoryChange(val) {
-  const wrap = document.getElementById('subcategory-wrap');
-  const sel  = document.getElementById('subcategory-select');
-  currentCategory = val ? parseInt(val) : null;
-  currentSubcategory = null;
-  isSpecialCategory = false;
-  hideSpecialFields();
-
-  if (!val) { wrap.classList.add('hidden'); return; }
-  const subs = SUBCATEGORIES[currentCategory] || [];
-  if (!subs.length) { wrap.classList.add('hidden'); return; }
-
-  sel.innerHTML = '<option value="">Choose a subcategory...</option>';
-  subs.forEach((s,i) => { const o = document.createElement('option'); o.value=i; o.textContent=s; sel.appendChild(o); });
-  wrap.classList.remove('hidden');
-
-  sel.onchange = function() {
-    currentSubcategory = this.value ? parseInt(this.value) : null;
-    const subName = subs[currentSubcategory];
-    isSpecialCategory = SPECIAL_SUBCATEGORIES.includes(subName);
-    if (isSpecialCategory) showSpecialFields(); else hideSpecialFields();
-  };
-}
-
-function showSpecialFields() {
-  document.getElementById('special-category-notice').classList.remove('hidden');
-  document.getElementById('contributions-section').classList.remove('hidden');
-  document.getElementById('reason-required-tag').classList.remove('hidden');
-  document.getElementById('reason-help-text').classList.remove('hidden');
-  document.getElementById('nom-reason').placeholder = 'REQUIRED: Describe SPECIFIC achievements — events organized, people helped, projects led, etc.';
-  document.getElementById('nom-reason').minLength = 100;
-}
-
-function hideSpecialFields() {
-  document.getElementById('special-category-notice').classList.add('hidden');
-  document.getElementById('contributions-section').classList.add('hidden');
-  document.getElementById('reason-required-tag').classList.add('hidden');
-  document.getElementById('reason-help-text').classList.add('hidden');
-  document.getElementById('nom-reason').placeholder = 'Describe their achievements and contributions...';
-  document.getElementById('nom-reason').minLength = 0;
-}
-
-let contributionCount = 3;
-function addContribution() {
-  contributionCount++;
-  const list = document.getElementById('contributions-list');
-  const div = document.createElement('div');
-  div.className = 'flex gap-2';
-  div.innerHTML = `<span class="text-orange-500 font-bold mt-2">${contributionCount}.</span><input type="text" class="contribution-input w-full px-3 py-2 rounded-lg border-2 border-orange-200 bg-white" placeholder="Add another contribution...">`;
-  list.appendChild(div);
-}
-
-/* ═══════════════════════════════════════════════
-   PHOTO PREVIEW
-═══════════════════════════════════════════════ */
-function previewPhoto(input) {
-  if (!input.files || !input.files[0]) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    document.getElementById('preview-img').src = e.target.result;
-    document.getElementById('photo-preview').classList.remove('hidden');
-    document.getElementById('upload-label').textContent = 'Photo selected ✓';
-  };
-  reader.readAsDataURL(input.files[0]);
-}
-
-/* Drag & Drop */
-const uploadLabel = document.querySelector('label[for="photo-upload"]');
-if (uploadLabel) {
-  uploadLabel.addEventListener('dragover', e => { e.preventDefault(); uploadLabel.style.borderColor='#16a34a'; });
-  uploadLabel.addEventListener('dragleave', () => { uploadLabel.style.borderColor=''; });
-  uploadLabel.addEventListener('drop', e => {
-    e.preventDefault(); uploadLabel.style.borderColor='';
-    if (e.dataTransfer.files.length) { document.getElementById('photo-upload').files = e.dataTransfer.files; previewPhoto(document.getElementById('photo-upload')); }
-  });
-}
-
-/* ═══════════════════════════════════════════════
-   NOMINATION SUBMIT
-═══════════════════════════════════════════════ */
-function handleNominateSubmit(e) {
-  e.preventDefault();
-
-  // Validate special category contributions
-  if (isSpecialCategory) {
-    const inputs = document.querySelectorAll('.contribution-input');
-    let filledCount = 0;
-    inputs.forEach(inp => { if (inp.value.trim()) filledCount++; });
-    if (filledCount < 3) {
-      alert('⚠️ This category requires at least 3 specific contributions. Please fill them in.');
-      return;
+async function loadNominees() {
+  try {
+    const res = await fetch('nominees.json?' + Date.now());
+    if (res.ok) {
+      approvedNominees = await res.json();
     }
+  } catch (err) {
+    console.log('nominees.json not found or error:', err);
   }
-
-  // Collect contributions
-  const contributions = [];
-  document.querySelectorAll('.contribution-input').forEach(inp => {
-    if (inp.value.trim()) contributions.push(inp.value.trim());
-  });
-
-  // Get photo as data URL
-  const photoEl = document.getElementById('preview-img');
-  const photoSrc = photoEl.src || '';
-
-  const catIdx = currentCategory;
-  const subIdx = currentSubcategory;
-  const subName = (catIdx !== null && subIdx !== null && SUBCATEGORIES[catIdx]) ? SUBCATEGORIES[catIdx][subIdx] : '';
-
-  const nomination = {
-    id: Date.now(),
-    status: 'pending', // pending | approved | rejected
-    category: catIdx,
-    categoryName: CATEGORY_NAMES[catIdx] || '',
-    subcategory: subName,
-    isSpecial: isSpecialCategory,
-    name: document.getElementById('nom-name').value,
-    nationality: document.getElementById('nom-nationality').value,
-    email: document.getElementById('nom-email').value,
-    phone: document.getElementById('nom-phone').value,
-    photo: photoSrc,
-    bio: document.getElementById('nom-bio').value,
-    reason: document.getElementById('nom-reason').value,
-    contributions: contributions,
-    nominatorName: document.getElementById('nominator-name').value,
-    nominatorEmail: document.getElementById('nominator-email').value,
-    votes: 0,
-    timestamp: new Date().toISOString()
-  };
-
-  const noms = getNominations();
-  noms.push(nomination);
-  saveNominations(noms);
-
-  // Show success
-  document.getElementById('nominate-success').classList.remove('hidden');
-  e.target.reset();
-  hideSpecialFields();
-  document.getElementById('subcategory-wrap').classList.add('hidden');
-  document.getElementById('photo-preview').classList.add('hidden');
-  document.getElementById('upload-label').textContent = 'Click to upload or drag and drop';
-  contributionCount = 3;
-
-  document.getElementById('nominate-success').scrollIntoView({ behavior:'smooth', block:'center' });
-
-  // Refresh admin & vote displays
-  renderAdminPanel();
-  renderVotingPage();
+  renderVoting();
 }
 
-/* ═══════════════════════════════════════════════
-   ADMIN PANEL
-═══════════════════════════════════════════════ */
-// Secret key: Ctrl+Shift+A to show admin button
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-    document.getElementById('admin-btn').classList.toggle('hidden');
-  }
-});
-
-function openAdminPanel() {
-  document.getElementById('admin-panel').classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-  renderAdminPanel();
-}
-function closeAdminPanel() {
-  document.getElementById('admin-panel').classList.add('hidden');
-  document.body.style.overflow = '';
-}
-
-let adminFilter = 'all';
-function filterAdmin(f) { adminFilter = f; renderAdminPanel(); }
-
-function renderAdminPanel() {
-  const noms = getNominations();
-  const container = document.getElementById('admin-nominations');
-
-  // Stats
-  document.getElementById('pending-count').textContent = noms.filter(n => n.status === 'pending').length;
-  document.getElementById('approved-count').textContent = noms.filter(n => n.status === 'approved').length;
-  document.getElementById('rejected-count').textContent = noms.filter(n => n.status === 'rejected').length;
-
-  const filtered = adminFilter === 'all' ? noms : noms.filter(n => n.status === adminFilter);
-
-  if (!filtered.length) {
-    container.innerHTML = '<p class="text-gray-500 text-center py-8">No nominations found.</p>';
-    return;
-  }
-
-  container.innerHTML = filtered.map(nom => `
-    <div class="nominee-card ${nom.status}">
-      <div class="flex gap-4">
-        ${nom.photo ? `<img src="${nom.photo}" class="w-20 h-20 rounded-xl object-cover flex-shrink-0" alt="${nom.name}">` : '<div class="w-20 h-20 bg-gray-200 rounded-xl flex-shrink-0 flex items-center justify-center text-2xl">👤</div>'}
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-2 flex-wrap mb-1">
-            <h4 class="font-bold text-lg text-gray-800">${nom.name}</h4>
-            <span class="text-sm px-2 py-0.5 rounded-full font-semibold ${nom.status === 'pending' ? 'bg-yellow-100 text-yellow-700' : nom.status === 'approved' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">${nom.status.toUpperCase()}</span>
-          </div>
-          <p class="text-sm text-gray-600">${nom.categoryName} ${nom.subcategory ? '→ '+nom.subcategory : ''}</p>
-          <p class="text-sm text-gray-500">${nom.nationality}</p>
-          ${nom.isSpecial ? '<span class="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-semibold">⭐ Requires Contributions</span>' : ''}
-        </div>
-      </div>
-      <div class="mt-4 space-y-2">
-        <div><span class="text-sm font-semibold text-gray-700">Reason:</span><p class="text-sm text-gray-600 mt-1">${nom.reason}</p></div>
-        ${nom.contributions && nom.contributions.length ? `
-          <div><span class="text-sm font-semibold text-orange-700">Specific Contributions:</span>
-            <ul class="mt-1 space-y-1">${nom.contributions.map(c => `<li class="text-sm text-gray-600 flex items-start gap-1"><span class="text-green-500 mt-0.5">✅</span>${c}</li>`).join('')}</ul>
-          </div>` : ''}
-        ${nom.bio ? `<div><span class="text-sm font-semibold text-gray-700">Bio:</span><p class="text-sm text-gray-600 mt-1">${nom.bio}</p></div>` : ''}
-        <div class="text-xs text-gray-400">Nominated by: ${nom.nominatorName} (${nom.nominatorEmail}) — ${new Date(nom.timestamp).toLocaleDateString()}</div>
-      </div>
-      ${nom.status === 'pending' ? `
-        <div class="flex gap-3 mt-4">
-          <button onclick="approveNomination(${nom.id})" class="flex-1 py-2 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition">✅ Approve</button>
-          <button onclick="rejectNomination(${nom.id})" class="flex-1 py-2 bg-red-600 text-white rounded-lg font-bold hover:bg-red-700 transition">❌ Reject</button>
-        </div>` : `
-        <div class="flex gap-3 mt-4">
-          <button onclick="changeStatus(${nom.id},'pending')" class="flex-1 py-2 bg-yellow-500 text-white rounded-lg font-bold text-sm hover:bg-yellow-600 transition">⏳ Pending</button>
-          <button onclick="changeStatus(${nom.id},'approved')" class="flex-1 py-2 bg-green-500 text-white rounded-lg font-bold text-sm hover:bg-green-600 transition">✅ Approve</button>
-          <button onclick="changeStatus(${nom.id},'rejected')" class="flex-1 py-2 bg-red-500 text-white rounded-lg font-bold text-sm hover:bg-red-600 transition">❌ Reject</button>
-          <button onclick="deleteNomination(${nom.id})" class="py-2 px-3 bg-gray-300 text-gray-700 rounded-lg font-bold text-sm hover:bg-gray-400 transition">🗑️</button>
-        </div>`}
-    </div>
-  `).join('');
-}
-
-function approveNomination(id) {
-  changeStatus(id, 'approved');
-}
-function rejectNomination(id) {
-  changeStatus(id, 'rejected');
-}
-function changeStatus(id, status) {
-  const noms = getNominations();
-  const idx = noms.findIndex(n => n.id === id);
-  if (idx > -1) { noms[idx].status = status; saveNominations(noms); renderAdminPanel(); renderVotingPage(); }
-}
-function deleteNomination(id) {
-  if (!confirm('Delete this nomination permanently?')) return;
-  const noms = getNominations().filter(n => n.id !== id);
-  saveNominations(noms);
-  renderAdminPanel();
-  renderVotingPage();
-}
-
-/* ═══════════════════════════════════════════════
-   VOTING PAGE
-═══════════════════════════════════════════════ */
-function renderVotingPage() {
-  const noms = getNominations().filter(n => n.status === 'approved');
-  const grid = document.getElementById('vote-nominees-grid');
+function renderVoting() {
+  const grid = document.getElementById('vote-grid');
   const empty = document.getElementById('vote-empty');
-  const filterWrap = document.getElementById('vote-category-filter');
+  const filterWrap = document.getElementById('vote-filter');
   const votes = getVotes();
 
-  if (!noms.length) {
-    grid.innerHTML = '';
-    grid.classList.add('hidden');
+  if (!approvedNominees.length) {
+    grid.innerHTML = ''; grid.classList.add('hidden');
     empty.classList.remove('hidden');
+    filterWrap.innerHTML = '';
     return;
   }
 
   empty.classList.add('hidden');
   grid.classList.remove('hidden');
 
-  // Build category filters
-  const categories = [...new Set(noms.map(n => n.categoryName))];
-  filterWrap.innerHTML = '<button onclick="filterVoteCategory(\'all\')" class="px-4 py-2 rounded-full bg-green-600 text-white font-medium text-sm">All</button>';
-  categories.forEach(cat => {
-    filterWrap.innerHTML += `<button onclick="filterVoteCategory('${cat}')" class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium text-sm hover:bg-gray-300">${cat}</button>`;
+  // Category filters
+  const cats = [...new Set(approvedNominees.map(n => n.category))];
+  filterWrap.innerHTML = '<button onclick="filterVote(\'all\')" class="px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium">All</button>';
+  cats.forEach(c => {
+    filterWrap.innerHTML += `<button onclick="filterVote('${c}')" class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300">${c}</button>`;
   });
 
-  const votingOpen = getPeriodStatus(VOTE_START, VOTE_END) === 'active';
+  const votingOpen = periodStatus(VOTE_START, VOTE_END) === 'active';
 
-  grid.innerHTML = noms.map(nom => {
-    const hasVoted = votes[nom.id];
+  grid.innerHTML = approvedNominees.map(n => {
+    const voted = votes[n.id];
+    const voteCount = (n.votes || 0) + (votes['count_' + n.id] || 0);
     return `
-    <div class="vote-card ${hasVoted ? 'voted' : ''}" data-category="${nom.categoryName}">
+    <div class="vote-card ${voted ? 'voted' : ''}" data-cat="${n.category}">
       <div class="flex gap-3 mb-3">
-        ${nom.photo ? `<img src="${nom.photo}" class="w-16 h-16 rounded-xl object-cover" alt="${nom.name}">` : '<div class="w-16 h-16 bg-gray-200 rounded-xl flex items-center justify-center text-xl">👤</div>'}
+        ${n.photo ? `<img src="${n.photo}" class="w-16 h-16 rounded-xl object-cover" onerror="this.style.display='none'">` : '<div class="w-16 h-16 bg-gray-200 rounded-xl flex items-center justify-center text-xl">👤</div>'}
         <div>
-          <h4 class="font-bold text-lg text-gray-800">${nom.name}</h4>
-          <p class="text-sm text-gray-500">${nom.nationality}</p>
+          <h4 class="font-bold text-lg text-gray-800">${n.name}</h4>
+          <p class="text-sm text-gray-500">${n.nationality}</p>
         </div>
       </div>
-      <div class="mb-3">
-        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">${nom.categoryName}</span>
-        ${nom.subcategory ? `<span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full font-semibold ml-1">${nom.subcategory}</span>` : ''}
+      <div class="mb-3 flex flex-wrap gap-1">
+        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">${n.category}</span>
+        ${n.subcategory ? `<span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full font-semibold">${n.subcategory}</span>` : ''}
       </div>
-      <p class="text-sm text-gray-600 mb-3 line-clamp-3">${nom.reason}</p>
-      ${nom.contributions && nom.contributions.length ? `
-        <div class="mb-3"><p class="text-xs font-bold text-orange-700 mb-1">Key Contributions:</p>
-        <ul class="text-xs text-gray-600 space-y-0.5">${nom.contributions.slice(0,3).map(c => `<li>✅ ${c}</li>`).join('')}</ul>
-        ${nom.contributions.length > 3 ? `<p class="text-xs text-gray-400">+${nom.contributions.length-3} more</p>` : ''}
+      <p class="text-sm text-gray-600 mb-3">${n.reason}</p>
+      ${n.contributions && n.contributions.length ? `
+        <div class="mb-3">
+          <p class="text-xs font-bold text-orange-700 mb-1">Key Contributions:</p>
+          <ul class="text-xs text-gray-600 space-y-0.5">${n.contributions.map(c => `<li>✅ ${c}</li>`).join('')}</ul>
         </div>` : ''}
-      <div class="flex items-center justify-between">
-        <span class="text-lg font-bold text-green-700">🗳️ ${nom.votes} votes</span>
-        ${votingOpen && !hasVoted ? `<button onclick="castVote(${nom.id})" class="px-4 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 transition">Vote</button>` :
-          hasVoted ? '<span class="text-sm font-bold text-green-600">✅ Voted</span>' :
+      <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+        <span class="text-lg font-bold text-green-700">🗳️ ${voteCount} votes</span>
+        ${votingOpen && !voted ?
+          `<button onclick="castVote(${n.id})" class="px-5 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 transition shadow-md">Vote</button>` :
+          voted ? '<span class="text-sm font-bold text-green-600">✅ Voted</span>' :
           '<span class="text-xs text-gray-400">Voting closed</span>'}
       </div>
     </div>`;
   }).join('');
 }
 
-function filterVoteCategory(cat) {
-  document.querySelectorAll('.vote-card').forEach(card => {
-    card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+function filterVote(cat) {
+  document.querySelectorAll('.vote-card').forEach(c => {
+    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
   });
-  // Update button styles
-  document.querySelectorAll('#vote-category-filter button').forEach(btn => {
-    btn.className = btn.textContent.trim() === 'All' && cat === 'all' || btn.textContent.trim() === cat
-      ? 'px-4 py-2 rounded-full bg-green-600 text-white font-medium text-sm'
-      : 'px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium text-sm hover:bg-gray-300';
+  // Highlight active filter
+  document.querySelectorAll('#vote-filter button').forEach(btn => {
+    const isActive = (cat === 'all' && btn.textContent === 'All') || btn.textContent === cat;
+    btn.className = isActive
+      ? 'px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium'
+      : 'px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300';
   });
 }
 
@@ -1290,47 +640,39 @@ function castVote(id) {
   const votes = getVotes();
   if (votes[id]) { alert('You already voted for this nominee!'); return; }
   votes[id] = true;
+  votes['count_' + id] = 1;
   saveVotes(votes);
-
-  const noms = getNominations();
-  const idx = noms.findIndex(n => n.id === id);
-  if (idx > -1) { noms[idx].votes = (noms[idx].votes || 0) + 1; saveNominations(noms); }
-
-  renderVotingPage();
+  renderVoting();
 }
 
-// Initial render
-renderVotingPage();
+// Load nominees on page load
+loadNominees();
 
-/* ═══════════════════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════════════════ */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      entry.target.style.animation = 'fadeInUp 0.7s ease forwards';
-      observer.unobserve(entry.target);
+/* ═══ SCROLL REVEAL ═══ */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      e.target.style.animation = 'fadeInUp 0.7s ease forwards';
+      obs.unobserve(e.target);
     }
   });
 }, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ═══════════════════════════════════════════════
-   ACTIVE NAV
-═══════════════════════════════════════════════ */
+/* ═══ ACTIVE NAV ═══ */
 window.addEventListener('scroll', () => {
-  let current = '';
-  document.querySelectorAll('section[id]').forEach(s => { if (scrollY >= s.offsetTop - 120) current = s.id; });
+  let c = '';
+  document.querySelectorAll('section[id]').forEach(s => { if (scrollY >= s.offsetTop - 120) c = s.id; });
   document.querySelectorAll('nav a[href^="#"]').forEach(a => {
-    a.classList.toggle('text-green-600', a.getAttribute('href') === '#' + current);
-    a.classList.toggle('font-bold', a.getAttribute('href') === '#' + current);
+    a.classList.toggle('text-green-600', a.getAttribute('href') === '#' + c);
+    a.classList.toggle('font-bold', a.getAttribute('href') === '#' + c);
   });
-}, { passive:true });
+}, { passive: true });
 
 window.addEventListener('scroll', () => {
   document.getElementById('main-header').classList.toggle('shadow-xl', scrollY > 20);
-}, { passive:true });
+}, { passive: true });
 </script>
 </body>
 </html>

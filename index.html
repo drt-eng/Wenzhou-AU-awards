@@ -232,15 +232,17 @@
     </div>
   </section>
 
-  <!-- NOMINATE — GOOGLE FORM EMBEDDED -->
+    <!-- NOMINATE — MICROSOFT FORMS EMBEDDED -->
   <section id="nominate" class="py-20 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-8 reveal">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Submit a Nomination</h2>
+
         <div class="bg-green-50 border-2 border-green-500 rounded-xl p-6 mb-4 max-w-2xl mx-auto">
           <p class="text-lg font-bold text-green-900">📝 Nomination Period: April 26 – May 2, 2026</p>
           <p class="text-gray-700 mt-2">All nominations are reviewed by the WAU admin team. Approved nominees will appear on the voting page.</p>
         </div>
+
         <div id="nom-form-status" class="max-w-2xl mx-auto mb-4"></div>
       </div>
 
@@ -252,37 +254,48 @@
             <div class="flex items-start gap-3 mb-4">
               <span class="text-2xl">📋</span>
               <div>
-                <p class="font-bold text-gray-800 mb-1">How Nominations Work:</p>
+                <p class="font-bold text-gray-800 mb-2">How Nominations Work:</p>
                 <ul class="text-sm text-gray-700 space-y-1">
                   <li>✅ Fill out the form below with nominee details</li>
                   <li>✅ Your nomination goes directly to the WAU admin team</li>
                   <li>✅ Approved nominees will appear on the voting page</li>
-                  <li>✅ You will be notified when your nominee is approved</li>
+                  <li>✅ Works without VPN in China</li>
                 </ul>
               </div>
             </div>
             <div class="bg-orange-50 border border-orange-300 rounded-lg p-4">
-              <p class="text-sm font-semibold text-orange-800">⚠️ For categories like Community Service, Volunteer of the Year, Community Leadership, Consistent Service, Mentorship Legacy, and Lifetime Commitment — you MUST list specific things the person has done. Generic answers will be rejected.</p>
+              <p class="text-sm font-semibold text-orange-800">⚠️ For Community Service, Volunteer of the Year, Community Leadership, Consistent Service, Mentorship Legacy and Lifetime Commitment — you MUST list specific things the person has done. Generic answers will be rejected.</p>
             </div>
           </div>
 
-          <!--
-            ╔══════════════════════════════════════════════════╗
-            ║  REPLACE THE URL BELOW WITH YOUR GOOGLE FORM URL ║
-            ╚══════════════════════════════════════════════════╝
-          -->
+          <!-- Microsoft Forms iframe -->
           <iframe
-            id="google-form"
-            src="https://docs.google.com/forms/d/e/1FAIpQLSfRR-umfg80dWS4gMpyBaphTuCJu079M4FhibL2OcQp9pDgwg/viewform?embedded=true"
             width="100%"
-            height="2400"
+            height="1800"
+            src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__j15ozdUREVTWUJVMDFXM09TN0MxNVFaTVREWlQwUy4u&embed=true"
             frameborder="0"
-            marginheight="0"
             marginwidth="0"
-            style="border:none; min-height:1200px;"
-            loading="lazy"
-          >Loading form…</iframe>
+            marginheight="0"
+            style="border:none; width:100%; min-height:1800px;"
+            allowfullscreen
+            webkitallowfullscreen
+            mozallowfullscreen
+            msallowfullscreen
+          ></iframe>
 
+        </div>
+
+        <!-- Backup link -->
+        <div class="text-center mt-4">
+          <p class="text-gray-500 text-sm mb-2">Form not loading?</p>
+          <a
+            href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__j15ozdUREVTWUJVMDFXM09TN0MxNVFaTVREWlQwUy4u"
+            target="_blank"
+            class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition"
+            style="background:linear-gradient(to right,#16a34a,#15803d)"
+          >
+            📝 Open Form in New Tab
+          </a>
         </div>
       </div>
     </div>

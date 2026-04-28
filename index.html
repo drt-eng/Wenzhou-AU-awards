@@ -239,7 +239,7 @@
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Submit a Nomination</h2>
 
         <div class="bg-green-50 border-2 border-green-500 rounded-xl p-6 mb-4 max-w-2xl mx-auto">
-          <p class="text-lg font-bold text-green-900">📝 Nomination Period: April 26 – May 2, 2026</p>
+          <p class="text-lg font-bold text-green-900">📝 Nomination Period: April 26 – May 5, 2026</p>
           <p class="text-gray-700 mt-2">All nominations are reviewed by the WAU admin team. Approved nominees will appear on the voting page.</p>
         </div>
 
@@ -308,7 +308,7 @@
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Vote for Nominees</h2>
         <div class="bg-yellow-50 border-2 border-yellow-500 rounded-xl p-6 max-w-2xl mx-auto mb-4">
           <p class="text-lg font-semibold text-gray-800">🗳️ Voting Period</p>
-          <p class="text-2xl font-bold text-yellow-700">May 5 – May 10, 2026</p>
+          <p class="text-2xl font-bold text-yellow-700">May 7 – May 17, 2026</p>
         </div>
         <div id="vote-section-status" class="max-w-2xl mx-auto"></div>
       </div>
@@ -513,7 +513,7 @@ function updateCountdowns() {
   const vs = periodStatus(VOTE_START, VOTE_END);
   const vEl = document.getElementById('vote-hero-status');
   if (vs === 'upcoming') {
-    vEl.innerHTML = '<span class="text-blue-600">⏳ Opens May 5</span>';
+    vEl.innerHTML = '<span class="text-blue-600">⏳ Opens May 7</span>';
     const t = timeLeft(VOTE_START);
     if (t) { document.getElementById('v-d').textContent=pad(t.d); document.getElementById('v-h').textContent=pad(t.h); document.getElementById('v-m').textContent=pad(t.m); document.getElementById('v-s').textContent=pad(t.s); }
   } else if (vs === 'active') {

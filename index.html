@@ -546,7 +546,7 @@ function updateCountdowns() {
     fs.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ Nominations are OPEN! Fill the form below.</span></div>';
     fw.style.opacity = '1'; fw.style.pointerEvents = 'auto';
   } else {
-    fs.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Nomination period has ended (Apr 26 – May 2)</span></div>';
+    fs.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Nomination period has ended (Apr 26 – May 5)</span></div>';
     fw.style.opacity = '0.5'; fw.style.pointerEvents = 'none';
   }
 
@@ -554,7 +554,7 @@ function updateCountdowns() {
   const vsEl = document.getElementById('vote-section-status');
   if (vs === 'upcoming') vsEl.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Voting opens May 5, 2026</span></div>';
   else if (vs === 'active') vsEl.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ VOTING IS OPEN! Cast your vote now.</span></div>';
-  else vsEl.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Voting has ended (May 5 – May 10)</span></div>';
+  else vsEl.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Voting has ended (May 7 – May 17)</span></div>';
 }
 
 setInterval(updateCountdowns, 1000);

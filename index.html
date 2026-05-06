@@ -205,7 +205,6 @@
         <a href="#home" class="text-gray-700 hover:text-green-600 transition">Home</a>
         <a href="#about" class="text-gray-700 hover:text-green-600 transition">About</a>
         <a href="#categories" class="text-gray-700 hover:text-green-600 transition">Categories</a>
-        <a href="#nominate" class="text-gray-700 hover:text-green-600 transition">Nominate</a>
         <a href="#vote" class="text-gray-700 hover:text-green-600 transition">Vote</a>
         <a href="#fixtures" class="text-gray-700 hover:text-green-600 transition">AFCON</a>
         <a href="#gallery" class="text-gray-700 hover:text-green-600 transition">Gallery</a>
@@ -222,7 +221,6 @@
       <a href="#home" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Home</a>
       <a href="#about" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">About</a>
       <a href="#categories" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Categories</a>
-      <a href="#nominate" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Nominate</a>
       <a href="#vote" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Vote</a>
       <a href="#fixtures" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">AFCON</a>
       <a href="#gallery" class="px-4 py-2 rounded-lg hover:bg-gray-100" onclick="closeMobile()">Gallery</a>
@@ -255,20 +253,8 @@
       <p class="text-2xl md:text-3xl text-gray-700 mb-12">Africa Day 2026 Awards</p>
 
       <!-- 3 Countdowns -->
-      <div class="grid md:grid-cols-3 gap-4 mb-12">
-        <!-- Nomination -->
-        <div class="bg-white rounded-2xl shadow-xl p-5">
-          <div class="text-3xl mb-2">📝</div>
-          <h3 class="text-sm font-bold text-gray-600 mb-1">Nomination Period</h3>
-          <p class="text-lg font-bold text-green-700">Apr 26 – May 5</p>
-          <div id="nom-status" class="mt-2 text-sm font-semibold"></div>
-          <div id="nom-cd" class="grid grid-cols-4 gap-2 mt-3">
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#16a34a,#15803d)"><span id="n-d">--</span></div><div class="text-xs mt-1 text-gray-500">D</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#ca8a04,#a16207)"><span id="n-h">--</span></div><div class="text-xs mt-1 text-gray-500">H</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><span id="n-m">--</span></div><div class="text-xs mt-1 text-gray-500">M</div></div>
-            <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#9333ea,#7e22ce)"><span id="n-s">--</span></div><div class="text-xs mt-1 text-gray-500">S</div></div>
-          </div>
-        </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-12 max-w-3xl mx-auto">
+        <
         <!-- Voting -->
         <div class="bg-white rounded-2xl shadow-xl p-5">
           <div class="text-3xl mb-2">🗳️</div>
@@ -298,7 +284,6 @@
       </div>
 
       <div class="flex flex-wrap gap-4 justify-center">
-        <a href="#nominate" class="btn-shimmer px-8 py-4 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2" style="background:linear-gradient(to right,#16a34a,#15803d)">📝 Nominate Now</a>
         <a href="#vote" class="px-8 py-4 bg-white text-green-700 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 border-2 border-green-200 hover:border-green-500">🗳️ Vote</a>
       </div>
     </div>
@@ -353,74 +338,6 @@
     </div>
   </section>
 
-    <!-- NOMINATE — MICROSOFT FORMS EMBEDDED -->
-  <section id="nominate" class="py-20 px-4 bg-white">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-8 reveal">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Submit a Nomination</h2>
-
-        <div class="bg-green-50 border-2 border-green-500 rounded-xl p-6 mb-4 max-w-2xl mx-auto">
-          <p class="text-lg font-bold text-green-900">📝 Nomination Period: April 26 – May 5, 2026</p>
-          <p class="text-gray-700 mt-2">All nominations are reviewed by the WAU admin team. Approved nominees will appear on the voting page.</p>
-        </div>
-
-        <div id="nom-form-status" class="max-w-2xl mx-auto mb-4"></div>
-      </div>
-
-      <div id="nom-form-wrap" class="reveal">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-green-200">
-
-          <!-- Instructions -->
-          <div class="bg-gradient-to-r from-green-50 to-yellow-50 p-6 border-b-2 border-green-100">
-            <div class="flex items-start gap-3 mb-4">
-              <span class="text-2xl">📋</span>
-              <div>
-                <p class="font-bold text-gray-800 mb-2">How Nominations Work:</p>
-                <ul class="text-sm text-gray-700 space-y-1">
-                  <li>✅ Fill out the form below with nominee details</li>
-                  <li>✅ Your nomination goes directly to the WAU admin team</li>
-                  <li>✅ Approved nominees will appear on the voting page</li>
-                  <li>✅ Works without VPN in China</li>
-                </ul>
-              </div>
-            </div>
-            <div class="bg-orange-50 border border-orange-300 rounded-lg p-4">
-              <p class="text-sm font-semibold text-orange-800">⚠️ For Community Service, Volunteer of the Year, Community Leadership, Consistent Service, Mentorship Legacy and Lifetime Commitment — you MUST list specific things the person has done. Generic answers will be rejected.</p>
-            </div>
-          </div>
-
-          <!-- Microsoft Forms iframe -->
-          <iframe
-            width="100%"
-            height="1800"
-            src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__j15ozdUREVTWUJVMDFXM09TN0MxNVFaTVREWlQwUy4u&embed=true"
-            frameborder="0"
-            marginwidth="0"
-            marginheight="0"
-            style="border:none; width:100%; min-height:1800px;"
-            allowfullscreen
-            webkitallowfullscreen
-            mozallowfullscreen
-            msallowfullscreen
-          ></iframe>
-
-        </div>
-
-        <!-- Backup link -->
-        <div class="text-center mt-4">
-          <p class="text-gray-500 text-sm mb-2">Form not loading?</p>
-          <a
-            href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__j15ozdUREVTWUJVMDFXM09TN0MxNVFaTVREWlQwUy4u"
-            target="_blank"
-            class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition"
-            style="background:linear-gradient(to right,#16a34a,#15803d)"
-          >
-            📝 Open Form in New Tab
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- VOTE -->
   <section id="vote" class="py-20 px-4">
@@ -580,8 +497,6 @@
 'use strict';
 
 /* ═══ DATES ═══ */
-const NOM_START  = new Date('2026-04-26T00:00:00');
-const NOM_END    = new Date('2026-05-05T23:59:59');
 const VOTE_START = new Date('2026-05-07T00:00:00');
 const VOTE_END   = new Date('2026-05-17T23:59:59');
 const GALA       = new Date('2026-05-23T18:00:00');
@@ -614,21 +529,7 @@ function periodStatus(s, e) {
 
 /* ═══ UPDATE COUNTDOWNS ═══ */
 function updateCountdowns() {
-  // Nomination
-  const ns = periodStatus(NOM_START, NOM_END);
-  const nEl = document.getElementById('nom-status');
-  if (ns === 'upcoming') {
-    nEl.innerHTML = '<span class="text-blue-600">⏳ Opens Apr 26</span>';
-    const t = timeLeft(NOM_START);
-    if (t) { document.getElementById('n-d').textContent=pad(t.d); document.getElementById('n-h').textContent=pad(t.h); document.getElementById('n-m').textContent=pad(t.m); document.getElementById('n-s').textContent=pad(t.s); }
-  } else if (ns === 'active') {
-    nEl.innerHTML = '<span class="text-green-600">✅ OPEN NOW!</span>';
-    const t = timeLeft(NOM_END);
-    if (t) { document.getElementById('n-d').textContent=pad(t.d); document.getElementById('n-h').textContent=pad(t.h); document.getElementById('n-m').textContent=pad(t.m); document.getElementById('n-s').textContent=pad(t.s); }
-  } else {
-    nEl.innerHTML = '<span class="text-red-600">❌ Closed</span>';
-    document.getElementById('nom-cd').classList.add('hidden');
-  }
+
 
   // Voting
   const vs = periodStatus(VOTE_START, VOTE_END);
@@ -657,19 +558,6 @@ function updateCountdowns() {
     document.getElementById('gala-cd').classList.add('hidden');
   }
 
-  // Lock nomination form
-  const fw = document.getElementById('nom-form-wrap');
-  const fs = document.getElementById('nom-form-status');
-  if (ns === 'upcoming') {
-    fs.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Nominations open April 26, 2026</span></div>';
-    fw.style.opacity = '0.5'; fw.style.pointerEvents = 'none';
-  } else if (ns === 'active') {
-    fs.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ Nominations are OPEN! Fill the form below.</span></div>';
-    fw.style.opacity = '1'; fw.style.pointerEvents = 'auto';
-  } else {
-    fs.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Nomination period has ended (Apr 26 – May 5)</span></div>';
-    fw.style.opacity = '0.5'; fw.style.pointerEvents = 'none';
-  }
 
   // Vote section status
   const vsEl = document.getElementById('vote-section-status');

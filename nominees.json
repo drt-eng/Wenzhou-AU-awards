@@ -1,1 +1,316 @@
-[]
+
+
+
+nominees_multi = [
+  # Dr Kamara Saidu - 1 category
+  {
+    "id": 1,
+    "name": "Dr Kamara Saidu",
+    "nationality": "🇸🇱 Sierra Leone",
+    "category": "Long-Term Dedication",
+    "subcategory": "Mentorship Legacy",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrKamaraSaidu.JPG"
+  },
+  # Dr Percy Akuetteh - 4 categories
+  {
+    "id": 2,
+    "name": "Dr Percy Akuetteh",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Long-Term Dedication",
+    "subcategory": "Mentorship Legacy",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrPercyKean.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Dr Percy Akuetteh",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Long-Term Dedication",
+    "subcategory": "Community Leadership",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrPercyKean.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Dr Percy Akuetteh",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Long-Term Dedication",
+    "subcategory": "Lifetime Commitment",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrPercyKean.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Dr Percy Akuetteh",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Long-Term Dedication",
+    "subcategory": "Consistent Service",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrPercyKean.jpg"
+  },
+  # Dr Stephen Akiti - 3 categories
+  {
+    "id": 6,
+    "name": "Dr Stephen Akiti",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Long-Term Dedication",
+    "subcategory": "Mentorship Legacy",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrStephenAkiti.JPG"
+  },
+  {
+    "id": 7,
+    "name": "Dr Stephen Akiti",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Long-Term Dedication",
+    "subcategory": "Community Leadership",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrStephenAkiti.JPG"
+  },
+  {
+    "id": 8,
+    "name": "Dr Stephen Akiti",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Long-Term Dedication",
+    "subcategory": "Consistent Service",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrStephenAkiti.JPG"
+  },
+  # Dr Tinotenda B Madzikatire - 3 categories
+  {
+    "id": 9,
+    "name": "Dr Tinotenda B Madzikatire",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "Long-Term Dedication",
+    "subcategory": "Mentorship Legacy",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrTinotendaBMadzikatire.JPG"
+  },
+  {
+    "id": 10,
+    "name": "Dr Tinotenda B Madzikatire",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "Long-Term Dedication",
+    "subcategory": "Community Leadership",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrTinotendaBMadzikatire.JPG"
+  },
+  {
+    "id": 11,
+    "name": "Dr Tinotenda B Madzikatire",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "Long-Term Dedication",
+    "subcategory": "Consistent Service",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/DrTinotendaBMadzikatire.JPG"
+  },
+  # Jenifer Asoh - 1 category
+  {
+    "id": 12,
+    "name": "Jenifer Asoh",
+    "nationality": "🇳🇬 Nigeria",
+    "category": "African Talent of the Year",
+    "subcategory": "Social Media",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/JeniferAsoh.png"
+  },
+  # LaYouthy Events - 1 category
+  {
+    "id": 13,
+    "name": "LaYouthy Events",
+    "nationality": "🇱🇸 Lesotho & 🇿🇼 Zimbabwe",
+    "category": "Business of the Year",
+    "subcategory": "Event Planning & Decor",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/LaYouthyEvents.jpg"
+  },
+  # LetsTalkMedicine - 2 categories
+  {
+    "id": 14,
+    "name": "LetsTalkMedicine",
+    "nationality": "🌍 Africa",
+    "category": "Social Impact Award",
+    "subcategory": "Volunteer of the Year",
+    "contributions": [
+      "Organized 10+ free health screening camps",
+      "Volunteered 500+ hours of medical consultation"
+    ],
+    "votes": 0,
+    "photo": "nominees/LetsTalkMedicine.JPG"
+  },
+  {
+    "id": 15,
+    "name": "LetsTalkMedicine",
+    "nationality": "🌍 Africa",
+    "category": "Health & Fitness Excellence",
+    "subcategory": "Wellness Advocate",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/LetsTalkMedicine.JPG"
+  },
+  # Mukudzei Makurira - 2 categories (Music and Dance)
+  {
+    "id": 16,
+    "name": "Mukudzei Makurira",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "African Talent of the Year",
+    "subcategory": "Music",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/Mukudzei.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Mukudzei Makurira",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "African Talent of the Year",
+    "subcategory": "Dance",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/Mukudzei.jpg"
+  },
+  # Ortis Kitchen - 1 category
+  {
+    "id": 18,
+    "name": "Ortis Kitchen",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Business of the Year",
+    "subcategory": "Food & Catering",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/OrtisKitchen.png"
+  },
+  # Tasty Bites - 1 category
+  {
+    "id": 19,
+    "name": "Tasty Bites",
+    "nationality": "🇬🇭 Ghana",
+    "category": "Business of the Year",
+    "subcategory": "Food & Catering",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/TastyBites.jpg"
+  },
+  # Pamora Space - 1 category
+  {
+    "id": 20,
+    "name": "Pamora Space",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "Business of the Year",
+    "subcategory": "Event Planning & Decor",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/PamoraSpace.jpg"
+  },
+  # Bwinja B Safari - 1 category
+  {
+    "id": 21,
+    "name": "Bwinja B Safari",
+    "nationality": "🇨🇩 DR Congo",
+    "category": "African Talent of the Year",
+    "subcategory": "Music",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/Safari.JPG"
+  },
+  # Soul Band - 1 category
+  {
+    "id": 22,
+    "name": "Soul Band",
+    "nationality": "🇬🇭 Ghana",
+    "category": "African Talent of the Year",
+    "subcategory": "Music",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/SoulBand.JPG"
+  },
+  # Tashinga C Mvumira - 1 category
+  {
+    "id": 23,
+    "name": "Tashinga C Mvumira",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "African Talent of the Year",
+    "subcategory": "Social Media",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/TashingaCecilia.png"
+  },
+  # Twiza Chard - 1 category
+  {
+    "id": 24,
+    "name": "Twiza Chard",
+    "nationality": "🇿🇲 Zambia",
+    "category": "African Talent of the Year",
+    "subcategory": "Social Media",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/TwizaChard.png"
+  },
+  # Vanessa Mavhunure - 1 category
+  {
+    "id": 25,
+    "name": "Vanessa Mavhunure",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "African Talent of the Year",
+    "subcategory": "Music",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/Vanessa.jpg"
+  },
+  # Bryan Mhaka - 2 categories
+  {
+    "id": 26,
+    "name": "Bryan Mhaka",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "African Talent of the Year",
+    "subcategory": "Social Media",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/bryanmint.png"
+  },
+  {
+    "id": 27,
+    "name": "Bryan Mhaka",
+    "nationality": "🇿🇼 Zimbabwe",
+    "category": "African Talent of the Year",
+    "subcategory": "Photography & Video",
+    "contributions": [],
+    "votes": 0,
+    "photo": "nominees/bryanmint.png"
+  }
+]
+
+import json
+json_str = json.dumps(nominees_multi, indent=2, ensure_ascii=False)
+
+with open('/mnt/agents/output/nominees.json', 'w', encoding='utf-8') as f:
+    f.write(json_str)
+
+print(f"Saved nominees.json with multiple entries per person")
+print(f"Total nominees: {len(nominees_multi)}")
+print(f"File size: {len(json_str)} characters")
+
+# Show summary
+from collections import Counter
+name_counts = Counter(n['name'] for n in nominees_multi)
+print("\n--- Multi-nomination summary ---")
+for name, count in name_counts.items():
+    if count > 1:
+        cats = [n['category'] + ' / ' + n['subcategory'] for n in nominees_multi if n['name'] == name]
+        print(f"\n{name}: {count} entries")
+        for c in cats:
+            print(f"  → {c}")

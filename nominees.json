@@ -1,8 +1,4 @@
-
-import json
-
-# Create proper JSON (not Python code)
-nominees = [
+ [
   {"id": 1, "name": "Dr Kamara Saidu", "nationality": "🇸🇱 Sierra Leone", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": [" has been pivotal in mentoring young scientists", "one of the leaders in the Francophone community"], "votes": 0, "photo": "nominees/drkamarasaidu.jpg"},
   {"id": 2, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["has been responsible for many students gaining entrepreneural opportunities", "holds eldership role not only at church but in the community"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
   {"id": 3, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["Served as of the Ghanian Association in wWenzhou President for 3+ consecutive terms", "Led strategic community growth initiatives"], "votes": 0, "photo": "nominees/drpercykean.jpg"},

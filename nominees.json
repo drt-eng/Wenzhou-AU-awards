@@ -1,329 +1,49 @@
 
-# Update nominees.json - all filenames lowercase and all .jpg extension
+import json
 
-nominees_lower = [
-  {
-    "id": 1,
-    "name": "Dr Kamara Saidu",
-    "nationality": "🇸🇱 Sierra Leone",
-    "category": "Long-Term Dedication",
-    "subcategory": "Mentorship Legacy",
-    "contributions": [
-      "Mentored 15+ students through university programs",
-      "Organized monthly mentorship workshops",
-      "Created a peer-support network for new arrivals"
-    ],
-    "votes": 0,
-    "photo": "nominees/drkamarasaidu.jpg"
-  },
-  {
-    "id": 2,
-    "name": "Dr Percy Akuetteh",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Long-Term Dedication",
-    "subcategory": "Mentorship Legacy",
-    "contributions": [
-      "Founded the WAU mentorship program",
-      "Provided free academic counseling to 50+ students"
-    ],
-    "votes": 0,
-    "photo": "nominees/drpercykean.jpg"
-  },
-  {
-    "id": 3,
-    "name": "Dr Percy Akuetteh",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Long-Term Dedication",
-    "subcategory": "Community Leadership",
-    "contributions": [
-      "Served as WAU President for 3 consecutive terms",
-      "Led strategic community growth initiatives"
-    ],
-    "votes": 0,
-    "photo": "nominees/drpercykean.jpg"
-  },
-  {
-    "id": 4,
-    "name": "Dr Percy Akuetteh",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Long-Term Dedication",
-    "subcategory": "Lifetime Commitment",
-    "contributions": [
-      "Dedicated 8+ years to WAU community building",
-      "Established sustainable community programs"
-    ],
-    "votes": 0,
-    "photo": "nominees/drpercykean.jpg"
-  },
-  {
-    "id": 5,
-    "name": "Dr Percy Akuetteh",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Long-Term Dedication",
-    "subcategory": "Consistent Service",
-    "contributions": [
-      "Organized 20+ community outreach events",
-      "Never missed a WAU general meeting in 5 years"
-    ],
-    "votes": 0,
-    "photo": "nominees/drpercykean.jpg"
-  },
-  {
-    "id": 6,
-    "name": "Dr Stephen Akiti",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Long-Term Dedication",
-    "subcategory": "Mentorship Legacy",
-    "contributions": [
-      "Led the WAU academic committee for 4 years",
-      "Mentored 30+ students through scholarship applications"
-    ],
-    "votes": 0,
-    "photo": "nominees/drstephenakiti.jpg"
-  },
-  {
-    "id": 7,
-    "name": "Dr Stephen Akiti",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Long-Term Dedication",
-    "subcategory": "Community Leadership",
-    "contributions": [
-      "Organized weekly study groups and tutoring sessions",
-      "Led student welfare initiatives"
-    ],
-    "votes": 0,
-    "photo": "nominees/drstephenakiti.jpg"
-  },
-  {
-    "id": 8,
-    "name": "Dr Stephen Akiti",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Long-Term Dedication",
-    "subcategory": "Consistent Service",
-    "contributions": [
-      "Consistently volunteered at every WAU event",
-      "Maintained academic support programs for 4 years"
-    ],
-    "votes": 0,
-    "photo": "nominees/drstephenakiti.jpg"
-  },
-  {
-    "id": 9,
-    "name": "Dr Tinotenda B Madzikatire",
-    "nationality": "🇿🇼 Zimbabwe",
-    "category": "Long-Term Dedication",
-    "subcategory": "Mentorship Legacy",
-    "contributions": [
-      "Mentored 25+ young professionals",
-      "Established career guidance programs"
-    ],
-    "votes": 0,
-    "photo": "nominees/drtinotendabmadzikatire.jpg"
-  },
-  {
-    "id": 10,
-    "name": "Dr Tinotenda B Madzikatire",
-    "nationality": "🇿🇼 Zimbabwe",
-    "category": "Long-Term Dedication",
-    "subcategory": "Community Leadership",
-    "contributions": [
-      "Led community service initiatives for 3 years",
-      "Established a mental health support group"
-    ],
-    "votes": 0,
-    "photo": "nominees/drtinotendabmadzikatire.jpg"
-  },
-  {
-    "id": 11,
-    "name": "Dr Tinotenda B Madzikatire",
-    "nationality": "🇿🇼 Zimbabwe",
-    "category": "Long-Term Dedication",
-    "subcategory": "Consistent Service",
-    "contributions": [
-      "Provided consistent mental health counseling",
-      "Organized monthly wellness check-ins"
-    ],
-    "votes": 0,
-    "photo": "nominees/drtinotendabmadzikatire.jpg"
-  },
-  {
-    "id": 12,
-    "name": "Jenifer Asoh",
-    "nationality": "🇳🇬 Nigeria",
-    "category": "African Talent of the Year",
-    "subcategory": "Social Media",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/jeniferasoh.jpg"
-  },
-  {
-    "id": 13,
-    "name": "LaYouthy Events",
-    "nationality": "🌍 Africa",
-    "category": "Business of the Year",
-    "subcategory": "Event Planning & Decor",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/layouthyevents.jpg"
-  },
-  {
-    "id": 14,
-    "name": "LetsTalkMedicine",
-    "nationality": "🌍 Africa",
-    "category": "Social Impact Award",
-    "subcategory": "Volunteer of the Year",
-    "contributions": [
-      "Organized 10+ free health screening camps",
-      "Volunteered 500+ hours of medical consultation"
-    ],
-    "votes": 0,
-    "photo": "nominees/letstalkmedicine.jpg"
-  },
-  {
-    "id": 15,
-    "name": "LetsTalkMedicine",
-    "nationality": "🌍 Africa",
-    "category": "Health & Fitness Excellence",
-    "subcategory": "Wellness Advocate",
-    "contributions": [
-      "Launched a wellness awareness campaign reaching 200+ people",
-      "Provided free fitness and nutrition workshops"
-    ],
-    "votes": 0,
-    "photo": "nominees/letstalkmedicine.jpg"
-  },
-  {
-    "id": 16,
-    "name": "Mukudzei Makurira",
-    "nationality": "🇿🇼 Zimbabwe",
-    "category": "African Talent of the Year",
-    "subcategory": "Music",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/mukudzei.jpg"
-  },
-  {
-    "id": 17,
-    "name": "Mukudzei Makurira",
-    "nationality": "🇿🇼 Zimbabwe",
-    "category": "African Talent of the Year",
-    "subcategory": "Dance",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/mukudzei.jpg"
-  },
-  {
-    "id": 18,
-    "name": "Ortis Kitchen",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Business of the Year",
-    "subcategory": "Food & Catering",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/ortiskitchen.jpg"
-  },
-  {
-    "id": 19,
-    "name": "Tasty Bites",
-    "nationality": "🇬🇭 Ghana",
-    "category": "Business of the Year",
-    "subcategory": "Food & Catering",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/tastybites.jpg"
-  },
-  {
-    "id": 20,
-    "name": "Pamora Space",
-    "nationality": "🌍 Africa",
-    "category": "Business of the Year",
-    "subcategory": "Event Planning & Decor",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/pamoraspace.jpg"
-  },
-  {
-    "id": 21,
-    "name": "Bwinja B Safari",
-    "nationality": "🌍 Africa",
-    "category": "African Talent of the Year",
-    "subcategory": "Music",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/safari.jpg"
-  },
-  {
-    "id": 22,
-    "name": "Soul Band",
-    "nationality": "🇬🇭 Ghana",
-    "category": "African Talent of the Year",
-    "subcategory": "Music",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/soulband.jpg"
-  },
-  {
-    "id": 23,
-    "name": "Tashinga C Mvumira",
-    "nationality": "🌍 Africa",
-    "category": "African Talent of the Year",
-    "subcategory": "Social Media",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/tashingacecilia.jpg"
-  },
-  {
-    "id": 24,
-    "name": "Twiza Chard",
-    "nationality": "🇿🇲 Zambia",
-    "category": "African Talent of the Year",
-    "subcategory": "Social Media",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/twizachard.jpg"
-  },
-  {
-    "id": 25,
-    "name": "Vanessa Mavhunure",
-    "nationality": "🇿🇼 Zimbabwe",
-    "category": "African Talent of the Year",
-    "subcategory": "Music",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/vanessa.jpg"
-  },
-  {
-    "id": 26,
-    "name": "Bryan Mhaka",
-    "nationality": "🇿🇼 Zimbabwe",
-    "category": "African Talent of the Year",
-    "subcategory": "Social Media",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/bryanmint.jpg"
-  },
-  {
-    "id": 27,
-    "name": "Bryan Mhaka",
-    "nationality": "🇿🇼 Zimbabwe",
-    "category": "African Talent of the Year",
-    "subcategory": "Photography & Video",
-    "contributions": [],
-    "votes": 0,
-    "photo": "nominees/bryanmint.jpg"
-  }
+# Create proper JSON (not Python code)
+nominees = [
+  {"id": 1, "name": "Dr Kamara Saidu", "nationality": "🇸🇱 Sierra Leone", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Mentored 15+ students through university programs", "Organized monthly mentorship workshops", "Created a peer-support network for new arrivals"], "votes": 0, "photo": "nominees/drkamarasaidu.jpg"},
+  {"id": 2, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Founded the WAU mentorship program", "Provided free academic counseling to 50+ students"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
+  {"id": 3, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["Served as WAU President for 3 consecutive terms", "Led strategic community growth initiatives"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
+  {"id": 4, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Lifetime Commitment", "contributions": ["Dedicated 8+ years to WAU community building", "Established sustainable community programs"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
+  {"id": 5, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Consistent Service", "contributions": ["Organized 20+ community outreach events", "Never missed a WAU general meeting in 5 years"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
+  {"id": 6, "name": "Dr Stephen Akiti", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Led the WAU academic committee for 4 years", "Mentored 30+ students through scholarship applications"], "votes": 0, "photo": "nominees/drstephenakiti.jpg"},
+  {"id": 7, "name": "Dr Stephen Akiti", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["Organized weekly study groups and tutoring sessions", "Led student welfare initiatives"], "votes": 0, "photo": "nominees/drstephenakiti.jpg"},
+  {"id": 8, "name": "Dr Stephen Akiti", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Consistent Service", "contributions": ["Consistently volunteered at every WAU event", "Maintained academic support programs for 4 years"], "votes": 0, "photo": "nominees/drstephenakiti.jpg"},
+  {"id": 9, "name": "Dr Tinotenda B Madzikatire", "nationality": "🇿🇼 Zimbabwe", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Mentored 25+ young professionals", "Established career guidance programs"], "votes": 0, "photo": "nominees/drtinotendabmadzikatire.jpg"},
+  {"id": 10, "name": "Dr Tinotenda B Madzikatire", "nationality": "🇿🇼 Zimbabwe", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["Led community service initiatives for 3 years", "Established a mental health support group"], "votes": 0, "photo": "nominees/drtinotendabmadzikatire.jpg"},
+  {"id": 11, "name": "Dr Tinotenda B Madzikatire", "nationality": "🇿🇼 Zimbabwe", "category": "Long-Term Dedication", "subcategory": "Consistent Service", "contributions": ["Provided consistent mental health counseling", "Organized monthly wellness check-ins"], "votes": 0, "photo": "nominees/drtinotendabmadzikatire.jpg"},
+  {"id": 12, "name": "Jenifer Asoh", "nationality": "🇳🇬 Nigeria", "category": "African Talent of the Year", "subcategory": "Social Media", "contributions": [], "votes": 0, "photo": "nominees/jeniferasoh.jpg"},
+  {"id": 13, "name": "LaYouthy Events", "nationality": "🌍 Africa", "category": "Business of the Year", "subcategory": "Event Planning & Decor", "contributions": [], "votes": 0, "photo": "nominees/layouthyevents.jpg"},
+  {"id": 14, "name": "LetsTalkMedicine", "nationality": "🌍 Africa", "category": "Social Impact Award", "subcategory": "Volunteer of the Year", "contributions": ["Organized 10+ free health screening camps", "Volunteered 500+ hours of medical consultation"], "votes": 0, "photo": "nominees/letstalkmedicine.jpg"},
+  {"id": 15, "name": "LetsTalkMedicine", "nationality": "🌍 Africa", "category": "Health & Fitness Excellence", "subcategory": "Wellness Advocate", "contributions": ["Launched a wellness awareness campaign reaching 200+ people", "Provided free fitness and nutrition workshops"], "votes": 0, "photo": "nominees/letstalkmedicine.jpg"},
+  {"id": 16, "name": "Mukudzei Makurira", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Music", "contributions": [], "votes": 0, "photo": "nominees/mukudzei.jpg"},
+  {"id": 17, "name": "Mukudzei Makurira", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Dance", "contributions": [], "votes": 0, "photo": "nominees/mukudzei.jpg"},
+  {"id": 18, "name": "Ortis Kitchen", "nationality": "🇬🇭 Ghana", "category": "Business of the Year", "subcategory": "Food & Catering", "contributions": [], "votes": 0, "photo": "nominees/ortiskitchen.jpg"},
+  {"id": 19, "name": "Tasty Bites", "nationality": "🇬🇭 Ghana", "category": "Business of the Year", "subcategory": "Food & Catering", "contributions": [], "votes": 0, "photo": "nominees/tastybites.jpg"},
+  {"id": 20, "name": "Pamora Space", "nationality": "🌍 Africa", "category": "Business of the Year", "subcategory": "Event Planning & Decor", "contributions": [], "votes": 0, "photo": "nominees/pamoraspace.jpg"},
+  {"id": 21, "name": "Bwinja B Safari", "nationality": "🌍 Africa", "category": "African Talent of the Year", "subcategory": "Music", "contributions": [], "votes": 0, "photo": "nominees/safari.jpg"},
+  {"id": 22, "name": "Soul Band", "nationality": "🇬🇭 Ghana", "category": "African Talent of the Year", "subcategory": "Music", "contributions": [], "votes": 0, "photo": "nominees/soulband.jpg"},
+  {"id": 23, "name": "Tashinga C Mvumira", "nationality": "🌍 Africa", "category": "African Talent of the Year", "subcategory": "Social Media", "contributions": [], "votes": 0, "photo": "nominees/tashingacecilia.jpg"},
+  {"id": 24, "name": "Twiza Chard", "nationality": "🇿🇲 Zambia", "category": "African Talent of the Year", "subcategory": "Social Media", "contributions": [], "votes": 0, "photo": "nominees/twizachard.jpg"},
+  {"id": 25, "name": "Vanessa Mavhunure", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Music", "contributions": [], "votes": 0, "photo": "nominees/vanessa.jpg"},
+  {"id": 26, "name": "Bryan Mhaka", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Social Media", "contributions": [], "votes": 0, "photo": "nominees/bryanmint.jpg"},
+  {"id": 27, "name": "Bryan Mhaka", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Photography & Video", "contributions": [], "votes": 0, "photo": "nominees/bryanmint.jpg"}
 ]
 
-import json
-json_str = json.dumps(nominees_lower, indent=2, ensure_ascii=False)
-
+# Save as proper JSON
 with open('/mnt/agents/output/nominees.json', 'w', encoding='utf-8') as f:
-    f.write(json_str)
+    json.dump(nominees, f, indent=2, ensure_ascii=False)
 
-print(f"Saved nominees.json with ALL lowercase filenames and .jpg extension")
-print(f"Total nominees: {len(nominees_lower)}")
+# Verify it's valid JSON
+with open('/mnt/agents/output/nominees.json', 'r', encoding='utf-8') as f:
+    content = f.read()
 
-# Show all photo paths to verify
-print("\n--- All photo paths ---")
-for n in nominees_lower:
-    print(f"{n['name']}: {n['photo']}")
+print("First 200 characters of the saved file:")
+print(content[:200])
+print("\n...")
+print("Last 100 characters:")
+print(content[-100:])
+print(f"\nTotal length: {len(content)} characters")
+print(f"Total nominees: {len(nominees)}")

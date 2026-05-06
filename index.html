@@ -68,7 +68,128 @@
     .vote-card:hover { border-color: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
     .vote-card.voted { border-color: #16a34a; background: #f0fdf4; }
   </style>
-</head>
+</head>/* ═══ ENHANCED VOTE CARDS — LARGE PHOTO WITH ANIMATION ═══ */
+
+.vote-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.vote-card .photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f0fdf4, #fefce8);
+}
+
+.vote-card .photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.vote-card:hover .photo-wrap img {
+  transform: scale(1.08);
+}
+
+/* Shimmer overlay on photo */
+.vote-card .photo-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: photoShimmer 3s infinite;
+}
+
+@keyframes photoShimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Slide-in animation for cards */
+.vote-card {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: cardSlideIn 0.6s ease forwards;
+}
+
+@keyframes cardSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger delay for each card */
+.vote-card:nth-child(1) { animation-delay: 0.05s; }
+.vote-card:nth-child(2) { animation-delay: 0.1s; }
+.vote-card:nth-child(3) { animation-delay: 0.15s; }
+.vote-card:nth-child(4) { animation-delay: 0.2s; }
+.vote-card:nth-child(5) { animation-delay: 0.25s; }
+.vote-card:nth-child(6) { animation-delay: 0.3s; }
+.vote-card:nth-child(7) { animation-delay: 0.35s; }
+.vote-card:nth-child(8) { animation-delay: 0.4s; }
+.vote-card:nth-child(9) { animation-delay: 0.45s; }
+.vote-card:nth-child(10) { animation-delay: 0.5s; }
+.vote-card:nth-child(11) { animation-delay: 0.55s; }
+.vote-card:nth-child(12) { animation-delay: 0.6s; }
+
+/* Card content padding */
+.vote-card .card-body {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nationality flag styling */
+.vote-card .nationality-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* Vote button enhancements */
+.vote-card .vote-btn {
+  transition: all 0.25s ease;
+}
+.vote-card .vote-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+/* Voted state ribbon */
+.vote-card.voted .photo-wrap::before {
+  content: '✅ VOTED';
+  position: absolute;
+  top: 12px;
+  right: -30px;
+  background: #16a34a;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 4px 35px;
+  transform: rotate(45deg);
+  z-index: 10;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Responsive: slightly smaller photos on mobile */
+@media (max-width: 640px) {
+  .vote-card .photo-wrap {
+    height: 160px;
+  }
+}
 
 <body class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
 
@@ -585,7 +706,8 @@ function renderVoting() {
   const votes = getVotes();
 
   if (!approvedNominees.length) {
-    grid.innerHTML = ''; grid.classList.add('hidden');
+    grid.innerHTML = '';
+    grid.classList.add('hidden');
     empty.classList.remove('hidden');
     filterWrap.innerHTML = '';
     return;
@@ -596,9 +718,9 @@ function renderVoting() {
 
   // Category filters
   const cats = [...new Set(approvedNominees.map(n => n.category))];
-  filterWrap.innerHTML = '<button onclick="filterVote(\'all\')" class="px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium">All</button>';
+  filterWrap.innerHTML = '<button onclick="filterVote(\'all\')" class="px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all hover:shadow-lg">All Categories</button>';
   cats.forEach(c => {
-    filterWrap.innerHTML += `<button onclick="filterVote('${c}')" class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300">${c}</button>`;
+    filterWrap.innerHTML += `<button onclick="filterVote('${c}')" class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-all">${c}</button>`;
   });
 
   const votingOpen = periodStatus(VOTE_START, VOTE_END) === 'active';
@@ -606,31 +728,64 @@ function renderVoting() {
   grid.innerHTML = approvedNominees.map(n => {
     const voted = votes[n.id];
     const voteCount = (n.votes || 0) + (votes['count_' + n.id] || 0);
+    
+    // Extract flag emoji from nationality if present
+    const flagMatch = n.nationality.match(/^(\uD83C[\uDDE6-\uDDFF]\uD83C[\uDDE6-\uDDFF]\s*)?/);
+    const flag = flagMatch ? flagMatch[0] : '';
+    const countryName = n.nationality.replace(flag, '').trim();
+    
     return `
     <div class="vote-card ${voted ? 'voted' : ''}" data-cat="${n.category}">
-      <div class="flex gap-3 mb-3">
-        ${n.photo ? `<img src="${n.photo}" class="w-16 h-16 rounded-xl object-cover" onerror="this.style.display='none'">` : '<div class="w-16 h-16 bg-gray-200 rounded-xl flex items-center justify-center text-xl">👤</div>'}
-        <div>
-          <h4 class="font-bold text-lg text-gray-800">${n.name}</h4>
-          <p class="text-sm text-gray-500">${n.nationality}</p>
+      
+      <!-- Large Photo Section -->
+      <div class="photo-wrap">
+        ${n.photo 
+          ? `<img src="${n.photo}" alt="${n.name}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center text-5xl\\'>👤</div>'">` 
+          : '<div class="w-full h-full flex items-center justify-center text-5xl">👤</div>'}
+      </div>
+      
+      <!-- Card Body -->
+      <div class="card-body">
+        
+        <!-- Name & Nationality -->
+        <div class="mb-2">
+          <h4 class="font-bold text-xl text-gray-800 leading-tight">${n.name}</h4>
+          <div class="nationality-badge">
+            <span>${flag}</span>
+            <span>${countryName}</span>
+          </div>
         </div>
-      </div>
-      <div class="mb-3 flex flex-wrap gap-1">
-        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">${n.category}</span>
-        ${n.subcategory ? `<span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full font-semibold">${n.subcategory}</span>` : ''}
-      </div>
-      <p class="text-sm text-gray-600 mb-3">${n.reason}</p>
-      ${n.contributions && n.contributions.length ? `
-        <div class="mb-3">
-          <p class="text-xs font-bold text-orange-700 mb-1">Key Contributions:</p>
-          <ul class="text-xs text-gray-600 space-y-0.5">${n.contributions.map(c => `<li>✅ ${c}</li>`).join('')}</ul>
-        </div>` : ''}
-      <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-        <span class="text-lg font-bold text-green-700">🗳️ ${voteCount} votes</span>
-        ${votingOpen && !voted ?
-          `<button onclick="castVote(${n.id})" class="px-5 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 transition shadow-md">Vote</button>` :
-          voted ? '<span class="text-sm font-bold text-green-600">✅ Voted</span>' :
-          '<span class="text-xs text-gray-400">Voting closed</span>'}
+        
+        <!-- Category Badges -->
+        <div class="mb-3 flex flex-wrap gap-1.5">
+          <span class="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-semibold">${n.category}</span>
+          ${n.subcategory ? `<span class="text-xs bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full font-semibold">${n.subcategory}</span>` : ''}
+        </div>
+        
+        <!-- Reason -->
+        <p class="text-sm text-gray-600 mb-3 leading-relaxed flex-grow">${n.reason}</p>
+        
+        <!-- Contributions (for starred categories) -->
+        ${n.contributions && n.contributions.length ? `
+          <div class="mb-3 bg-orange-50 rounded-lg p-3">
+            <p class="text-xs font-bold text-orange-700 mb-1.5 uppercase tracking-wide">Key Contributions</p>
+            <ul class="text-xs text-gray-600 space-y-1">${n.contributions.map(c => `<li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span><span>${c}</span></li>`).join('')}</ul>
+          </div>` : ''}
+        
+        <!-- Vote Footer -->
+        <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
+          <div class="flex items-center gap-1.5">
+            <span class="text-lg">🗳️</span>
+            <span class="text-lg font-bold text-green-700">${voteCount}</span>
+            <span class="text-xs text-gray-400 font-medium">${voteCount === 1 ? 'vote' : 'votes'}</span>
+          </div>
+          ${votingOpen && !voted 
+            ? `<button onclick="castVote(${n.id})" class="vote-btn px-5 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 shadow-md">Vote Now</button>` 
+            : voted 
+              ? '<span class="text-sm font-bold text-green-600 flex items-center gap-1">✅ You Voted</span>' 
+              : '<span class="text-xs text-gray-400 font-medium">Voting closed</span>'}
+        </div>
+        
       </div>
     </div>`;
   }).join('');

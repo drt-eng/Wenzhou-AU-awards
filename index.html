@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+
+# The string is getting cut off. Let me write it in parts to a file directly
+
+part1 = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -64,133 +67,113 @@
     .bafana-flags { display: inline-flex; align-items: center; gap: 1px; background: linear-gradient(135deg,#f0fdf4,#fefce8); border: 1px solid #d1fae5; border-radius: 6px; padding: 2px 5px; font-size: 1rem; line-height: 1; }
     .bafana-flags .flag-sep { font-size: 0.55rem; color: #94a3b8; font-weight: 900; margin: 0 1px; }
 
-    .vote-card { border: 2px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; transition: all 0.3s; }
-    .vote-card:hover { border-color: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-    .vote-card.voted { border-color: #16a34a; background: #f0fdf4; }
+    /* ENHANCED VOTE CARDS - LARGE PHOTO WITH SLIDE-IN ANIMATION */
+    .vote-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: cardSlideIn 0.6s ease forwards;
+    }
+    .vote-card:hover { 
+      border-color: #16a34a; 
+      transform: translateY(-2px); 
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    }
+    .vote-card.voted { 
+      border-color: #16a34a; 
+      background: #f0fdf4; 
+    }
+    .vote-card .photo-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f0fdf4, #fefce8);
+    }
+    .vote-card .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .vote-card:hover .photo-wrap img {
+      transform: scale(1.08);
+    }
+    .vote-card .photo-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: photoShimmer 3s infinite;
+    }
+    @keyframes photoShimmer {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+    @keyframes cardSlideIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .vote-card:nth-child(1) { animation-delay: 0.05s; }
+    .vote-card:nth-child(2) { animation-delay: 0.1s; }
+    .vote-card:nth-child(3) { animation-delay: 0.15s; }
+    .vote-card:nth-child(4) { animation-delay: 0.2s; }
+    .vote-card:nth-child(5) { animation-delay: 0.25s; }
+    .vote-card:nth-child(6) { animation-delay: 0.3s; }
+    .vote-card:nth-child(7) { animation-delay: 0.35s; }
+    .vote-card:nth-child(8) { animation-delay: 0.4s; }
+    .vote-card:nth-child(9) { animation-delay: 0.45s; }
+    .vote-card:nth-child(10) { animation-delay: 0.5s; }
+    .vote-card:nth-child(11) { animation-delay: 0.55s; }
+    .vote-card:nth-child(12) { animation-delay: 0.6s; }
+    .vote-card .card-body {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .vote-card .nationality-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+    .vote-card .vote-btn {
+      transition: all 0.25s ease;
+    }
+    .vote-card .vote-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+    .vote-card.voted .photo-wrap::before {
+      content: 'VOTED';
+      position: absolute;
+      top: 12px;
+      right: -30px;
+      background: #16a34a;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 4px 35px;
+      transform: rotate(45deg);
+      z-index: 10;
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    @media (max-width: 640px) {
+      .vote-card .photo-wrap { height: 160px; }
+    }
   </style>
 </head>
-  /* ═══ ENHANCED VOTE CARDS — LARGE PHOTO WITH ANIMATION ═══ */
-
-.vote-card {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.vote-card .photo-wrap {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #f0fdf4, #fefce8);
-}
-
-.vote-card .photo-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.vote-card:hover .photo-wrap img {
-  transform: scale(1.08);
-}
-
-/* Shimmer overlay on photo */
-.vote-card .photo-wrap::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  animation: photoShimmer 3s infinite;
-}
-
-@keyframes photoShimmer {
-  0% { left: -100%; }
-  100% { left: 200%; }
-}
-
-/* Slide-in animation for cards */
-.vote-card {
-  opacity: 0;
-  transform: translateY(40px);
-  animation: cardSlideIn 0.6s ease forwards;
-}
-
-@keyframes cardSlideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Stagger delay for each card */
-.vote-card:nth-child(1) { animation-delay: 0.05s; }
-.vote-card:nth-child(2) { animation-delay: 0.1s; }
-.vote-card:nth-child(3) { animation-delay: 0.15s; }
-.vote-card:nth-child(4) { animation-delay: 0.2s; }
-.vote-card:nth-child(5) { animation-delay: 0.25s; }
-.vote-card:nth-child(6) { animation-delay: 0.3s; }
-.vote-card:nth-child(7) { animation-delay: 0.35s; }
-.vote-card:nth-child(8) { animation-delay: 0.4s; }
-.vote-card:nth-child(9) { animation-delay: 0.45s; }
-.vote-card:nth-child(10) { animation-delay: 0.5s; }
-.vote-card:nth-child(11) { animation-delay: 0.55s; }
-.vote-card:nth-child(12) { animation-delay: 0.6s; }
-
-/* Card content padding */
-.vote-card .card-body {
-  padding: 1.25rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Nationality flag styling */
-.vote-card .nationality-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-top: 0.25rem;
-}
-
-/* Vote button enhancements */
-.vote-card .vote-btn {
-  transition: all 0.25s ease;
-}
-.vote-card .vote-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
-}
-
-/* Voted state ribbon */
-.vote-card.voted .photo-wrap::before {
-  content: '✅ VOTED';
-  position: absolute;
-  top: 12px;
-  right: -30px;
-  background: #16a34a;
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 800;
-  padding: 4px 35px;
-  transform: rotate(45deg);
-  z-index: 10;
-  letter-spacing: 0.05em;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-/* Responsive: slightly smaller photos on mobile */
-@media (max-width: 640px) {
-  .vote-card .photo-wrap {
-    height: 160px;
-  }
-}
 
 <body class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
 
@@ -253,9 +236,8 @@
       <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient-g2r">Wenzhou African Union</h1>
       <p class="text-2xl md:text-3xl text-gray-700 mb-12">Africa Day 2026 Awards</p>
 
-      <!-- 3 Countdowns -->
+      <!-- 2 Countdowns -->
       <div class="grid md:grid-cols-2 gap-4 mb-12 max-w-3xl mx-auto">
-        <
         <!-- Voting -->
         <div class="bg-white rounded-2xl shadow-xl p-5">
           <div class="text-3xl mb-2">🗳️</div>
@@ -285,7 +267,8 @@
       </div>
 
       <div class="flex flex-wrap gap-4 justify-center">
-        <a href="#vote" class="px-8 py-4 bg-white text-green-700 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 border-2 border-green-200 hover:border-green-500">🗳️ Vote</a>
+        <a href="#vote" class="btn-shimmer px-8 py-4 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2" style="background:linear-gradient(to right,#16a34a,#15803d)">🗳️ Vote Now</a>
+        <a href="#fixtures" class="px-8 py-4 bg-white text-green-700 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 border-2 border-green-200 hover:border-green-500">⚽ AFCON Fixtures</a>
       </div>
     </div>
   </section>
@@ -339,7 +322,6 @@
     </div>
   </section>
 
-
   <!-- VOTE -->
   <section id="vote" class="py-20 px-4">
     <div class="max-w-6xl mx-auto">
@@ -363,7 +345,7 @@
         <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">👤</div>
         <h3 class="text-2xl font-bold text-gray-800 mb-3">No approved nominees yet</h3>
         <p class="text-gray-600 mb-6">Approved nominees will appear here for voting.</p>
-        <a href="#nominate" class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold shadow-lg" style="background:linear-gradient(to right,#16a34a,#15803d)">Nominate Someone</a>
+        <a href="#categories" class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold shadow-lg" style="background:linear-gradient(to right,#16a34a,#15803d)">View Categories</a>
       </div>
     </div>
   </section>
@@ -497,12 +479,12 @@
 <script>
 'use strict';
 
-/* ═══ DATES ═══ */
+/* DATES */
 const VOTE_START = new Date('2026-05-07T00:00:00');
 const VOTE_END   = new Date('2026-05-17T23:59:59');
 const GALA       = new Date('2026-05-23T18:00:00');
 
-/* ═══ MOBILE MENU ═══ */
+/* MOBILE MENU */
 document.getElementById('hamburger').addEventListener('click', () => {
   const o = document.getElementById('mobile-menu').classList.toggle('open');
   document.getElementById('icon-menu').classList.toggle('hidden', o);
@@ -514,7 +496,7 @@ function closeMobile() {
   document.getElementById('icon-close').classList.add('hidden');
 }
 
-/* ═══ COUNTDOWN HELPERS ═══ */
+/* COUNTDOWN HELPERS */
 function pad(n) { return String(n).padStart(2, '0'); }
 function timeLeft(t) {
   const d = t.getTime() - Date.now();
@@ -528,10 +510,8 @@ function periodStatus(s, e) {
   return 'ended';
 }
 
-/* ═══ UPDATE COUNTDOWNS ═══ */
+/* UPDATE COUNTDOWNS */
 function updateCountdowns() {
-
-
   // Voting
   const vs = periodStatus(VOTE_START, VOTE_END);
   const vEl = document.getElementById('vote-hero-status');
@@ -559,10 +539,9 @@ function updateCountdowns() {
     document.getElementById('gala-cd').classList.add('hidden');
   }
 
-
   // Vote section status
   const vsEl = document.getElementById('vote-section-status');
-  if (vs === 'upcoming') vsEl.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Voting opens May 5, 2026</span></div>';
+  if (vs === 'upcoming') vsEl.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Voting opens May 7, 2026</span></div>';
   else if (vs === 'active') vsEl.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ VOTING IS OPEN! Cast your vote now.</span></div>';
   else vsEl.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Voting has ended (May 7 – May 17)</span></div>';
 }
@@ -570,7 +549,7 @@ function updateCountdowns() {
 setInterval(updateCountdowns, 1000);
 updateCountdowns();
 
-/* ═══ VOTING — LOADS FROM nominees.json ═══ */
+/* VOTING - LOADS FROM nominees.json */
 let approvedNominees = [];
 
 function getVotes() { return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}'); }
@@ -629,7 +608,7 @@ function renderVoting() {
       <!-- Large Photo Section -->
       <div class="photo-wrap">
         ${n.photo 
-          ? `<img src="${n.photo}" alt="${n.name}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center text-5xl\\'>👤</div>'">` 
+          ? `<img src="${n.photo}" alt="${n.name}" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-5xl\'>👤</div>'">` 
           : '<div class="w-full h-full flex items-center justify-center text-5xl">👤</div>'}
       </div>
       
@@ -686,10 +665,10 @@ function filterVote(cat) {
   });
   // Highlight active filter
   document.querySelectorAll('#vote-filter button').forEach(btn => {
-    const isActive = (cat === 'all' && btn.textContent === 'All') || btn.textContent === cat;
+    const isActive = (cat === 'all' && btn.textContent === 'All Categories') || btn.textContent === cat;
     btn.className = isActive
-      ? 'px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium'
-      : 'px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300';
+      ? 'px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all hover:shadow-lg'
+      : 'px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-all';
   });
 }
 
@@ -705,7 +684,7 @@ function castVote(id) {
 // Load nominees on page load
 loadNominees();
 
-/* ═══ SCROLL REVEAL ═══ */
+/* SCROLL REVEAL */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -717,7 +696,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ═══ ACTIVE NAV ═══ */
+/* ACTIVE NAV */
 window.addEventListener('scroll', () => {
   let c = '';
   document.querySelectorAll('section[id]').forEach(s => { if (scrollY >= s.offsetTop - 120) c = s.id; });
@@ -732,4 +711,9 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 </script>
 </body>
-</html>
+</html>'''
+
+with open('/mnt/agents/output/index.html', 'w', encoding='utf-8') as f:
+    f.write(part1)
+
+print(f"File written successfully: {len(part1)} characters")

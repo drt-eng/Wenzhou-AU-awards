@@ -509,7 +509,7 @@ const approvedNominees = [
 /* ============================================
    CONFIG
    ============================================ */
-const API_URL = 'https://script.google.com/macros/s/AKfycbyihYqBFurPVlcJIt1O8iTIRO_0MTSOOsbCBskuY3WtRL83P7iDtn-usQN1rK6IlaIW/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyIcfynjJtUtU4hLzTZAN_qCkb2yfFvN6VJI61cloFNRL9F8hLcL1eWDMhYL4VfJGS0/exec';
 const VOTE_START = new Date('2026-05-07T00:00:00');
 const VOTE_END   = new Date('2026-05-17T23:59:59');
 const GALA       = new Date('2026-05-23T18:00:00');
@@ -831,8 +831,65 @@ function initializeResults() {
 }
 
 function fetchVotesFromSheets() {
-  const el = document.getElementById('last-updated');
-  if (el) el.textContent = 'Fetching...';
+  const lastUpdatedEl = document.getElementById('last-updated');
+
+  if (lastUpdatedEl) {
+    lastUpdatedEl.textContent = 'Fetching from Google Sheet...';
+  }
+
+  const callbackName = 'wauVotesCallback_' + Date.now();
+
+  window[callbackName] = function(data) {
+    try {
+      if (data && (data.status === 'success' || data.status === 'no_votes_sheet')) {
+        const sheetVotes = data.votes || {};
+
+        approvedNominees.forEach(n => {
+          n.votes = Number(sheetVotes[String(n.id)] || 0);
+        });
+
+        updateLiveResults();
+
+        const totalEl = document.getElementById('total-votes-count');
+        if (totalEl) {
+          totalEl.textContent = data.totalVotes || 0;
+        }
+
+        if (lastUpdatedEl) {
+          lastUpdatedEl.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+        }
+      } else {
+        console.log('Unexpected vote data:', data);
+
+        if (lastUpdatedEl) {
+          lastUpdatedEl.textContent = 'Could not load results';
+        }
+      }
+    } finally {
+      const oldScript = document.getElementById(callbackName);
+      if (oldScript) oldScript.remove();
+      delete window[callbackName];
+    }
+  };
+
+  const script = document.createElement('script');
+  script.id = callbackName;
+  script.src = API_URL + '?action=get_votes&callback=' + callbackName + '&_=' + Date.now();
+
+  script.onerror = function() {
+    if (lastUpdatedEl) {
+      lastUpdatedEl.textContent = 'Error fetching results';
+    }
+
+    console.error('Could not fetch live results from Google Apps Script.');
+
+    const oldScript = document.getElementById(callbackName);
+    if (oldScript) oldScript.remove();
+    delete window[callbackName];
+  };
+
+  document.body.appendChild(script);
+}
 
   fetch(API_URL + '?action=get_votes')
     .then(r => r.json())

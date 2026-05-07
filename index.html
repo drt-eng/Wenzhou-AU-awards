@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+
+# Build the complete HTML file with all nominees data embedded
+# and fix the image path issue
+
+html_content = '''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -482,6 +486,13 @@
    EMBEDDED NOMINEES DATA (PHOTOS LOAD DIRECTLY)
    ============================================ */
 const approvedNominees = [
+'''
+
+print("Part 1 written successfully")
+print(f"Length so far: {len(html_content)} characters")
+
+# Continue with the nominees data array
+nominees_data = '''
   {"id": 1, "name": "Dr Kamara Saidu", "nationality": "🇸🇱 Sierra Leone", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Has been pivotal in mentoring young scientists", "Vice President of the Wenzhou African Union"], "votes": 0, "photo": "nominees/drkamarasaidu.jpg"},
   {"id": 2, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Has been responsible for many students gaining entrepreneurial opportunities", "Holds eldership role not only at church but in the community"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
   {"id": 3, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["Served as President of the Ghanaian Association in Wenzhou for 3+ consecutive terms", "Led strategic community growth initiatives"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
@@ -547,7 +558,7 @@ function closeMobile() {
 
 /* COUNTDOWN HELPERS */
 function pad(n) { return String(n).padStart(2, '0'); }
- function timeLeft(t) {
+function timeLeft(t) {
   const d = t.getTime() - Date.now();
   if (d <= 0) return null;
   return { d: Math.floor(d/864e5), h: Math.floor(d/36e5%24), m: Math.floor(d/6e4%60), s: Math.floor(d/1e3%60) };
@@ -601,7 +612,6 @@ updateCountdowns();
 /* ============================================
    VOTING SYSTEM - EMBEDDED DATA (NO EXTERNAL FETCH)
    ============================================ */
-let approvedNominees = [];
 
 function getVotes() { return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}'); }
 function saveVotes(v) { localStorage.setItem('wau_votes_2026', JSON.stringify(v)); }
@@ -609,7 +619,6 @@ function saveVotes(v) { localStorage.setItem('wau_votes_2026', JSON.stringify(v)
 /* LOAD NOMINEES FROM EMBEDDED DATA */
 function loadNominees() {
   // Use the embedded data directly - no external fetch needed
-  approvedNominees = window.approvedNominees || [];
   renderVoting();
 }
 
@@ -644,7 +653,7 @@ function renderVoting() {
     const voteCount = (n.votes || 0) + (votes['count_' + n.id] || 0);
     
     // Extract flag emoji from nationality if present
-    const flagMatch = n.nationality.match(/^(\uD83C[\uDDE6-\uDDFF]\uD83C[\uDDE6-\uDDFF]\s*)?/);
+    const flagMatch = n.nationality.match(/^(\\uD83C[\\uDDE6-\\uDDFF]\\uD83C[\\uDDE6-\\uDDFF]\\s*)?/);
     const flag = flagMatch ? flagMatch[0] : '';
     const countryName = n.nationality.replace(flag, '').trim();
     
@@ -675,9 +684,6 @@ function renderVoting() {
           <span class="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-semibold">${n.category}</span>
           ${n.subcategory ? `<span class="text-xs bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full font-semibold">${n.subcategory}</span>` : ''}
         </div>
-        
-        <!-- Reason -->
-        <p class="text-sm text-gray-600 mb-3 leading-relaxed flex-grow">${n.reason || ''}</p>
         
         <!-- Contributions (for starred categories) -->
         ${n.contributions && n.contributions.length ? `
@@ -777,4 +783,6 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 </script>
 </body>
-</html>
+</html>'''
+
+

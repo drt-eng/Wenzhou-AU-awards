@@ -48,9 +48,7 @@
       display: flex;
       flex-direction: column;
       transition: all 0.3s;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: cardSlideIn 0.6s ease forwards;
+      background: white;
     }
     .vote-card:hover {
       border-color: #16a34a;
@@ -75,9 +73,7 @@
       background: linear-gradient(135deg, #f0fdf4, #fefce8);
       transition: transform 0.5s ease;
     }
-    .vote-card:hover .photo-wrap img {
-      transform: scale(1.08);
-    }
+    .vote-card:hover .photo-wrap img { transform: scale(1.08); }
     .vote-card .photo-wrap::after {
       content: '';
       position: absolute;
@@ -88,25 +84,8 @@
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
       animation: photoShimmer 3s infinite;
     }
-    @keyframes photoShimmer {
-      0% { left: -100%; }
-      100% { left: 200%; }
-    }
-    @keyframes cardSlideIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .vote-card:nth-child(1) { animation-delay: 0.05s; }
-    .vote-card:nth-child(2) { animation-delay: 0.1s; }
-    .vote-card:nth-child(3) { animation-delay: 0.15s; }
-    .vote-card:nth-child(4) { animation-delay: 0.2s; }
-    .vote-card:nth-child(5) { animation-delay: 0.25s; }
-    .vote-card:nth-child(6) { animation-delay: 0.3s; }
-    .vote-card:nth-child(7) { animation-delay: 0.35s; }
-    .vote-card:nth-child(8) { animation-delay: 0.4s; }
-    .vote-card:nth-child(9) { animation-delay: 0.45s; }
-    .vote-card:nth-child(10) { animation-delay: 0.5s; }
-    .vote-card:nth-child(11) { animation-delay: 0.55s; }
-    .vote-card:nth-child(12) { animation-delay: 0.6s; }
+    @keyframes photoShimmer { 0% { left: -100%; } 100% { left: 200%; } }
+    @keyframes cardSlideIn { to { opacity: 1; transform: translateY(0); } }
     .vote-card .card-body {
       padding: 1.25rem;
       flex: 1;
@@ -121,9 +100,7 @@
       color: #6b7280;
       margin-top: 0.25rem;
     }
-    .vote-card .vote-btn {
-      transition: all 0.25s ease;
-    }
+    .vote-card .vote-btn { transition: all 0.25s ease; }
     .vote-card .vote-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
@@ -143,15 +120,36 @@
       letter-spacing: 0.05em;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    @media (max-width: 640px) {
-      .vote-card .photo-wrap { height: 220px; }
+    @media (max-width: 640px) { .vote-card .photo-wrap { height: 220px; } }
+    .result-card { transition: all 0.3s; }
+    .result-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+    .subcategory-header {
+      background: linear-gradient(to right, #f0fdf4, #fefce8);
+      border-left: 4px solid #16a34a;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
     }
-    .result-card {
-      transition: all 0.3s;
+    .category-header {
+      background: linear-gradient(to right, #14532d, #15803d);
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      margin-top: 2rem;
     }
-    .result-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    .voted-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #16a34a;
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      z-index: 10;
+      letter-spacing: 0.05em;
     }
   </style>
 </head>
@@ -215,7 +213,6 @@
       </div>
       <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient-g2r">Wenzhou African Union</h1>
       <p class="text-2xl md:text-3xl text-gray-700 mb-12">Africa Day 2026 Awards</p>
-
       <div class="grid md:grid-cols-2 gap-4 mb-12 max-w-3xl mx-auto">
         <div class="bg-white rounded-2xl shadow-xl p-5">
           <div class="text-3xl mb-2">🗳️</div>
@@ -242,7 +239,6 @@
           </div>
         </div>
       </div>
-
       <div class="flex flex-wrap gap-4 justify-center">
         <a href="#vote" class="btn-shimmer px-8 py-4 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2" style="background:linear-gradient(to right,#16a34a,#15803d)">🗳️ Vote Now</a>
         <a href="#results" class="px-8 py-4 bg-white text-green-700 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 border-2 border-green-200 hover:border-green-500">📊 Live Results</a>
@@ -291,9 +287,9 @@
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🏪</div><h3 class="text-xl font-bold mb-3">Business of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Food &amp; Catering</li><li>• Hair &amp; Beauty</li><li>• Event Planning &amp; Decor</li><li>• Photography &amp; Video</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🚀</div><h3 class="text-xl font-bold mb-3">Entrepreneur of the Year</h3></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">💪</div><h3 class="text-xl font-bold mb-3">Health &amp; Fitness Excellence</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Personal Trainer</li><li>• Wellness Advocate</li><li>• Healthcare Professional</li></ul></div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🤝</div><h3 class="text-xl font-bold mb-3">Social Impact Award</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Service ⭐</li><li>• Volunteer of the Year ⭐</li></ul><p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions</p></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🤝</div><h3 class="text-xl font-bold mb-3">Social Impact Award</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Service ⭐</li><li>• Volunteer of the Year ⭐</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🎭</div><h3 class="text-xl font-bold mb-3">African Talent of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Music</li><li>• Dance</li><li>• Photography &amp; Video</li><li>• Social Media</li><li>• Sports</li></ul></div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🏆</div><h3 class="text-xl font-bold mb-3">Long-Term Dedication</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Leadership ⭐</li><li>• Consistent Service ⭐</li><li>• Mentorship Legacy ⭐</li><li>• Lifetime Commitment ⭐</li></ul><p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions</p></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🏆</div><h3 class="text-xl font-bold mb-3">Long-Term Dedication</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Leadership ⭐</li><li>• Consistent Service ⭐</li><li>• Mentorship Legacy ⭐</li><li>• Lifetime Commitment ⭐</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🎤</div><h3 class="text-xl font-bold mb-3">Entertainer of the Year</h3></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal lg:col-span-3 md:col-span-2"><div class="text-5xl mb-4">⭐</div><h3 class="text-xl font-bold mb-3">People's Choice Award</h3><div class="flex flex-wrap gap-3 mt-3"><span class="text-sm bg-green-50 px-3 py-1.5 rounded-full">Favorite Personality</span><span class="text-sm bg-yellow-50 px-3 py-1.5 rounded-full">Favorite Entertainer</span><span class="text-sm bg-red-50 px-3 py-1.5 rounded-full">Favorite Community Leader</span></div></div>
       </div>
@@ -312,178 +308,106 @@
         <div id="vote-section-status" class="max-w-2xl mx-auto"></div>
       </div>
 
-      <!-- VOTER REGISTRATION MODAL -->
-      <div id="registration-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 reveal">
+      <!-- REGISTRATION MODAL -->
+      <div id="registration-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
           <div class="text-center mb-6">
             <div class="text-5xl mb-3">🗳️</div>
             <h3 class="text-2xl font-bold text-gray-800">Register to Vote</h3>
-            <p class="text-gray-600 mt-2">One vote per person per category</p>
+            <p class="text-gray-600 mt-2">One vote per person per subcategory</p>
           </div>
-
           <form id="registration-form" class="space-y-4">
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
-              <input 
-                type="text" 
-                id="voter-name" 
-                placeholder="Your name" 
-                class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-green-600 focus:outline-none"
-                required
-              />
+              <input type="text" id="voter-name" placeholder="Your full name" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-600 focus:outline-none" required />
             </div>
-
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
-              <input 
-                type="tel" 
-                id="voter-phone" 
-                placeholder="+86 123 4567 8900" 
-                class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-green-600 focus:outline-none"
-                required
-              />
+              <input type="tel" id="voter-phone" placeholder="+86 123 4567 8900" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-600 focus:outline-none" required />
             </div>
-
-            <button 
-              type="submit" 
-              class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-all mt-6"
-            >
-              Get Voting Code
-            </button>
+            <button type="submit" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-all mt-2">Get My Voting Code</button>
           </form>
-
-          <p class="text-xs text-gray-500 text-center mt-4">
-            Your information is securely stored and only used for voting verification.
-          </p>
+          <p class="text-xs text-gray-500 text-center mt-4">Your information is used only for voting verification.</p>
         </div>
       </div>
 
-      <!-- VOTING CODE DISPLAY -->
-      <div id="code-display-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 reveal text-center">
+      <!-- CODE DISPLAY MODAL -->
+      <div id="code-display-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center">
           <div class="text-5xl mb-4">✅</div>
           <h3 class="text-2xl font-bold text-gray-800 mb-2">Registration Successful!</h3>
-          
           <div class="bg-gradient-to-r from-green-100 to-green-50 p-6 rounded-xl my-6 border-2 border-green-600">
-            <p class="text-sm text-gray-600 mb-2 font-semibold">YOUR UNIQUE VOTING CODE</p>
+            <p class="text-sm text-gray-600 mb-2 font-semibold uppercase tracking-wide">Your Unique Voting Code</p>
             <p id="display-code" class="text-4xl font-black text-green-700 tracking-widest">000000</p>
-            <p class="text-xs text-gray-500 mt-2">Save this code - you'll need it to vote</p>
+            <p class="text-xs text-gray-500 mt-2">📸 Screenshot this code for your records</p>
           </div>
-
-          <div class="bg-blue-50 border-2 border-blue-300 rounded-lg p-4 mb-4">
-            <p class="text-sm text-gray-700">
-              <span class="font-bold">Name:</span> <span id="display-name"></span><br/>
-              <span class="font-bold">Phone:</span> <span id="display-phone"></span><br/>
-            </p>
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-left">
+            <p class="text-sm text-gray-700"><span class="font-bold">Name:</span> <span id="display-name"></span></p>
+            <p class="text-sm text-gray-700 mt-1"><span class="font-bold">Phone:</span> <span id="display-phone"></span></p>
           </div>
-
-          <button 
-            onclick="startVoting()" 
-            class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-all"
-          >
-            Start Voting
-          </button>
+          <button onclick="startVoting()" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-all">Start Voting Now 🗳️</button>
         </div>
       </div>
 
-      <!-- VOTING INTERFACE (HIDDEN UNTIL REGISTERED) -->
+      <!-- VOTING INTERFACE -->
       <div id="voting-interface" class="hidden">
         <!-- Voter Info Bar -->
-        <div class="bg-green-50 border-2 border-green-300 rounded-lg p-4 mb-8 flex items-center justify-between">
-          <div>
-            <p class="text-sm text-gray-600">Voting as:</p>
-            <p class="text-lg font-bold text-gray-800" id="voting-as-name">-</p>
+        <div class="bg-white border-2 border-green-300 rounded-xl p-4 mb-8 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-lg">👤</div>
+            <div>
+              <p class="text-xs text-gray-500">Voting as</p>
+              <p class="font-bold text-gray-800" id="voting-as-name">-</p>
+            </div>
           </div>
-          <div class="text-right">
-            <p class="text-xs text-gray-600">Code:</p>
-            <p class="text-lg font-bold font-mono text-green-700" id="voting-code-display">000000</p>
+          <div class="text-center">
+            <p class="text-xs text-gray-500">Your Code</p>
+            <p class="text-xl font-black font-mono text-green-700" id="voting-code-display">000000</p>
           </div>
-          <button 
-            onclick="logoutVoter()" 
-            class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-semibold"
-          >
-            Logout
-          </button>
+          <button onclick="logoutVoter()" class="px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 text-sm font-semibold transition-all">Logout</button>
         </div>
 
-        <!-- Category Filter -->
-        <div id="vote-filter" class="flex flex-wrap gap-2 justify-center mb-8"></div>
-
-        <!-- Nominees Grid -->
-        <div id="vote-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-
-        <!-- Empty State -->
-        <div id="vote-empty" class="bg-white rounded-2xl shadow-lg p-12 text-center hidden">
-          <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">🏆</div>
-          <h3 class="text-2xl font-bold text-gray-800 mb-3">No approved nominees yet</h3>
-          <p class="text-gray-600 mb-6">Approved nominees will appear here for voting.</p>
-        </div>
+        <!-- Nominees by Category & Subcategory -->
+        <div id="vote-grid"></div>
       </div>
 
-      <!-- Registration CTA (shown before registration) -->
-      <div id="registration-cta" class="bg-gradient-to-r from-green-100 to-yellow-100 rounded-2xl p-12 text-center border-2 border-green-500">
+      <!-- Registration CTA -->
+      <div id="registration-cta" class="bg-gradient-to-br from-green-100 to-yellow-100 rounded-2xl p-12 text-center border-2 border-green-400 shadow-lg">
         <div class="text-6xl mb-4">🗳️</div>
         <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Vote?</h3>
-        <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-          Register with your name and phone number to get your unique voting code and start voting!
-        </p>
-        <button 
-          onclick="openRegistration()" 
-          class="px-8 py-4 bg-green-600 text-white rounded-full font-bold text-lg hover:bg-green-700 transition-all shadow-lg"
-        >
-          Register Now
-        </button>
+        <p class="text-lg text-gray-700 mb-8 max-w-xl mx-auto">Register with your name and phone number to get your unique voting code. You can vote once per subcategory!</p>
+        <button onclick="openRegistration()" class="px-10 py-4 bg-green-600 text-white rounded-full font-bold text-lg hover:bg-green-700 transition-all shadow-lg hover:shadow-xl">Register & Vote Now</button>
       </div>
     </div>
   </section>
 
-  <!-- LIVE VOTE RESULTS -->
-  <!-- LIVE VOTE RESULTS -->
-<section id="results" class="py-20 px-4 bg-gradient-to-br from-green-50 to-yellow-50">
-  <div class="max-w-6xl mx-auto">
-    <div class="text-center mb-12 reveal">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Live Vote Results</h2>
-      <p class="text-lg text-gray-700 mb-2">Real votes pulled directly from our database</p>
-      
-      <!-- Live indicator -->
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-        <span class="text-green-700 font-semibold">Live</span>
-        <span class="text-gray-400 text-sm">·</span>
-        <span id="last-updated" class="text-gray-500 text-sm">Loading...</span>
+  <!-- LIVE RESULTS -->
+  <section id="results" class="py-20 px-4 bg-gradient-to-br from-green-50 to-yellow-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Live Vote Results</h2>
+        <p class="text-lg text-gray-700 mb-3">Real votes pulled directly from our database</p>
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+          <span class="text-green-700 font-semibold">Live</span>
+          <span class="text-gray-400">·</span>
+          <span id="last-updated" class="text-gray-500 text-sm">Loading...</span>
+        </div>
+        <div class="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-md border border-green-200 mb-4">
+          <span class="text-2xl">🗳️</span>
+          <span class="text-gray-700 font-semibold">Total Votes Cast:</span>
+          <span id="total-votes-count" class="text-2xl font-black text-green-700">0</span>
+        </div>
       </div>
 
-      <!-- Total votes counter -->
-      <div class="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-md border border-green-200">
-        <span class="text-2xl">🗳️</span>
-        <span class="text-gray-700 font-semibold">Total Votes Cast:</span>
-        <span id="total-votes-count" class="text-2xl font-black text-green-700">0</span>
-      </div>
-    </div>
-
-    <!-- Category Filter for Results -->
-    <div id="results-filter" class="flex flex-wrap gap-2 justify-center mb-8"></div>
-
-    <!-- Results Grid -->
-    <div id="results-grid" class="grid md:grid-cols-2 gap-4"></div>
-
-    <!-- Refresh button -->
-    <div class="text-center mt-8">
-      <button 
-        onclick="fetchVotesFromSheets()" 
-        class="px-6 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 transition-all shadow-md flex items-center gap-2 mx-auto"
-      >
-        🔄 Refresh Results
-      </button>
-    </div>
-  </div>
-</section>
-
-      <!-- Category Selector for Results -->
       <div id="results-filter" class="flex flex-wrap gap-2 justify-center mb-8"></div>
+      <div id="results-grid" class="space-y-4"></div>
 
-      <!-- Results Grid -->
-      <div id="results-grid" class="grid md:grid-cols-2 gap-6"></div>
+      <div class="text-center mt-8">
+        <button onclick="fetchVotesFromSheets()" class="px-6 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 transition-all shadow-md inline-flex items-center gap-2">
+          🔄 Refresh Results
+        </button>
+      </div>
     </div>
   </section>
 
@@ -492,14 +416,14 @@
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12 reveal"><h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Event Gallery</h2><p class="text-gray-600 text-lg">Memories from previous events</p></div>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-1.jpg" class="w-full h-full object-cover" alt="1"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-2.jpg" class="w-full h-full object-cover" alt="2"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-3.jpg" class="w-full h-full object-cover" alt="3"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-4.jpg" class="w-full h-full object-cover" alt="4"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-5.jpg" class="w-full h-full object-cover" alt="5"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-6.jpg" class="w-full h-full object-cover" alt="6"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-7.jpg" class="w-full h-full object-cover" alt="7"></div>
-        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-8.jpg" class="w-full h-full object-cover" alt="8"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-1.jpg" class="w-full h-full object-cover" alt="1" onerror="this.parentElement.style.display='none'"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-2.jpg" class="w-full h-full object-cover" alt="2" onerror="this.parentElement.style.display='none'"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-3.jpg" class="w-full h-full object-cover" alt="3" onerror="this.parentElement.style.display='none'"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-4.jpg" class="w-full h-full object-cover" alt="4" onerror="this.parentElement.style.display='none'"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-5.jpg" class="w-full h-full object-cover" alt="5" onerror="this.parentElement.style.display='none'"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-6.jpg" class="w-full h-full object-cover" alt="6" onerror="this.parentElement.style.display='none'"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-7.jpg" class="w-full h-full object-cover" alt="7" onerror="this.parentElement.style.display='none'"></div>
+        <div class="gallery-item aspect-square overflow-hidden rounded-xl shadow-lg reveal"><img src="gallery/gallery-8.jpg" class="w-full h-full object-cover" alt="8" onerror="this.parentElement.style.display='none'"></div>
       </div>
     </div>
   </section>
@@ -525,7 +449,10 @@
 <!-- FOOTER -->
 <footer class="text-white py-12 px-4" style="background:linear-gradient(to right,#14532d,#713f12,#7f1d1d)">
   <div class="max-w-6xl mx-auto text-center">
-    <div class="mb-6 inline-flex items-center gap-3"><div class="w-12 h-12 rounded-full overflow-hidden"><img src="logo.png" alt="WAU" class="w-full h-full object-cover"></div><span class="text-2xl font-bold">WAU Africa Day Awards</span></div>
+    <div class="mb-6 inline-flex items-center gap-3">
+      <div class="w-12 h-12 rounded-full overflow-hidden"><img src="logo.png" alt="WAU" class="w-full h-full object-cover"></div>
+      <span class="text-2xl font-bold">WAU Africa Day Awards</span>
+    </div>
     <p class="text-green-100 mb-4">Celebrating African Excellence in Wenzhou, China</p>
     <p class="text-sm text-green-200">&copy; 2026 Wenzhou African Union. All rights reserved.</p>
   </div>
@@ -535,61 +462,61 @@
 'use strict';
 
 /* ============================================
-   EMBEDDED NOMINEES DATA
+   NOMINEES DATA
    ============================================ */
 const approvedNominees = [
-  {"id": 1, "name": "Dr Kamara Saidu", "nationality": "🇸🇱 Sierra Leone", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Has been pivotal in mentoring young scientists", "Vice President of the Wenzhou African Union"], "votes": 0, "photo": "nominees/drkamarasaidu.jpg"},
-  {"id": 2, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Has been responsible for many students gaining entrepreneurial opportunities", "Holds eldership role not only at church but in the community"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
-  {"id": 3, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["Served as President of the Ghanaian Association in Wenzhou for 3+ consecutive terms", "Led strategic community growth initiatives"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
-  {"id": 4, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Lifetime Commitment", "contributions": ["Dedicated 8+ years to Wenzhou community building", "Key link between foreigners in Wenzhou and the Wenzhou Foreign Affairs"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
-  {"id": 5, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Consistent Service", "contributions": ["Longest acting African national in our society", "Ever present to support new and old students as well as workers"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
-  {"id": 6, "name": "Dr Stephen Akiti", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Founder of Let's Talk Medicine", "Mentored many students through his Tank Admissions agency"], "votes": 0, "photo": "nominees/drstephenakiti.jpg"},
-  {"id": 7, "name": "Dr Stephen Akiti", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["Served as WAU President for 3 consecutive terms", "Vice President of the Ghanaian Association in Wenzhou"], "votes": 0, "photo": "nominees/drstephenakiti.jpg"},
-  {"id": 8, "name": "Dr Stephen Akiti", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Consistent Service", "contributions": ["Consistently volunteered at every WAU event", "Has been one of the most vibrant African nationals in our society"], "votes": 0, "photo": "nominees/drstephenakiti.jpg"},
-  {"id": 9, "name": "Dr Tinotenda B Madzikatire", "nationality": "🇿🇼 Zimbabwe", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Through Let's Talk Medicine has mentored many students under the initiative of The World of a Medical Student", "Established career guidance programs"], "votes": 0, "photo": "nominees/drtinotendabmadzikatire.jpg"},
-  {"id": 10, "name": "Dr Tinotenda B Madzikatire", "nationality": "🇿🇼 Zimbabwe", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["One of the founders and current serving President of the Zimbabwean Association Wenzhou", "Established mental health support groups"], "votes": 0, "photo": "nominees/drtinotendabmadzikatire.jpg"},
-  {"id": 11, "name": "Dr Tinotenda B Madzikatire", "nationality": "🇿🇼 Zimbabwe", "category": "Long-Term Dedication", "subcategory": "Consistent Service", "contributions": ["Part of the founders and first leadership of Wenzhou AU", "Organized quarterly wellness check-ins"], "votes": 0, "photo": "nominees/drtinotendabmadzikatire.jpg"},
-  {"id": 12, "name": "Jenifer Asoh", "nationality": "🇳🇬 Nigeria", "category": "African Talent of the Year", "subcategory": "Social Media", "contributions": [], "votes": 0, "photo": "nominees/jeniferasoh.jpg"},
-  {"id": 13, "name": "LaYouthy Events", "nationality": "🌍 Africa", "category": "Business of the Year", "subcategory": "Event Planning & Decor", "contributions": [], "votes": 0, "photo": "nominees/layouthyevents.jpg"},
-  {"id": 14, "name": "LetsTalkMedicine", "nationality": "🌍 Africa", "category": "Social Impact Award", "subcategory": "Volunteer of the Year", "contributions": ["Organized 10+ free health screening camps, CPR trainings", "Volunteered 500+ hours of medical consultation for both foreigners and Chinese in and out of Wenzhou"], "votes": 0, "photo": "nominees/letstalkmedicine.jpg"},
-  {"id": 15, "name": "LetsTalkMedicine", "nationality": "🌍 Africa", "category": "Health & Fitness Excellence", "subcategory": "Wellness Advocate", "contributions": ["Launched numerous wellness awareness campaigns reaching 200+ people like breast cancer awareness events", "Provided free fitness and nutrition workshops, basic life training CPR"], "votes": 0, "photo": "nominees/letstalkmedicine.jpg"},
-  {"id": 16, "name": "Mukudzei Makurira", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Music", "contributions": [], "votes": 0, "photo": "nominees/mukudzei.jpg"},
-  {"id": 17, "name": "Mukudzei Makurira", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Dance", "contributions": [], "votes": 0, "photo": "nominees/mukudzei.jpg"},
-  {"id": 18, "name": "Ortis Kitchen", "nationality": "🇬🇭 Ghana", "category": "Business of the Year", "subcategory": "Food & Catering", "contributions": [], "votes": 0, "photo": "nominees/ortiskitchen.jpg"},
-  {"id": 19, "name": "Tasty Bites", "nationality": "🇬🇭 Ghana", "category": "Business of the Year", "subcategory": "Food & Catering", "contributions": [], "votes": 0, "photo": "nominees/tastybites.jpg"},
-  {"id": 20, "name": "Pamora Space", "nationality": "🌍 Africa", "category": "Business of the Year", "subcategory": "Event Planning & Decor", "contributions": [], "votes": 0, "photo": "nominees/pamoraspace.jpg"},
-  {"id": 21, "name": "Bwinja B Safari", "nationality": "🌍 Africa", "category": "African Talent of the Year", "subcategory": "Music", "contributions": [], "votes": 0, "photo": "nominees/safari.jpg"},
-  {"id": 22, "name": "Soul Band", "nationality": "🇬🇭 Ghana", "category": "African Talent of the Year", "subcategory": "Music", "contributions": [], "votes": 0, "photo": "nominees/soulband.jpg"},
-  {"id": 23, "name": "Tashinga C Mvumira", "nationality": "🌍 Africa", "category": "African Talent of the Year", "subcategory": "Social Media", "contributions": [], "votes": 0, "photo": "nominees/tashingacecilia.jpg"},
-  {"id": 24, "name": "Twiza Chard", "nationality": "🇿🇲 Zambia", "category": "African Talent of the Year", "subcategory": "Social Media", "contributions": [], "votes": 0, "photo": "nominees/twizachard.jpg"},
-  {"id": 25, "name": "Vanessa Mavhunure", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Music", "contributions": [], "votes": 0, "photo": "nominees/vanessa.jpg"},
-  {"id": 26, "name": "Bryan Mhaka", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Social Media", "contributions": [], "votes": 0, "photo": "nominees/bryanmint.jpg"},
-  {"id": 27, "name": "Bryan Mhaka", "nationality": "🇿🇼 Zimbabwe", "category": "Business of the Year", "subcategory": "Photography & Video", "contributions": [], "votes": 0, "photo": "nominees/bryanmint.jpg"},
-  {"id": 28, "name": "Balki", "nationality": "🇨🇲 Cameroon", "category": "African Talent of the Year", "subcategory": "Sports", "contributions": [], "votes": 0, "photo": "nominees/balki.jpg"},
-  {"id": 29, "name": "Christabel Chukwuka (Bella's Beauty)", "nationality": "🇳🇬 Nigeria", "category": "Business of the Year", "subcategory": "Hair & Beauty", "contributions": [], "votes": 0, "photo": "nominees/bellasbeauty.jpg"},
-  {"id": 30, "name": "Chido Reza", "nationality": "🇿🇼 Zimbabwe", "category": "Business of the Year", "subcategory": "Hair & Beauty", "contributions": [], "votes": 0, "photo": "nominees/chido.jpg"},
-  {"id": 31, "name": "Israel", "nationality": "🇨🇲 Cameroon", "category": "Business of the Year", "subcategory": "Photography & Video", "contributions": [], "votes": 0, "photo": "nominees/dedie.jpg"},
-  {"id": 32, "name": "Maze Club (DJ Bain)", "nationality": "🇿🇼 Zimbabwe", "category": "Entertainer of the Year", "subcategory": "", "contributions": [], "votes": 0, "photo": "nominees/djbain.jpg"},
-  {"id": 33, "name": "Hugly Wenzhou (Dj Derick)", "nationality": "🇱🇷 Liberia", "category": "Entertainer of the Year", "subcategory": "", "contributions": [], "votes": 0, "photo": "nominees/djderick.jpg"},
-  {"id": 34, "name": "Ibrahim", "nationality": "🇳🇪 Niger", "category": "African Talent of the Year", "subcategory": "Sports", "contributions": [], "votes": 0, "photo": "nominees/ibrahim.jpg"},
-  {"id": 35, "name": "Ortis Melo", "nationality": "🇬🇭 Ghana", "category": "African Talent of the Year", "subcategory": "Sports", "contributions": [], "votes": 0, "photo": "nominees/ortis.jpg"},
-  {"id": 36, "name": "Hope Pency (Plaits and Patterns)", "nationality": "🇱🇷 Liberia", "category": "Business of the Year", "subcategory": "Hair & Beauty", "contributions": [], "votes": 0, "photo": "nominees/plaitsandpatterns.jpg"},
-  {"id": 37, "name": "Nandi (NmVHair)", "nationality": "🇿🇲 Zambia", "category": "Business of the Year", "subcategory": "Hair & Beauty", "contributions": [], "votes": 0, "photo": "nominees/nmvhair.jpg"},
-  {"id": 38, "name": "Mukudzei Makurira", "nationality": "🇿🇼 Zimbabwe", "category": "Health & Fitness Excellence", "subcategory": "Personal Trainer", "contributions": [], "votes": 0, "photo": "nominees/mukudzei.jpg"},
-  {"id": 39, "name": "Lebo", "nationality": "🇿🇼 Zimbabwe", "category": "African Talent of the Year", "subcategory": "Sports", "contributions": [], "votes": 0, "photo": "nominees/lebo.jpg"}
+  {"id":1,"name":"Dr Kamara Saidu","nationality":"🇸🇱 Sierra Leone","category":"Long-Term Dedication","subcategory":"Mentorship Legacy","contributions":["Has been pivotal in mentoring young scientists","Vice President of the Wenzhou African Union"],"votes":0,"photo":"nominees/drkamarasaidu.jpg"},
+  {"id":2,"name":"Dr Percy Akuetteh","nationality":"🇬🇭 Ghana","category":"Long-Term Dedication","subcategory":"Mentorship Legacy","contributions":["Has been responsible for many students gaining entrepreneurial opportunities","Holds eldership role not only at church but in the community"],"votes":0,"photo":"nominees/drpercykean.jpg"},
+  {"id":3,"name":"Dr Percy Akuetteh","nationality":"🇬🇭 Ghana","category":"Long-Term Dedication","subcategory":"Community Leadership","contributions":["Served as President of the Ghanaian Association in Wenzhou for 3+ consecutive terms","Led strategic community growth initiatives"],"votes":0,"photo":"nominees/drpercykean.jpg"},
+  {"id":4,"name":"Dr Percy Akuetteh","nationality":"🇬🇭 Ghana","category":"Long-Term Dedication","subcategory":"Lifetime Commitment","contributions":["Dedicated 8+ years to Wenzhou community building","Key link between foreigners in Wenzhou and the Wenzhou Foreign Affairs"],"votes":0,"photo":"nominees/drpercykean.jpg"},
+  {"id":5,"name":"Dr Percy Akuetteh","nationality":"🇬🇭 Ghana","category":"Long-Term Dedication","subcategory":"Consistent Service","contributions":["Longest acting African national in our society","Ever present to support new and old students as well as workers"],"votes":0,"photo":"nominees/drpercykean.jpg"},
+  {"id":6,"name":"Dr Stephen Akiti","nationality":"🇬🇭 Ghana","category":"Long-Term Dedication","subcategory":"Mentorship Legacy","contributions":["Founder of Let's Talk Medicine","Mentored many students through his Tank Admissions agency"],"votes":0,"photo":"nominees/drstephenakiti.jpg"},
+  {"id":7,"name":"Dr Stephen Akiti","nationality":"🇬🇭 Ghana","category":"Long-Term Dedication","subcategory":"Community Leadership","contributions":["Served as WAU President for 3 consecutive terms","Vice President of the Ghanaian Association in Wenzhou"],"votes":0,"photo":"nominees/drstephenakiti.jpg"},
+  {"id":8,"name":"Dr Stephen Akiti","nationality":"🇬🇭 Ghana","category":"Long-Term Dedication","subcategory":"Consistent Service","contributions":["Consistently volunteered at every WAU event","Has been one of the most vibrant African nationals in our society"],"votes":0,"photo":"nominees/drstephenakiti.jpg"},
+  {"id":9,"name":"Dr Tinotenda B Madzikatire","nationality":"🇿🇼 Zimbabwe","category":"Long-Term Dedication","subcategory":"Mentorship Legacy","contributions":["Through Let's Talk Medicine has mentored many students","Established career guidance programs"],"votes":0,"photo":"nominees/drtinotendabmadzikatire.jpg"},
+  {"id":10,"name":"Dr Tinotenda B Madzikatire","nationality":"🇿🇼 Zimbabwe","category":"Long-Term Dedication","subcategory":"Community Leadership","contributions":["One of the founders and current serving President of the Zimbabwean Association Wenzhou","Established mental health support groups"],"votes":0,"photo":"nominees/drtinotendabmadzikatire.jpg"},
+  {"id":11,"name":"Dr Tinotenda B Madzikatire","nationality":"🇿🇼 Zimbabwe","category":"Long-Term Dedication","subcategory":"Consistent Service","contributions":["Part of the founders and first leadership of Wenzhou AU","Organized quarterly wellness check-ins"],"votes":0,"photo":"nominees/drtinotendabmadzikatire.jpg"},
+  {"id":12,"name":"Jenifer Asoh","nationality":"🇳🇬 Nigeria","category":"African Talent of the Year","subcategory":"Social Media","contributions":[],"votes":0,"photo":"nominees/jeniferasoh.jpg"},
+  {"id":13,"name":"LaYouthy Events","nationality":"🌍 Africa","category":"Business of the Year","subcategory":"Event Planning & Decor","contributions":[],"votes":0,"photo":"nominees/layouthyevents.jpg"},
+  {"id":14,"name":"LetsTalkMedicine","nationality":"🌍 Africa","category":"Social Impact Award","subcategory":"Volunteer of the Year","contributions":["Organized 10+ free health screening camps, CPR trainings","Volunteered 500+ hours of medical consultation"],"votes":0,"photo":"nominees/letstalkmedicine.jpg"},
+  {"id":15,"name":"LetsTalkMedicine","nationality":"🌍 Africa","category":"Health & Fitness Excellence","subcategory":"Wellness Advocate","contributions":["Launched numerous wellness awareness campaigns reaching 200+ people","Provided free fitness and nutrition workshops"],"votes":0,"photo":"nominees/letstalkmedicine.jpg"},
+  {"id":16,"name":"Mukudzei Makurira","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Music","contributions":[],"votes":0,"photo":"nominees/mukudzei.jpg"},
+  {"id":17,"name":"Mukudzei Makurira","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Dance","contributions":[],"votes":0,"photo":"nominees/mukudzei.jpg"},
+  {"id":18,"name":"Ortis Kitchen","nationality":"🇬🇭 Ghana","category":"Business of the Year","subcategory":"Food & Catering","contributions":[],"votes":0,"photo":"nominees/ortiskitchen.jpg"},
+  {"id":19,"name":"Tasty Bites","nationality":"🇬🇭 Ghana","category":"Business of the Year","subcategory":"Food & Catering","contributions":[],"votes":0,"photo":"nominees/tastybites.jpg"},
+  {"id":20,"name":"Pamora Space","nationality":"🌍 Africa","category":"Business of the Year","subcategory":"Event Planning & Decor","contributions":[],"votes":0,"photo":"nominees/pamoraspace.jpg"},
+  {"id":21,"name":"Bwinja B Safari","nationality":"🌍 Africa","category":"African Talent of the Year","subcategory":"Music","contributions":[],"votes":0,"photo":"nominees/safari.jpg"},
+  {"id":22,"name":"Soul Band","nationality":"🇬🇭 Ghana","category":"African Talent of the Year","subcategory":"Music","contributions":[],"votes":0,"photo":"nominees/soulband.jpg"},
+  {"id":23,"name":"Tashinga C Mvumira","nationality":"🌍 Africa","category":"African Talent of the Year","subcategory":"Social Media","contributions":[],"votes":0,"photo":"nominees/tashingacecilia.jpg"},
+  {"id":24,"name":"Twiza Chard","nationality":"🇿🇲 Zambia","category":"African Talent of the Year","subcategory":"Social Media","contributions":[],"votes":0,"photo":"nominees/twizachard.jpg"},
+  {"id":25,"name":"Vanessa Mavhunure","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Music","contributions":[],"votes":0,"photo":"nominees/vanessa.jpg"},
+  {"id":26,"name":"Bryan Mhaka","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Social Media","contributions":[],"votes":0,"photo":"nominees/bryanmint.jpg"},
+  {"id":27,"name":"Bryan Mhaka","nationality":"🇿🇼 Zimbabwe","category":"Business of the Year","subcategory":"Photography & Video","contributions":[],"votes":0,"photo":"nominees/bryanmint.jpg"},
+  {"id":28,"name":"Balki","nationality":"🇨🇲 Cameroon","category":"African Talent of the Year","subcategory":"Sports","contributions":[],"votes":0,"photo":"nominees/balki.jpg"},
+  {"id":29,"name":"Christabel Chukwuka (Bella's Beauty)","nationality":"🇳🇬 Nigeria","category":"Business of the Year","subcategory":"Hair & Beauty","contributions":[],"votes":0,"photo":"nominees/bellasbeauty.jpg"},
+  {"id":30,"name":"Chido Reza","nationality":"🇿🇼 Zimbabwe","category":"Business of the Year","subcategory":"Hair & Beauty","contributions":[],"votes":0,"photo":"nominees/chido.jpg"},
+  {"id":31,"name":"Israel","nationality":"🇨🇲 Cameroon","category":"Business of the Year","subcategory":"Photography & Video","contributions":[],"votes":0,"photo":"nominees/dedie.jpg"},
+  {"id":32,"name":"Maze Club (DJ Bain)","nationality":"🇿🇼 Zimbabwe","category":"Entertainer of the Year","subcategory":"","contributions":[],"votes":0,"photo":"nominees/djbain.jpg"},
+  {"id":33,"name":"Hugly Wenzhou (Dj Derick)","nationality":"🇱🇷 Liberia","category":"Entertainer of the Year","subcategory":"","contributions":[],"votes":0,"photo":"nominees/djderick.jpg"},
+  {"id":34,"name":"Ibrahim","nationality":"🇳🇪 Niger","category":"African Talent of the Year","subcategory":"Sports","contributions":[],"votes":0,"photo":"nominees/ibrahim.jpg"},
+  {"id":35,"name":"Ortis Melo","nationality":"🇬🇭 Ghana","category":"African Talent of the Year","subcategory":"Sports","contributions":[],"votes":0,"photo":"nominees/ortis.jpg"},
+  {"id":36,"name":"Hope Pency (Plaits and Patterns)","nationality":"🇱🇷 Liberia","category":"Business of the Year","subcategory":"Hair & Beauty","contributions":[],"votes":0,"photo":"nominees/plaitsandpatterns.jpg"},
+  {"id":37,"name":"Nandi (NmVHair)","nationality":"🇿🇲 Zambia","category":"Business of the Year","subcategory":"Hair & Beauty","contributions":[],"votes":0,"photo":"nominees/nmvhair.jpg"},
+  {"id":38,"name":"Mukudzei Makurira","nationality":"🇿🇼 Zimbabwe","category":"Health & Fitness Excellence","subcategory":"Personal Trainer","contributions":[],"votes":0,"photo":"nominees/mukudzei.jpg"},
+  {"id":39,"name":"Lebo","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Sports","contributions":[],"votes":0,"photo":"nominees/lebo.jpg"}
 ];
 
 /* ============================================
-   GOOGLE APPS SCRIPT API
+   CONFIG
    ============================================ */
 const API_URL = 'https://script.google.com/macros/s/AKfycbyihYqBFurPVlcJIt1O8iTIRO_0MTSOOsbCBskuY3WtRL83P7iDtn-usQN1rK6IlaIW/exec';
-
-/* DATES */
 const VOTE_START = new Date('2026-05-07T00:00:00');
 const VOTE_END   = new Date('2026-05-17T23:59:59');
 const GALA       = new Date('2026-05-23T18:00:00');
 
-/* MOBILE MENU */
+/* ============================================
+   MOBILE MENU
+   ============================================ */
 document.getElementById('hamburger').addEventListener('click', () => {
   const o = document.getElementById('mobile-menu').classList.toggle('open');
   document.getElementById('icon-menu').classList.toggle('hidden', o);
@@ -601,21 +528,21 @@ function closeMobile() {
   document.getElementById('icon-close').classList.add('hidden');
 }
 
-/* COUNTDOWN HELPERS */
-function pad(n) { return String(n).padStart(2, '0'); }
+/* ============================================
+   COUNTDOWNS
+   ============================================ */
+function pad(n) { return String(n).padStart(2,'0'); }
 function timeLeft(t) {
   const d = t.getTime() - Date.now();
   if (d <= 0) return null;
-  return { d: Math.floor(d/864e5), h: Math.floor(d/36e5%24), m: Math.floor(d/6e4%60), s: Math.floor(d/1e3%60) };
+  return { d:Math.floor(d/864e5), h:Math.floor(d/36e5%24), m:Math.floor(d/6e4%60), s:Math.floor(d/1e3%60) };
 }
-function periodStatus(s, e) {
+function periodStatus(s,e) {
   const n = Date.now();
   if (n < s.getTime()) return 'upcoming';
   if (n <= e.getTime()) return 'active';
   return 'ended';
 }
-
-/* UPDATE COUNTDOWNS */
 function updateCountdowns() {
   const vs = periodStatus(VOTE_START, VOTE_END);
   const vEl = document.getElementById('vote-hero-status');
@@ -628,10 +555,9 @@ function updateCountdowns() {
     const t = timeLeft(VOTE_END);
     if (t) { document.getElementById('v-d').textContent=pad(t.d); document.getElementById('v-h').textContent=pad(t.h); document.getElementById('v-m').textContent=pad(t.m); document.getElementById('v-s').textContent=pad(t.s); }
   } else {
-    vEl.innerHTML = '<span class="text-red-600">❌ Closed</span>';
+    vEl.innerHTML = '<span class="text-red-600">❌ Voting Closed</span>';
     document.getElementById('vote-cd').classList.add('hidden');
   }
-
   const gt = timeLeft(GALA);
   const gEl = document.getElementById('gala-status');
   if (gt) {
@@ -644,460 +570,409 @@ function updateCountdowns() {
     gEl.innerHTML = '<span class="text-green-600">🎉 TODAY!</span>';
     document.getElementById('gala-cd').classList.add('hidden');
   }
-
   const vsEl = document.getElementById('vote-section-status');
   if (vs === 'upcoming') vsEl.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Voting opens May 7, 2026</span></div>';
-  else if (vs === 'active') vsEl.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ VOTING IS OPEN! Register and cast your vote now.</span></div>';
+  else if (vs === 'active') vsEl.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ VOTING IS OPEN! Register and cast your votes now.</span></div>';
   else vsEl.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Voting has ended (May 7 – May 17)</span></div>';
 }
 setInterval(updateCountdowns, 1000);
 updateCountdowns();
 
 /* ============================================
-   VOTER REGISTRATION & UNIQUE CODES
+   VOTER REGISTRATION
    ============================================ */
-
 function generateVotingCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
-
 function isVoterRegistered() {
   return localStorage.getItem('wau_voter_code') !== null;
 }
-
 function getCurrentVoter() {
   return JSON.parse(localStorage.getItem('wau_voter_info') || '{}');
 }
-
 function registerVoter(name, phone) {
   const votingCode = generateVotingCode();
-  const voterInfo = {
-    name: name,
-    phone: phone,
-    code: votingCode,
-    registeredAt: new Date().toISOString()
-  };
-
+  const voterInfo = { name, phone, code: votingCode, registeredAt: new Date().toISOString() };
   localStorage.setItem('wau_voter_code', votingCode);
   localStorage.setItem('wau_voter_info', JSON.stringify(voterInfo));
-
-  const payload = {
-    action: 'register_voter',
-    name: name,
-    phone: phone,
-    votingCode: votingCode,
-    timestamp: new Date().toISOString()
-  };
-
-  const params = new URLSearchParams(payload).toString();
-  fetch(API_URL + '?' + params, {
-    method: 'GET',
-    mode: 'no-cors'
-  }).catch(err => console.log('Voter registration sent'));
-
+  const params = new URLSearchParams({ action:'register_voter', name, phone, votingCode, timestamp: new Date().toISOString() }).toString();
+  fetch(API_URL + '?' + params, { method:'GET', mode:'no-cors' }).catch(() => {});
   return voterInfo;
 }
-
 function openRegistration() {
   document.getElementById('registration-modal').classList.remove('hidden');
 }
-
-function closeRegistration() {
-  document.getElementById('registration-modal').classList.add('hidden');
-}
-
-function closeCodeDisplay() {
-  document.getElementById('code-display-modal').classList.add('hidden');
-}
-
 function startVoting() {
-  closeCodeDisplay();
+  document.getElementById('code-display-modal').classList.add('hidden');
   showVotingInterface();
 }
-
 function logoutVoter() {
-  if (confirm('Are you sure you want to logout? You will need to register again to vote.')) {
-    localStorage.removeItem('wau_voter_code');
-    localStorage.removeItem('wau_voter_info');
-    localStorage.removeItem('wau_votes_2026');
+  if (confirm('Logout? You will need to register again to vote.')) {
+    ['wau_voter_code','wau_voter_info','wau_votes_2026'].forEach(k => localStorage.removeItem(k));
     location.reload();
   }
 }
-
 function showVotingInterface() {
   document.getElementById('registration-cta').classList.add('hidden');
   document.getElementById('voting-interface').classList.remove('hidden');
-  
   const voter = getCurrentVoter();
   document.getElementById('voting-as-name').textContent = voter.name;
   document.getElementById('voting-code-display').textContent = voter.code;
-  
   renderVoting();
-  initializeResults();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('registration-form');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById('voter-name').value.trim();
-      const phone = document.getElementById('voter-phone').value.trim();
-      
-
-      if (!name || !phone ) {
-        alert('Please fill in all fields');
-        return;
-      }
-
-      const voterInfo = registerVoter(name, phone);
-
-      closeRegistration();
-      document.getElementById('code-display-modal').classList.remove('hidden');
-      document.getElementById('display-code').textContent = voterInfo.code;
-      document.getElementById('display-name').textContent = voterInfo.name;
-      document.getElementById('display-phone').textContent = voterInfo.phone;
-    });
-  }
-
-  if (isVoterRegistered()) {
-    showVotingInterface();
-  }
+  document.getElementById('registration-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('voter-name').value.trim();
+    const phone = document.getElementById('voter-phone').value.trim();
+    if (!name || !phone) { alert('Please fill in all fields'); return; }
+    const voterInfo = registerVoter(name, phone);
+    document.getElementById('registration-modal').classList.add('hidden');
+    document.getElementById('code-display-modal').classList.remove('hidden');
+    document.getElementById('display-code').textContent = voterInfo.code;
+    document.getElementById('display-name').textContent = voterInfo.name;
+    document.getElementById('display-phone').textContent = voterInfo.phone;
+  });
+  if (isVoterRegistered()) showVotingInterface();
+  initializeResults();
 });
 
 /* ============================================
-   VOTING SYSTEM
+   VOTING STORAGE
    ============================================ */
+function getVotes() { return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}'); }
+function saveVotes(v) { localStorage.setItem('wau_votes_2026', JSON.stringify(v)); }
 
-function getVotes() {
-  return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}');
+function getSubKey(category, subcategory) {
+  return 'sub_' + category + '_' + (subcategory || 'none');
+}
+function hasVotedInSubcategory(category, subcategory) {
+  return getVotes()[getSubKey(category, subcategory)] !== undefined;
+}
+function getVoteInSubcategory(category, subcategory) {
+  return getVotes()[getSubKey(category, subcategory)];
 }
 
-function saveVotes(v) {
-  localStorage.setItem('wau_votes_2026', JSON.stringify(v));
-}
-
-function hasVotedInCategory(category) {
-  const votes = getVotes();
-  return votes['category_' + category] !== undefined;
-}
-
-function getVoteInCategory(category) {
-  const votes = getVotes();
-  return votes['category_' + category];
-}
-
+/* ============================================
+   RENDER VOTING - GROUPED BY CATEGORY & SUBCATEGORY
+   ============================================ */
 function renderVoting() {
   const grid = document.getElementById('vote-grid');
-  const empty = document.getElementById('vote-empty');
-  const filterWrap = document.getElementById('vote-filter');
   const votes = getVotes();
-
-  if (!approvedNominees.length) {
-    grid.innerHTML = '';
-    grid.classList.add('hidden');
-    empty.classList.remove('hidden');
-    filterWrap.innerHTML = '';
-    return;
-  }
-
-  empty.classList.add('hidden');
-  grid.classList.remove('hidden');
-
-  const cats = [...new Set(approvedNominees.map(n => n.category))];
-  filterWrap.innerHTML = '<button onclick="filterVote(\'all\')" class="px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all hover:shadow-lg">All Categories</button>';
-  cats.forEach(c => {
-    filterWrap.innerHTML += `<button onclick="filterVote('${c}')" class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-all">${c}</button>`;
-  });
-
   const votingOpen = periodStatus(VOTE_START, VOTE_END) === 'active';
 
-  grid.innerHTML = approvedNominees.map(n => {
-    const userVoteInThisCategory = getVoteInCategory(n.category);
-    const hasVoted = userVoteInThisCategory === n.id;
-    const voteCount = (n.votes || 0) + (votes['count_' + n.id] || 0);
-    const nationality = n.nationality || '';
+  // Group by category then subcategory
+  const grouped = {};
+  approvedNominees.forEach(n => {
+    if (!grouped[n.category]) grouped[n.category] = {};
+    const sub = n.subcategory || 'General';
+    if (!grouped[n.category][sub]) grouped[n.category][sub] = [];
+    grouped[n.category][sub].push(n);
+  });
 
-    return `
-    <div class="vote-card ${hasVoted ? 'voted' : ''}" data-cat="${n.category}">
-      <div class="photo-wrap">
-        ${n.photo
-          ? `<img src="${n.photo}" alt="${n.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center text-5xl bg-gradient-to-br from-green-50 to-yellow-50\\'>👤</div>';"/>`
-          : '<div class="w-full h-full flex items-center justify-center text-5xl">👤</div>'}
+  let html = '';
+
+  Object.entries(grouped).forEach(([category, subcategories]) => {
+    // Category header
+    html += `
+      <div class="category-header mb-2">
+        <h3 class="text-2xl font-black text-white flex items-center gap-2">🏆 ${category}</h3>
       </div>
-      <div class="card-body">
-        <div class="mb-2">
-          <h4 class="font-bold text-xl text-gray-800 leading-tight">${n.name}</h4>
-          <div class="nationality-badge">
-            <span>${nationality}</span>
+    `;
+
+    Object.entries(subcategories).forEach(([subcategory, nominees]) => {
+      const subKey = getSubKey(category, subcategory === 'General' ? '' : subcategory);
+      const alreadyVotedId = votes[subKey];
+      const votedInThisSub = alreadyVotedId !== undefined;
+
+      // Subcategory header
+      html += `
+        <div class="subcategory-header flex items-center justify-between mb-4">
+          <div>
+            <p class="text-xs text-green-600 font-bold uppercase tracking-wider mb-0.5">Subcategory</p>
+            <h4 class="text-lg font-bold text-gray-800">${subcategory === 'General' ? category : subcategory}</h4>
+          </div>
+          <div class="text-right">
+            ${votedInThisSub
+              ? '<span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold">✅ Voted</span>'
+              : votingOpen
+              ? '<span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-bold">Pick 1</span>'
+              : '<span class="text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full font-bold">Closed</span>'
+            }
           </div>
         </div>
-        <div class="mb-3 flex flex-wrap gap-1.5">
-          <span class="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-semibold">${n.category}</span>
-          ${n.subcategory ? `<span class="text-xs bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full font-semibold">${n.subcategory}</span>` : ''}
-        </div>
-        ${n.contributions && n.contributions.length ? `
-        <div class="mb-3 bg-orange-50 rounded-lg p-3">
-          <p class="text-xs font-bold text-orange-700 mb-1.5 uppercase tracking-wide">Key Contributions</p>
-          <ul class="text-xs text-gray-600 space-y-1">${n.contributions.map(c => `<li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span><span>${c}</span></li>`).join('')}</ul>
-        </div>` : ''}
-        <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-          <div class="flex items-center gap-1.5">
-            <span class="text-lg">🗳️</span>
-            <span class="text-lg font-bold text-green-700">${voteCount}</span>
-            <span class="text-xs text-gray-400 font-medium">${voteCount === 1 ? 'vote' : 'votes'}</span>
-          </div>
-          ${votingOpen && !hasVotedInCategory(n.category)
-            ? `<button onclick="castVote(${n.id})" class="vote-btn px-5 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 shadow-md">Vote Now</button>`
-            : hasVoted
-            ? '<span class="text-sm font-bold text-green-600 flex items-center gap-1">✅ Your Vote</span>'
-            : '<span class="text-xs text-gray-500 font-medium">Already voted</span>'}
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+      `;
 
+      // Nominees grid for this subcategory
+      html += `<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">`;
+
+      nominees.forEach(n => {
+        const hasVoted = alreadyVotedId === n.id;
+        const voteCount = n.votes || 0;
+
+        html += `
+          <div class="vote-card ${hasVoted ? 'voted' : ''}">
+            <div class="photo-wrap">
+              ${hasVoted ? '<span class="voted-badge">✅ YOUR VOTE</span>' : ''}
+              ${n.photo
+                ? `<img src="${n.photo}" alt="${n.name}" onerror="this.style.display='none';this.parentElement.innerHTML+='<div class=\\'w-full h-full flex items-center justify-center text-5xl\\'>👤</div>';"/>`
+                : '<div class="w-full h-full flex items-center justify-center text-5xl bg-green-50">👤</div>'}
+            </div>
+            <div class="card-body">
+              <div class="mb-2">
+                <h4 class="font-bold text-xl text-gray-800 leading-tight">${n.name}</h4>
+                <p class="text-sm text-gray-500 mt-0.5">${n.nationality}</p>
+              </div>
+              ${n.contributions && n.contributions.length ? `
+              <div class="mb-3 bg-orange-50 rounded-lg p-3 flex-1">
+                <p class="text-xs font-bold text-orange-700 mb-1.5 uppercase tracking-wide">Key Contributions</p>
+                <ul class="text-xs text-gray-600 space-y-1">${n.contributions.map(c => `<li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span><span>${c}</span></li>`).join('')}</ul>
+              </div>` : '<div class="flex-1"></div>'}
+              <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-base">🗳️</span>
+                  <span class="text-lg font-bold text-green-700">${voteCount}</span>
+                  <span class="text-xs text-gray-400">${voteCount === 1 ? 'vote' : 'votes'}</span>
+                </div>
+                ${votingOpen && !votedInThisSub
+                  ? `<button onclick="castVote(${n.id})" class="vote-btn px-5 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 shadow-sm">Vote</button>`
+                  : hasVoted
+                  ? '<span class="text-sm font-bold text-green-600">✅ Your Vote</span>'
+                  : votedInThisSub
+                  ? '<span class="text-xs text-gray-400 font-medium">Already voted here</span>'
+                  : '<span class="text-xs text-gray-400 font-medium">Voting closed</span>'
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+    });
+  });
+
+  grid.innerHTML = html;
   updateLiveResults();
 }
 
-function filterVote(cat) {
-  document.querySelectorAll('.vote-card').forEach(c => {
-    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
-  });
-  document.querySelectorAll('#vote-filter button').forEach(btn => {
-    const isActive = (cat === 'all' && btn.textContent === 'All Categories') || btn.textContent === cat;
-    btn.className = isActive
-      ? 'px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all hover:shadow-lg'
-      : 'px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-all';
-  });
-}
-
+/* ============================================
+   CAST VOTE
+   ============================================ */
 function castVote(id) {
-  if (!isVoterRegistered()) {
-    alert('Please register first to vote');
-    openRegistration();
-    return;
-  }
+  if (!isVoterRegistered()) { openRegistration(); return; }
 
   const nominee = approvedNominees.find(n => n.id === id);
   if (!nominee) return;
 
   const category = nominee.category;
+  const subcategory = nominee.subcategory || '';
+  const subKey = getSubKey(category, subcategory || 'none');
   const votes = getVotes();
   const voter = getCurrentVoter();
 
-  if (hasVotedInCategory(category)) {
-    const previousVoteId = getVoteInCategory(category);
-    const previousNominee = approvedNominees.find(n => n.id === previousVoteId);
-    alert(`You already voted for "${previousNominee.name}" in "${category}". You can only vote once per category.`);
+  if (hasVotedInSubcategory(category, subcategory)) {
+    const prevId = getVoteInSubcategory(category, subcategory);
+    const prev = approvedNominees.find(n => n.id === prevId);
+    alert(`You already voted for "${prev ? prev.name : 'someone'}" in "${subcategory || category}". One vote per subcategory.`);
     return;
   }
 
-  const payload = {
+  // Send to Google Sheets
+  const params = new URLSearchParams({
     action: 'vote',
     votingCode: voter.code,
     voterName: voter.name,
     nomineeId: id,
     nomineeName: nominee.name,
     category: category,
-    subcategory: nominee.subcategory || '',
+    subcategory: subcategory,
     timestamp: new Date().toISOString()
-  };
+  }).toString();
 
-  const params = new URLSearchParams(payload).toString();
-  fetch(API_URL + '?' + params, {
-    method: 'GET',
-    mode: 'no-cors'
-  }).then(() => {
-    console.log('Vote submitted');
-  }).catch(err => {
-    console.log('Vote attempt:', err);
-  });
+  fetch(API_URL + '?' + params, { method:'GET', mode:'no-cors' }).catch(() => {});
 
-  votes['category_' + category] = id;
+  // Save locally
+  votes[subKey] = id;
   votes['count_' + id] = (votes['count_' + id] || 0) + 1;
   saveVotes(votes);
+  nominee.votes = (nominee.votes || 0) + 1;
 
-  if (nominee) nominee.votes = (nominee.votes || 0) + 1;
+  showVoteToast(nominee.name, subcategory || category);
   renderVoting();
 }
 
 /* ============================================
-   LIVE VOTE RESULTS - PULLS FROM GOOGLE SHEETS
+   TOAST
    ============================================ */
+function showVoteToast(name, sub) {
+  const old = document.getElementById('vote-toast');
+  if (old) old.remove();
+  const t = document.createElement('div');
+  t.id = 'vote-toast';
+  t.className = 'fixed bottom-6 right-6 z-50 bg-green-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3';
+  t.style.animation = 'fadeInUp 0.4s ease';
+  t.innerHTML = `<span class="text-2xl">✅</span><div><p class="font-bold">Vote Cast!</p><p class="text-sm opacity-90">You voted for <strong>${name}</strong> in <strong>${sub}</strong></p></div>`;
+  document.body.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity 0.5s'; setTimeout(() => t.remove(), 500); }, 4000);
+}
 
+/* ============================================
+   LIVE RESULTS - FROM GOOGLE SHEETS
+   ============================================ */
 let voteUpdateInterval = null;
-let sheetVoteCounts = {}; // stores real counts from Google Sheets
 
 function initializeResults() {
   renderResultsFilter();
-  fetchVotesFromSheets(); // fetch immediately on load
-  
+  fetchVotesFromSheets();
   if (voteUpdateInterval) clearInterval(voteUpdateInterval);
-  // Fetch from Google Sheets every 10 seconds
   voteUpdateInterval = setInterval(fetchVotesFromSheets, 10000);
 }
 
 function fetchVotesFromSheets() {
-  // Show last updated time
-  const lastUpdatedEl = document.getElementById('last-updated');
-  if (lastUpdatedEl) {
-    lastUpdatedEl.textContent = 'Fetching...';
-  }
+  const el = document.getElementById('last-updated');
+  if (el) el.textContent = 'Fetching...';
 
-  // Use a JSONP-style fetch via iframe trick OR direct fetch
-  // Since we use no-cors for voting, for GET we can try direct fetch
   fetch(API_URL + '?action=get_votes')
-    .then(response => response.json())
+    .then(r => r.json())
     .then(data => {
-      if (data.status === 'success' || data.status === 'no_votes') {
-        sheetVoteCounts = data.votes || {};
-        
-        // Update the approvedNominees vote counts with real sheet data
+      if (data.votes) {
         approvedNominees.forEach(n => {
-          const sheetCount = sheetVoteCounts[String(n.id)] || 0;
-          n.votes = sheetCount;
+          n.votes = data.votes[String(n.id)] || 0;
         });
-
         updateLiveResults();
-
-        if (lastUpdatedEl) {
-          const now = new Date();
-          lastUpdatedEl.textContent = 'Last updated: ' + now.toLocaleTimeString();
-        }
-
-        const totalEl = document.getElementById('total-votes-count');
-        if (totalEl) {
-          totalEl.textContent = data.totalVotes || 0;
-        }
+        if (el) el.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+        const tot = document.getElementById('total-votes-count');
+        if (tot) tot.textContent = data.totalVotes || 0;
       }
     })
-    .catch(err => {
-      console.log('Could not fetch from sheets, using local data:', err);
-      // Fall back to local storage counts
+    .catch(() => {
       updateLiveResults();
-      if (lastUpdatedEl) {
-        lastUpdatedEl.textContent = 'Using local data (offline)';
-      }
+      if (el) el.textContent = 'Using local data';
     });
 }
 
 function renderResultsFilter() {
-  const resultsFilter = document.getElementById('results-filter');
-  if (!resultsFilter) return;
-  
+  const f = document.getElementById('results-filter');
+  if (!f) return;
   const cats = [...new Set(approvedNominees.map(n => n.category))];
-  
-  resultsFilter.innerHTML = '<button onclick="filterResults(\'all\')" class="px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all hover:shadow-lg">All Categories</button>';
-  
+  f.innerHTML = `<button onclick="filterResults('all')" class="px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all">All Categories</button>`;
   cats.forEach(c => {
-    resultsFilter.innerHTML += `<button onclick="filterResults('${c}')" class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-all">${c}</button>`;
+    f.innerHTML += `<button onclick="filterResults('${c}')" class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-all">${c}</button>`;
   });
 }
 
 function filterResults(cat) {
-  document.querySelectorAll('.result-card').forEach(c => {
-    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+  document.querySelectorAll('.result-section').forEach(s => {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? '' : 'none';
   });
-  
   document.querySelectorAll('#results-filter button').forEach(btn => {
-    const isActive = (cat === 'all' && btn.textContent === 'All Categories') || btn.textContent === cat;
-    btn.className = isActive
-      ? 'px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all hover:shadow-lg'
+    const active = (cat === 'all' && btn.textContent === 'All Categories') || btn.textContent === cat;
+    btn.className = active
+      ? 'px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all'
       : 'px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-all';
   });
 }
 
 function updateLiveResults() {
-  const resultsGrid = document.getElementById('results-grid');
-  if (!resultsGrid) return;
+  const grid = document.getElementById('results-grid');
+  if (!grid) return;
 
-  // Group nominees by category
-  const categories = [...new Set(approvedNominees.map(n => n.category))];
+  // Group by category → subcategory
+  const grouped = {};
+  approvedNominees.forEach(n => {
+    if (!grouped[n.category]) grouped[n.category] = {};
+    const sub = n.subcategory || 'General';
+    if (!grouped[n.category][sub]) grouped[n.category][sub] = [];
+    grouped[n.category][sub].push(n);
+  });
 
   let html = '';
 
-  categories.forEach(cat => {
-    const nomineesInCat = approvedNominees
-      .filter(n => n.category === cat)
-      .map(n => ({
-        ...n,
-        realVotes: n.votes || 0
-      }))
-      .sort((a, b) => b.realVotes - a.realVotes);
-
-    const catTotal = nomineesInCat.reduce((sum, n) => sum + n.realVotes, 0);
+  Object.entries(grouped).forEach(([category, subcategories]) => {
+    const catTotal = approvedNominees
+      .filter(n => n.category === category)
+      .reduce((sum, n) => sum + (n.votes || 0), 0);
 
     html += `
-      <div class="col-span-full mb-6">
-        <div class="bg-gradient-to-r from-green-700 to-green-600 text-white px-6 py-3 rounded-xl font-bold text-lg flex items-center justify-between">
-          <span>🏆 ${cat}</span>
-          <span class="text-sm font-normal opacity-80">${catTotal} vote${catTotal !== 1 ? 's' : ''} total</span>
+      <div class="result-section mb-8" data-cat="${category}">
+        <div class="bg-gradient-to-r from-green-700 to-green-600 text-white px-6 py-4 rounded-xl font-bold text-xl flex items-center justify-between mb-4">
+          <span>🏆 ${category}</span>
+          <span class="text-sm font-normal opacity-80">${catTotal} total vote${catTotal !== 1 ? 's' : ''}</span>
         </div>
-      </div>
     `;
 
-    nomineesInCat.forEach((n, index) => {
-      const voteCount = n.realVotes;
-      const percentage = catTotal > 0 ? Math.round((voteCount / catTotal) * 100) : 0;
-
-      let medalEmoji = '';
-      if (index === 0 && voteCount > 0) medalEmoji = '🥇';
-      else if (index === 1 && voteCount > 0) medalEmoji = '🥈';
-      else if (index === 2 && voteCount > 0) medalEmoji = '🥉';
-
-      const barColor = index === 0 && voteCount > 0
-        ? 'bg-yellow-500'
-        : index === 1 && voteCount > 0
-        ? 'bg-gray-400'
-        : index === 2 && voteCount > 0
-        ? 'bg-orange-400'
-        : 'bg-green-500';
-
-      const borderColor = index === 0 && voteCount > 0
-        ? 'border-yellow-400'
-        : 'border-green-300';
+    Object.entries(subcategories).forEach(([subcategory, nominees]) => {
+      const subTotal = nominees.reduce((sum, n) => sum + (n.votes || 0), 0);
+      const sorted = [...nominees].sort((a, b) => (b.votes || 0) - (a.votes || 0));
 
       html += `
-        <div class="result-card bg-white rounded-xl shadow-md overflow-hidden border-l-4 ${borderColor} hover:shadow-xl transition-all" data-cat="${n.category}">
-          <div class="p-4 flex items-center gap-4">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-4 overflow-hidden">
+          <div class="bg-gradient-to-r from-green-50 to-yellow-50 border-l-4 border-green-500 px-5 py-3 flex items-center justify-between">
+            <div>
+              <p class="text-xs text-green-600 font-bold uppercase tracking-wider">Subcategory</p>
+              <h5 class="text-base font-bold text-gray-800">${subcategory === 'General' ? category : subcategory}</h5>
+            </div>
+            <span class="text-sm text-gray-500 font-semibold">${subTotal} vote${subTotal !== 1 ? 's' : ''}</span>
+          </div>
+          <div class="p-4 space-y-3">
+      `;
+
+      sorted.forEach((n, index) => {
+        const voteCount = n.votes || 0;
+        const percentage = subTotal > 0 ? Math.round((voteCount / subTotal) * 100) : 0;
+
+        let medal = '';
+        if (index === 0 && voteCount > 0) medal = '🥇';
+        else if (index === 1 && voteCount > 0) medal = '🥈';
+        else if (index === 2 && voteCount > 0) medal = '🥉';
+        else medal = `${index + 1}.`;
+
+        const barColor = index === 0 && voteCount > 0 ? 'bg-yellow-400'
+          : index === 1 && voteCount > 0 ? 'bg-gray-400'
+          : index === 2 && voteCount > 0 ? 'bg-orange-400'
+          : 'bg-green-400';
+
+        html += `
+          <div class="flex items-center gap-3 p-3 rounded-lg ${index === 0 && voteCount > 0 ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50'}">
             ${n.photo
-              ? `<img src="${n.photo}" alt="${n.name}" class="w-16 h-16 rounded-lg object-cover border-2 border-white shadow flex-shrink-0" onerror="this.style.display='none';"/>`
-              : '<div class="w-16 h-16 rounded-lg bg-green-100 flex items-center justify-center text-2xl flex-shrink-0">👤</div>'}
+              ? `<img src="${n.photo}" alt="${n.name}" class="w-12 h-12 rounded-lg object-cover border-2 border-white shadow flex-shrink-0" onerror="this.style.display='none';"/>`
+              : '<div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center text-xl flex-shrink-0">👤</div>'}
             <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between mb-1">
-                <h4 class="font-bold text-gray-800 truncate">${medalEmoji ? medalEmoji + ' ' : (index + 1) + '. '}${n.name}</h4>
+                <span class="font-bold text-gray-800 text-sm truncate">${medal} ${n.name}</span>
                 <div class="flex items-baseline gap-1 ml-2 flex-shrink-0">
-                  <span class="text-2xl font-black text-green-700">${voteCount}</span>
+                  <span class="text-xl font-black text-green-700">${voteCount}</span>
                   <span class="text-xs text-gray-400">votes</span>
                 </div>
               </div>
-              <p class="text-xs text-gray-500 mb-2">${n.nationality || ''}${n.subcategory ? ' · ' + n.subcategory : ''}</p>
-              <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
-                <div class="${barColor} h-full rounded-full transition-all duration-700" style="width: ${percentage}%;"></div>
+              <p class="text-xs text-gray-400 mb-1.5">${n.nationality}</p>
+              <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div class="${barColor} h-full rounded-full transition-all duration-700" style="width:${percentage}%"></div>
               </div>
-              <p class="text-xs text-gray-400 mt-1">${percentage}% of votes in this category</p>
+              <p class="text-xs text-gray-400 mt-0.5">${percentage}%</p>
             </div>
           </div>
-        </div>
-      `;
+        `;
+      });
+
+      html += `</div></div>`;
     });
+
+    html += `</div>`;
   });
 
-  resultsGrid.innerHTML = html;
+  grid.innerHTML = html;
 }
 
-window.addEventListener('load', function() {
-  // Results visible to everyone (not just registered voters)
-  initializeResults();
-});
-
-window.addEventListener('beforeunload', function() {
+window.addEventListener('beforeunload', () => {
   if (voteUpdateInterval) clearInterval(voteUpdateInterval);
 });
 
-/* SCROLL REVEAL */
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {

@@ -15,7 +15,6 @@
     @keyframes float2 { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-30px,-50px); } }
     @keyframes shimmer { 0% { left: -75%; } 100% { left: 125%; } }
     @keyframes finalGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,179,8,0.5); } 50% { box-shadow: 0 0 20px 10px rgba(234,179,8,0.2); } }
-
     .animate-flag-scroll { animation: scrollFlags 60s linear infinite; }
     .animate-fade-up { animation: fadeInUp 0.8s ease forwards; }
     .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
@@ -25,11 +24,9 @@
     .reveal { opacity: 0; }
     .reveal.visible { opacity: 1; }
     html { scroll-behavior: smooth; }
-
     .text-gradient-g2y { background: linear-gradient(to right, #16a34a, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .text-gradient-g2r { background: linear-gradient(to right, #16a34a, #ca8a04, #dc2626); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .text-gradient-purple { background: linear-gradient(to right, #9333ea, #db2777); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
     .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
     .digit-box { border-radius: 0.5rem; padding: 0.75rem; min-width: 64px; text-align: center; }
@@ -44,7 +41,6 @@
     .btn-shimmer { position: relative; overflow: hidden; }
     .btn-shimmer::after { content: ''; position: absolute; top: -50%; left: -75%; width: 50%; height: 200%; background: rgba(255,255,255,0.2); transform: skewX(-20deg); animation: shimmer 3s infinite; }
     select option { color: #1f2937; background: #fff; }
-
     .match-card { transition: all 0.3s ease; border-left: 4px solid transparent; }
     .match-card:hover { transform: translateX(4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
     .match-card.group-stage { border-left-color: #16a34a; }
@@ -63,7 +59,6 @@
     .supporter-flag:hover { transform: scale(1.3) rotate(-5deg); }
     .bafana-flags { display: inline-flex; align-items: center; gap: 1px; background: linear-gradient(135deg,#f0fdf4,#fefce8); border: 1px solid #d1fae5; border-radius: 6px; padding: 2px 5px; font-size: 1rem; line-height: 1; }
     .bafana-flags .flag-sep { font-size: 0.55rem; color: #94a3b8; font-weight: 900; margin: 0 1px; }
-
     .vote-card {
       border: 2px solid #e2e8f0;
       border-radius: 1rem;
@@ -75,14 +70,14 @@
       transform: translateY(40px);
       animation: cardSlideIn 0.6s ease forwards;
     }
-    .vote-card:hover { 
-      border-color: #16a34a; 
-      transform: translateY(-2px); 
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    .vote-card:hover {
+      border-color: #16a34a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
-    .vote-card.voted { 
-      border-color: #16a34a; 
-      background: #f0fdf4; 
+    .vote-card.voted {
+      border-color: #16a34a;
+      background: #f0fdf4;
     }
     .vote-card .photo-wrap {
       position: relative;
@@ -170,9 +165,8 @@
       .vote-card .photo-wrap { height: 220px; }
     }
   </style>
-<base target="_blank">
+  <!-- FIX #1: REMOVED <base target="_blank"> — it was breaking all internal #hash navigation -->
 </head>
-
 <body class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
 
 <!-- HEADER -->
@@ -214,8 +208,8 @@
 <!-- FLAGS -->
 <div class="fixed top-16 left-0 right-0 z-40 py-2 overflow-hidden" style="background:linear-gradient(to right,#16a34a,#ca8a04,#dc2626)">
   <div class="animate-flag-scroll flex gap-4 whitespace-nowrap" style="width:max-content">
-    <span class="text-2xl">🇩🇿</span><span class="text-2xl">🇦🇴</span><span class="text-2xl">🇧🇯</span><span class="text-2xl">🇧🇼</span><span class="text-2xl">🇧🇫</span><span class="text-2xl">🇧🇮</span><span class="text-2xl">🇨🇻</span><span class="text-2xl">🇨🇲</span><span class="text-2xl">🇨🇫</span><span class="text-2xl">🇹🇩</span><span class="text-2xl">🇰🇲</span><span class="text-2xl">🇨🇬</span><span class="text-2xl">🇨🇩</span><span class="text-2xl">🇨🇮</span><span class="text-2xl">🇩🇯</span><span class="text-2xl">🇪🇬</span><span class="text-2xl">🇬🇶</span><span class="text-2xl">🇪🇷</span><span class="text-2xl">🇸🇿</span><span class="text-2xl">🇪🇹</span><span class="text-2xl">🇬🇦</span><span class="text-2xl">🇬🇲</span><span class="text-2xl">🇬🇭</span><span class="text-2xl">🇬🇳</span><span class="text-2xl">🇬🇼</span><span class="text-2xl">🇰🇪</span><span class="text-2xl">🇱🇸</span><span class="text-2xl">🇱🇷</span><span class="text-2xl">🇱🇾</span><span class="text-2xl">🇲🇬</span><span class="text-2xl">🇲🇼</span><span class="text-2xl">🇲🇱</span><span class="text-2xl">🇲🇷</span><span class="text-2xl">🇲🇺</span><span class="text-2xl">🇲🇦</span><span class="text-2xl">🇲🇿</span><span class="text-2xl">🇳🇦</span><span class="text-2xl">🇳🇪</span><span class="text-2xl">🇳🇬</span><span class="text-2xl">🇷🇼</span><span class="text-2xl">🇸🇹</span><span class="text-2xl">🇸🇳</span><span class="text-2xl">🇸🇨</span><span class="text-2xl">🇸🇱</span><span class="text-2xl">🇸🇴</span><span class="text-2xl">🇿🇦</span><span class="text-2xl">🇸🇸</span><span class="text-2xl">🇸🇩</span><span class="text-2xl">🇹🇿</span><span class="text-2xl">🇹🇬</span><span class="text-2xl">🇹🇳</span><span class="text-2xl">🇺🇬</span><span class="text-2xl">🇿🇲</span><span class="text-2xl">🇿🇼</span>
-    <span class="text-2xl">🇩🇿</span><span class="text-2xl">🇦🇴</span><span class="text-2xl">🇧🇯</span><span class="text-2xl">🇧🇼</span><span class="text-2xl">🇧🇫</span><span class="text-2xl">🇧🇮</span><span class="text-2xl">🇨🇻</span><span class="text-2xl">🇨🇲</span><span class="text-2xl">🇨🇫</span><span class="text-2xl">🇹🇩</span><span class="text-2xl">🇰🇲</span><span class="text-2xl">🇨🇬</span><span class="text-2xl">🇨🇩</span><span class="text-2xl">🇨🇮</span><span class="text-2xl">🇩🇯</span><span class="text-2xl">🇪🇬</span><span class="text-2xl">🇬🇶</span><span class="text-2xl">🇪🇷</span><span class="text-2xl">🇸🇿</span><span class="text-2xl">🇪🇹</span><span class="text-2xl">🇬🇦</span><span class="text-2xl">🇬🇲</span><span class="text-2xl">🇬🇭</span><span class="text-2xl">🇬🇳</span><span class="text-2xl">🇬🇼</span><span class="text-2xl">🇰🇪</span><span class="text-2xl">🇱🇸</span><span class="text-2xl">🇱🇷</span><span class="text-2xl">🇱🇾</span><span class="text-2xl">🇲🇬</span><span class="text-2xl">🇲🇼</span><span class="text-2xl">🇲🇱</span><span class="text-2xl">🇲🇷</span><span class="text-2xl">🇲🇺</span><span class="text-2xl">🇲🇦</span><span class="text-2xl">🇲🇿</span><span class="text-2xl">🇳🇦</span><span class="text-2xl">🇳🇪</span><span class="text-2xl">🇳🇬</span><span class="text-2xl">🇷🇼</span><span class="text-2xl">🇸🇹</span><span class="text-2xl">🇸🇳</span><span class="text-2xl">🇸🇨</span><span class="text-2xl">🇸🇱</span><span class="text-2xl">🇸🇴</span><span class="text-2xl">🇿🇦</span><span class="text-2xl">🇸🇸</span><span class="text-2xl">🇸🇩</span><span class="text-2xl">🇹🇿</span><span class="text-2xl">🇹🇬</span><span class="text-2xl">🇹🇳</span><span class="text-2xl">🇺🇬</span><span class="text-2xl">🇿🇲</span><span class="text-2xl">🇿🇼</span>
+    <span class="text-2xl">🇪🇹</span><span class="text-2xl">🇬🇭</span><span class="text-2xl">🇳🇬</span><span class="text-2xl">🇰🇪</span><span class="text-2xl">🇿🇦</span><span class="text-2xl">🇪🇬</span><span class="text-2xl">🇨🇲</span><span class="text-2xl">🇹🇿</span><span class="text-2xl">🇺🇬</span><span class="text-2xl">🇸🇳</span><span class="text-2xl">🇲🇦</span><span class="text-2xl">🇨🇮</span><span class="text-2xl">🇲🇿</span><span class="text-2xl">🇿🇲</span><span class="text-2xl">🇿🇼</span><span class="text-2xl">🇲🇱</span><span class="text-2xl">🇧🇫</span><span class="text-2xl">🇳🇪</span><span class="text-2xl">🇹🇩</span><span class="text-2xl">🇬🇳</span><span class="text-2xl">🇷🇼</span><span class="text-2xl">🇧🇮</span><span class="text-2xl">🇸🇱</span><span class="text-2xl">🇱🇷</span><span class="text-2xl">🇨🇫</span><span class="text-2xl">🇨🇬</span><span class="text-2xl">🇨🇩</span>
+    <span class="text-2xl">🇪🇹</span><span class="text-2xl">🇬🇭</span><span class="text-2xl">🇳🇬</span><span class="text-2xl">🇰🇪</span><span class="text-2xl">🇿🇦</span><span class="text-2xl">🇪🇬</span><span class="text-2xl">🇨🇲</span><span class="text-2xl">🇹🇿</span><span class="text-2xl">🇺🇬</span><span class="text-2xl">🇸🇳</span><span class="text-2xl">🇲🇦</span><span class="text-2xl">🇨🇮</span><span class="text-2xl">🇲🇿</span><span class="text-2xl">🇿🇲</span><span class="text-2xl">🇿🇼</span><span class="text-2xl">🇲🇱</span><span class="text-2xl">🇧🇫</span><span class="text-2xl">🇳🇪</span><span class="text-2xl">🇹🇩</span><span class="text-2xl">🇬🇳</span><span class="text-2xl">🇷🇼</span><span class="text-2xl">🇧🇮</span><span class="text-2xl">🇸🇱</span><span class="text-2xl">🇱🇷</span><span class="text-2xl">🇨🇫</span><span class="text-2xl">🇨🇬</span><span class="text-2xl">🇨🇩</span>
   </div>
 </div>
 
@@ -234,9 +228,7 @@
       <h1 class="text-5xl md:text-7xl font-bold mb-4 text-gradient-g2r">Wenzhou African Union</h1>
       <p class="text-2xl md:text-3xl text-gray-700 mb-12">Africa Day 2026 Awards</p>
 
-      <!-- 2 Countdowns -->
       <div class="grid md:grid-cols-2 gap-4 mb-12 max-w-3xl mx-auto">
-        <!-- Voting -->
         <div class="bg-white rounded-2xl shadow-xl p-5">
           <div class="text-3xl mb-2">🗳️</div>
           <h3 class="text-sm font-bold text-gray-600 mb-1">Voting Period</h3>
@@ -249,7 +241,6 @@
             <div class="text-center"><div class="digit-box text-white text-xl font-bold" style="background:linear-gradient(135deg,#9333ea,#7e22ce)"><span id="v-s">--</span></div><div class="text-xs mt-1 text-gray-500">S</div></div>
           </div>
         </div>
-        <!-- Gala -->
         <div class="bg-white rounded-2xl shadow-xl p-5">
           <div class="text-3xl mb-2">🎉</div>
           <h3 class="text-sm font-bold text-gray-600 mb-1">AU Day Gala</h3>
@@ -280,12 +271,12 @@
       </div>
       <div class="grid md:grid-cols-2 gap-8 mb-12">
         <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg reveal card-hover">
-          <div class="text-4xl mb-4">👁️</div>
+          <div class="text-4xl mb-4">🌍</div>
           <h3 class="text-2xl font-bold mb-4 text-gray-800">Our Vision</h3>
           <p class="text-gray-700 leading-relaxed">A thriving, united African community in Wenzhou where every member has the opportunity to succeed, connect, and celebrate our rich cultural heritage while building bridges with our Chinese hosts.</p>
         </div>
         <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl shadow-lg reveal card-hover">
-          <div class="text-4xl mb-4">🌍</div>
+          <div class="text-4xl mb-4">🎯</div>
           <h3 class="text-2xl font-bold mb-4 text-gray-800">Our Mission</h3>
           <p class="text-gray-700 leading-relaxed">The Wenzhou African Union exists to unite, empower, and celebrate the African community in Wenzhou, China. We foster cultural exchange, support African businesses, and create a home away from home.</p>
         </div>
@@ -309,14 +300,14 @@
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16 reveal"><h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Award Categories</h2></div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">💼</div><h3 class="text-xl font-bold mb-3">Business of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Food &amp; Catering</li><li>• Hair &amp; Beauty</li><li>• Event Planning &amp; Decor</li><li>• Photography &amp; Video</li></ul></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🏪</div><h3 class="text-xl font-bold mb-3">Business of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Food &amp; Catering</li><li>• Hair &amp; Beauty</li><li>• Event Planning &amp; Decor</li><li>• Photography &amp; Video</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🚀</div><h3 class="text-xl font-bold mb-3">Entrepreneur of the Year</h3></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">💪</div><h3 class="text-xl font-bold mb-3">Health &amp; Fitness Excellence</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Personal Trainer</li><li>• Wellness Advocate</li><li>• Healthcare Professional</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🤝</div><h3 class="text-xl font-bold mb-3">Social Impact Award</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Service ⭐</li><li>• Volunteer of the Year ⭐</li></ul><p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions</p></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🎭</div><h3 class="text-xl font-bold mb-3">African Talent of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Music</li><li>• Dance</li><li>• Photography &amp; Video</li><li>• Social Media</li><li>• Sports</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🏆</div><h3 class="text-xl font-bold mb-3">Long-Term Dedication</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Leadership ⭐</li><li>• Consistent Service ⭐</li><li>• Mentorship Legacy ⭐</li><li>• Lifetime Commitment ⭐</li></ul><p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions</p></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🎤</div><h3 class="text-xl font-bold mb-3">Entertainer of the Year</h3></div>
-        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal lg:col-span-3 md:col-span-2"><div class="text-5xl mb-4">🌟</div><h3 class="text-xl font-bold mb-3">People's Choice Award</h3><div class="flex flex-wrap gap-3 mt-3"><span class="text-sm bg-green-50 px-3 py-1.5 rounded-full">Favorite Personality</span><span class="text-sm bg-yellow-50 px-3 py-1.5 rounded-full">Favorite Entertainer</span><span class="text-sm bg-red-50 px-3 py-1.5 rounded-full">Favorite Community Leader</span></div></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal lg:col-span-3 md:col-span-2"><div class="text-5xl mb-4">⭐</div><h3 class="text-xl font-bold mb-3">People's Choice Award</h3><div class="flex flex-wrap gap-3 mt-3"><span class="text-sm bg-green-50 px-3 py-1.5 rounded-full">Favorite Personality</span><span class="text-sm bg-yellow-50 px-3 py-1.5 rounded-full">Favorite Entertainer</span><span class="text-sm bg-red-50 px-3 py-1.5 rounded-full">Favorite Community Leader</span></div></div>
       </div>
     </div>
   </section>
@@ -332,16 +323,10 @@
         </div>
         <div id="vote-section-status" class="max-w-2xl mx-auto"></div>
       </div>
-
-      <!-- Category Filter -->
       <div id="vote-filter" class="flex flex-wrap gap-2 justify-center mb-8"></div>
-
-      <!-- Nominees Grid -->
       <div id="vote-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-
-      <!-- Empty State -->
       <div id="vote-empty" class="bg-white rounded-2xl shadow-lg p-12 text-center hidden">
-        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">👤</div>
+        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">🏆</div>
         <h3 class="text-2xl font-bold text-gray-800 mb-3">No approved nominees yet</h3>
         <p class="text-gray-600 mb-6">Approved nominees will appear here for voting.</p>
         <a href="#categories" class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold shadow-lg" style="background:linear-gradient(to right,#16a34a,#15803d)">View Categories</a>
@@ -378,7 +363,7 @@
       </div>
       <div class="reveal">
         <div class="rounded-2xl p-8 text-center shadow-xl" style="background:linear-gradient(135deg,#14532d,#15803d)">
-          <p class="text-4xl mb-4 flex justify-center gap-1 flex-wrap"><span class="supporter-flag">🇩🇿</span><span class="supporter-flag">🇳🇬</span><span class="supporter-flag">🇬🇭</span><span class="supporter-flag">🇿🇦</span><span class="supporter-flag">🇨🇲</span><span class="supporter-flag">🇲🇦</span><span class="supporter-flag">🇸🇳</span><span class="supporter-flag">🇰🇪</span><span class="supporter-flag">🇿🇲</span><span class="supporter-flag">🇹🇿</span><span class="supporter-flag">🇿🇼</span><span class="supporter-flag">🇧🇼</span></p>
+          <p class="text-4xl mb-4 flex justify-center gap-1 flex-wrap"><span class="supporter-flag">🇬🇭</span><span class="supporter-flag">🇳🇬</span><span class="supporter-flag">🇿🇦</span><span class="supporter-flag">🇨🇲</span><span class="supporter-flag">🇲🇦</span><span class="supporter-flag">🇿🇼</span><span class="supporter-flag">🇰🇪</span><span class="supporter-flag">🇪🇹</span><span class="supporter-flag">🇸🇳</span><span class="supporter-flag">🇹🇿</span></p>
           <h3 class="text-2xl md:text-3xl font-black text-white mb-2">SHOW UP. SHOW OUT. SUPPORT YOUR TEAM.</h3>
           <p class="text-green-200 text-lg">📍 Wenzhou Kean University Stadium</p>
         </div>
@@ -419,7 +404,7 @@
   <!-- DRESS CODE -->
   <section class="py-20 px-4 bg-gradient-to-br from-purple-50 to-pink-50">
     <div class="max-w-4xl mx-auto text-center reveal">
-      <div class="text-6xl mb-6">👗🎩</div>
+      <div class="text-6xl mb-6">👗👔</div>
       <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-purple">Dress Code</h2>
       <div class="bg-white p-8 rounded-2xl shadow-xl">
         <h3 class="text-2xl font-bold mb-4 text-gray-800">DRESS TO REPRESENT YOUR COUNTRY</h3>
@@ -479,9 +464,10 @@
 'use strict';
 
 /* ============================================
-   EMBEDDED NOMINEES DATA (PHOTOS LOAD DIRECTLY)
+   EMBEDDED NOMINEES DATA
+   FIX #2: Proper array declaration with [...]
    ============================================ */
-const approvedNominees =
+const approvedNominees = [
   {"id": 1, "name": "Dr Kamara Saidu", "nationality": "🇸🇱 Sierra Leone", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Has been pivotal in mentoring young scientists", "Vice President of the Wenzhou African Union"], "votes": 0, "photo": "nominees/drkamarasaidu.jpg"},
   {"id": 2, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Mentorship Legacy", "contributions": ["Has been responsible for many students gaining entrepreneurial opportunities", "Holds eldership role not only at church but in the community"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
   {"id": 3, "name": "Dr Percy Akuetteh", "nationality": "🇬🇭 Ghana", "category": "Long-Term Dedication", "subcategory": "Community Leadership", "contributions": ["Served as President of the Ghanaian Association in Wenzhou for 3+ consecutive terms", "Led strategic community growth initiatives"], "votes": 0, "photo": "nominees/drpercykean.jpg"},
@@ -524,9 +510,9 @@ const approvedNominees =
 ];
 
 /* ============================================
-   GOOGLE APPS SCRIPT API (VOTE SUBMISSION ONLY)
+   GOOGLE APPS SCRIPT API
    ============================================ */
-const API_URL = 'https://script.google.com/macros/s/AKfycbxXSZA2NWZRhEoM-PjqHYNzuxpHPAOTp66s5lwiZGvU6IgVOA_H6WK2XQzDYZY2dOaK/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxXSZA2NWZRhEoMPjqHYNzuxpHPAOTp66s5lwiZGvU6IgVOA_H6WK2XQzDYZY2dOaK/exec';
 
 /* DATES */
 const VOTE_START = new Date('2026-05-07T00:00:00');
@@ -561,7 +547,6 @@ function periodStatus(s, e) {
 
 /* UPDATE COUNTDOWNS */
 function updateCountdowns() {
-  // Voting
   const vs = periodStatus(VOTE_START, VOTE_END);
   const vEl = document.getElementById('vote-hero-status');
   if (vs === 'upcoming') {
@@ -577,37 +562,34 @@ function updateCountdowns() {
     document.getElementById('vote-cd').classList.add('hidden');
   }
 
-  // Gala
   const gt = timeLeft(GALA);
   const gEl = document.getElementById('gala-status');
   if (gt) {
     gEl.innerHTML = '<span class="text-blue-600">⏳ Coming</span>';
-    document.getElementById('g-d').textContent=pad(gt.d); document.getElementById('g-h').textContent=pad(gt.h); document.getElementById('g-m').textContent=pad(gt.m); document.getElementById('g-s').textContent=pad(gt.s);
+    document.getElementById('g-d').textContent=pad(gt.d);
+    document.getElementById('g-h').textContent=pad(gt.h);
+    document.getElementById('g-m').textContent=pad(gt.m);
+    document.getElementById('g-s').textContent=pad(gt.s);
   } else {
     gEl.innerHTML = '<span class="text-green-600">🎉 TODAY!</span>';
     document.getElementById('gala-cd').classList.add('hidden');
   }
 
-  // Vote section status
   const vsEl = document.getElementById('vote-section-status');
   if (vs === 'upcoming') vsEl.innerHTML = '<div class="bg-blue-50 border-2 border-blue-400 rounded-xl p-4 text-center"><span class="text-blue-700 font-bold">⏳ Voting opens May 7, 2026</span></div>';
   else if (vs === 'active') vsEl.innerHTML = '<div class="bg-green-50 border-2 border-green-400 rounded-xl p-4 text-center"><span class="text-green-700 font-bold">✅ VOTING IS OPEN! Cast your vote now.</span></div>';
   else vsEl.innerHTML = '<div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center"><span class="text-red-700 font-bold">❌ Voting has ended (May 7 – May 17)</span></div>';
 }
-
 setInterval(updateCountdowns, 1000);
 updateCountdowns();
 
 /* ============================================
-   VOTING SYSTEM - EMBEDDED DATA (NO EXTERNAL FETCH)
+   VOTING SYSTEM
    ============================================ */
-
 function getVotes() { return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}'); }
 function saveVotes(v) { localStorage.setItem('wau_votes_2026', JSON.stringify(v)); }
 
-/* LOAD NOMINEES FROM EMBEDDED DATA */
 function loadNominees() {
-  // Use the embedded data directly - no external fetch needed
   renderVoting();
 }
 
@@ -628,7 +610,6 @@ function renderVoting() {
   empty.classList.add('hidden');
   grid.classList.remove('hidden');
 
-  // Category filters
   const cats = [...new Set(approvedNominees.map(n => n.category))];
   filterWrap.innerHTML = '<button onclick="filterVote(\'all\')" class="px-4 py-2 rounded-full bg-green-600 text-white text-sm font-medium transition-all hover:shadow-lg">All Categories</button>';
   cats.forEach(c => {
@@ -640,61 +621,45 @@ function renderVoting() {
   grid.innerHTML = approvedNominees.map(n => {
     const voted = votes[n.id];
     const voteCount = (n.votes || 0) + (votes['count_' + n.id] || 0);
-    
-    // Extract flag emoji from nationality if present
-    const flagMatch = n.nationality.match(/^(\\uD83C[\\uDDE6-\\uDDFF]\\uD83C[\\uDDE6-\\uDDFF]\\s*)?/);
-    const flag = flagMatch ? flagMatch[0] : '';
-    const countryName = n.nationality.replace(flag, '').trim();
-    
+
+    /* FIX #3: Simple nationality parsing — just display as-is */
+    const nationality = n.nationality || '';
+
     return `
     <div class="vote-card ${voted ? 'voted' : ''}" data-cat="${n.category}">
-      
-      <!-- Large Photo Section -->
       <div class="photo-wrap">
-        ${n.photo 
-          ? `<img src="${n.photo}" alt="${n.name}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center text-5xl\\'>👤</div>'">` 
+        ${n.photo
+          ? `<img src="${n.photo}" alt="${n.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center text-5xl bg-gradient-to-br from-green-50 to-yellow-50\\'>👤</div>'">`
           : '<div class="w-full h-full flex items-center justify-center text-5xl">👤</div>'}
       </div>
-      
-      <!-- Card Body -->
       <div class="card-body">
-        
-        <!-- Name & Nationality -->
         <div class="mb-2">
           <h4 class="font-bold text-xl text-gray-800 leading-tight">${n.name}</h4>
           <div class="nationality-badge">
-            <span>${flag}</span>
-            <span>${countryName}</span>
+            <span>${nationality}</span>
           </div>
         </div>
-        
-        <!-- Category Badges -->
         <div class="mb-3 flex flex-wrap gap-1.5">
           <span class="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-semibold">${n.category}</span>
           ${n.subcategory ? `<span class="text-xs bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full font-semibold">${n.subcategory}</span>` : ''}
         </div>
-        
-        <!-- Contributions (for starred categories) -->
         ${n.contributions && n.contributions.length ? `
-          <div class="mb-3 bg-orange-50 rounded-lg p-3">
-            <p class="text-xs font-bold text-orange-700 mb-1.5 uppercase tracking-wide">Key Contributions</p>
-            <ul class="text-xs text-gray-600 space-y-1">${n.contributions.map(c => `<li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span><span>${c}</span></li>`).join('')}</ul>
-          </div>` : ''}
-        
-        <!-- Vote Footer -->
+        <div class="mb-3 bg-orange-50 rounded-lg p-3">
+          <p class="text-xs font-bold text-orange-700 mb-1.5 uppercase tracking-wide">Key Contributions</p>
+          <ul class="text-xs text-gray-600 space-y-1">${n.contributions.map(c => `<li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span><span>${c}</span></li>`).join('')}</ul>
+        </div>` : ''}
         <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
           <div class="flex items-center gap-1.5">
             <span class="text-lg">🗳️</span>
             <span class="text-lg font-bold text-green-700">${voteCount}</span>
             <span class="text-xs text-gray-400 font-medium">${voteCount === 1 ? 'vote' : 'votes'}</span>
           </div>
-          ${votingOpen && !voted 
-            ? `<button onclick="castVote(${n.id})" class="vote-btn px-5 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 shadow-md">Vote Now</button>` 
-            : voted 
-              ? '<span class="text-sm font-bold text-green-600 flex items-center gap-1">✅ You Voted</span>' 
-              : '<span class="text-xs text-gray-400 font-medium">Voting closed</span>'}
+          ${votingOpen && !voted
+            ? `<button onclick="castVote(${n.id})" class="vote-btn px-5 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 shadow-md">Vote Now</button>`
+            : voted
+            ? '<span class="text-sm font-bold text-green-600 flex items-center gap-1">✅ You Voted</span>'
+            : '<span class="text-xs text-gray-400 font-medium">Voting closed</span>'}
         </div>
-        
       </div>
     </div>`;
   }).join('');
@@ -704,7 +669,6 @@ function filterVote(cat) {
   document.querySelectorAll('.vote-card').forEach(c => {
     c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
   });
-  // Highlight active filter
   document.querySelectorAll('#vote-filter button').forEach(btn => {
     const isActive = (cat === 'all' && btn.textContent === 'All Categories') || btn.textContent === cat;
     btn.className = isActive
@@ -713,36 +677,43 @@ function filterVote(cat) {
   });
 }
 
-/* CAST VOTE - SENDS TO GOOGLE APPS SCRIPT */
+/* FIX #4: castVote - use proper fetch that actually delivers data to Google Sheets */
 function castVote(id) {
   const votes = getVotes();
   if (votes[id]) { alert('You already voted for this nominee!'); return; }
-  
-  // Send vote to Google Apps Script (fire-and-forget due to no-cors)
-  fetch(API_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
-      action: 'vote', 
-      nomineeId: id,
-      category: approvedNominees.find(n => n.id == id)?.category || ''
-    })
-  }).catch(err => console.log('Vote sent (no-cors mode):', err));
-  
-  // Store locally to prevent double-voting on same device
+
+  const nominee = approvedNominees.find(n => n.id === id);
+  const payload = {
+    action: 'vote',
+    nomineeId: id,
+    nomineeName: nominee ? nominee.name : '',
+    category: nominee ? nominee.category : '',
+    subcategory: nominee ? (nominee.subcategory || '') : '',
+    timestamp: new Date().toISOString()
+  };
+
+  /* FIX #5: Use GET with query params OR form POST — no-cors with JSON body is silently dropped.
+     The most reliable way for Google Apps Script from a static site is a GET request or a form-encoded POST.
+     Here we use a GET approach by appending data as URL params: */
+  const params = new URLSearchParams(payload).toString();
+  fetch(API_URL + '?' + params, {
+    method: 'GET',
+    mode: 'no-cors'
+  }).then(() => {
+    console.log('Vote submitted to Google Sheets');
+  }).catch(err => {
+    console.log('Vote submission attempted:', err);
+  });
+
+  // Store locally
   votes[id] = true;
   votes['count_' + id] = 1;
   saveVotes(votes);
-  
-  // Optimistic UI update
-  const nominee = approvedNominees.find(n => n.id == id);
+
   if (nominee) nominee.votes = (nominee.votes || 0) + 1;
-  
   renderVoting();
 }
 
-// Load nominees on page load
 loadNominees();
 
 /* SCROLL REVEAL */
@@ -772,6 +743,4 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 </script>
 </body>
-</html>'''
-
-
+</html>

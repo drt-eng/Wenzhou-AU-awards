@@ -891,25 +891,6 @@ function fetchVotesFromSheets() {
   document.body.appendChild(script);
 }
 
-  fetch(API_URL + '?action=get_votes')
-    .then(r => r.json())
-    .then(data => {
-      if (data.votes) {
-        approvedNominees.forEach(n => {
-          n.votes = data.votes[String(n.id)] || 0;
-        });
-        updateLiveResults();
-        if (el) el.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
-        const tot = document.getElementById('total-votes-count');
-        if (tot) tot.textContent = data.totalVotes || 0;
-      }
-    })
-    .catch(() => {
-      updateLiveResults();
-      if (el) el.textContent = 'Using local data';
-    });
-}
-
 function renderResultsFilter() {
   const f = document.getElementById('results-filter');
   if (!f) return;

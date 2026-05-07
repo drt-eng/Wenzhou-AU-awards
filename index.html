@@ -64,7 +64,6 @@
     .bafana-flags { display: inline-flex; align-items: center; gap: 1px; background: linear-gradient(135deg,#f0fdf4,#fefce8); border: 1px solid #d1fae5; border-radius: 6px; padding: 2px 5px; font-size: 1rem; line-height: 1; }
     .bafana-flags .flag-sep { font-size: 0.55rem; color: #94a3b8; font-weight: 900; margin: 0 1px; }
 
-    /* ENHANCED VOTE CARDS - LARGE PHOTO WITH SLIDE-IN ANIMATION */
     .vote-card {
       border: 2px solid #e2e8f0;
       border-radius: 1rem;
@@ -310,14 +309,14 @@
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16 reveal"><h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-g2y">Award Categories</h2></div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        '''<div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">💼</div><h3 class="text-xl font-bold mb-3">Business of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Food &amp; Catering</li><li>• Hair &amp; Beauty</li><li>• Event Planning &amp; Decor</li><li>• Photography &amp; Video</li></ul></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">💼</div><h3 class="text-xl font-bold mb-3">Business of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Food &amp; Catering</li><li>• Hair &amp; Beauty</li><li>• Event Planning &amp; Decor</li><li>• Photography &amp; Video</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🚀</div><h3 class="text-xl font-bold mb-3">Entrepreneur of the Year</h3></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">💪</div><h3 class="text-xl font-bold mb-3">Health &amp; Fitness Excellence</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Personal Trainer</li><li>• Wellness Advocate</li><li>• Healthcare Professional</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🤝</div><h3 class="text-xl font-bold mb-3">Social Impact Award</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Service ⭐</li><li>• Volunteer of the Year ⭐</li></ul><p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions</p></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🎭</div><h3 class="text-xl font-bold mb-3">African Talent of the Year</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Music</li><li>• Dance</li><li>• Photography &amp; Video</li><li>• Social Media</li><li>• Sports</li></ul></div>
         <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🏆</div><h3 class="text-xl font-bold mb-3">Long-Term Dedication</h3><ul class="space-y-2 mt-3 text-sm text-gray-600"><li>• Community Leadership ⭐</li><li>• Consistent Service ⭐</li><li>• Mentorship Legacy ⭐</li><li>• Lifetime Commitment ⭐</li></ul><p class="text-xs text-orange-600 mt-2 font-semibold">⭐ Requires specific contributions</p></div>
-                <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🎤</div><h3 class="text-xl font-bold mb-3">Entertainer of the Year</h3></div>
-<div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal lg:col-span-3 md:col-span-2"><div class="text-5xl mb-4">🌟</div><h3 class="text-xl font-bold mb-3">People's Choice Award</h3><div class="flex flex-wrap gap-3 mt-3"><span class="text-sm bg-green-50 px-3 py-1.5 rounded-full">Favorite Personality</span><span class="text-sm bg-yellow-50 px-3 py-1.5 rounded-full">Favorite Entertainer</span><span class="text-sm bg-red-50 px-3 py-1.5 rounded-full">Favorite Community Leader</span></div></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal"><div class="text-5xl mb-4">🎤</div><h3 class="text-xl font-bold mb-3">Entertainer of the Year</h3></div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover border-2 border-transparent hover:border-green-500 reveal lg:col-span-3 md:col-span-2"><div class="text-5xl mb-4">🌟</div><h3 class="text-xl font-bold mb-3">People's Choice Award</h3><div class="flex flex-wrap gap-3 mt-3"><span class="text-sm bg-green-50 px-3 py-1.5 rounded-full">Favorite Personality</span><span class="text-sm bg-yellow-50 px-3 py-1.5 rounded-full">Favorite Entertainer</span><span class="text-sm bg-red-50 px-3 py-1.5 rounded-full">Favorite Community Leader</span></div></div>
       </div>
     </div>
   </section>
@@ -479,6 +478,11 @@
 <script>
 'use strict';
 
+/* ============================================
+   GOOGLE APPS SCRIPT API CONFIGURATION
+   ============================================ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbwsnPqfuPw0M660deaPN0ZmavCbjZHPO63TStLS_jjsCf6LXOlCbO5D471rNFt8UIqe/exec';
+
 /* DATES */
 const VOTE_START = new Date('2026-05-07T00:00:00');
 const VOTE_END   = new Date('2026-05-17T23:59:59');
@@ -549,20 +553,31 @@ function updateCountdowns() {
 setInterval(updateCountdowns, 1000);
 updateCountdowns();
 
-/* VOTING - LOADS FROM nominees.json */
+/* ============================================
+   VOTING SYSTEM - GOOGLE APPS SCRIPT INTEGRATED
+   ============================================ */
 let approvedNominees = [];
 
 function getVotes() { return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}'); }
 function saveVotes(v) { localStorage.setItem('wau_votes_2026', JSON.stringify(v)); }
 
+/* LOAD NOMINEES FROM GOOGLE APPS SCRIPT */
 async function loadNominees() {
   try {
-    const res = await fetch('nominees.json?' + Date.now());
+    const res = await fetch(API_URL + '?action=getNominees');
     if (res.ok) {
       approvedNominees = await res.json();
     }
   } catch (err) {
-    console.log('nominees.json not found or error:', err);
+    console.log('API error, trying local fallback:', err);
+    // Fallback to local nominees.json if API fails
+    try {
+      const localRes = await fetch('nominees.json?' + Date.now());
+      if (localRes.ok) approvedNominees = await localRes.json();
+    } catch (localErr) {
+      console.log('Local fallback also failed:', localErr);
+      approvedNominees = [];
+    }
   }
   renderVoting();
 }
@@ -672,12 +687,32 @@ function filterVote(cat) {
   });
 }
 
+/* CAST VOTE - SENDS TO GOOGLE APPS SCRIPT */
 function castVote(id) {
   const votes = getVotes();
   if (votes[id]) { alert('You already voted for this nominee!'); return; }
+  
+  // Send vote to Google Apps Script (fire-and-forget due to no-cors)
+  fetch(API_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+      action: 'vote', 
+      nomineeId: id,
+      category: approvedNominees.find(n => n.id == id)?.category || ''
+    })
+  }).catch(err => console.log('Vote sent (no-cors mode):', err));
+  
+  // Store locally to prevent double-voting on same device
   votes[id] = true;
   votes['count_' + id] = 1;
   saveVotes(votes);
+  
+  // Optimistic UI update
+  const nominee = approvedNominees.find(n => n.id == id);
+  if (nominee) nominee.votes = (nominee.votes || 0) + 1;
+  
   renderVoting();
 }
 
@@ -711,4 +746,4 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 </script>
 </body>
-</html>'''
+</html>

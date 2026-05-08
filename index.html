@@ -776,11 +776,11 @@ function castVote(id) {
   const voter = getCurrentVoter();
 
   if (hasVotedInSubcategory(category, subcategory)) {
-    const prevId = getVoteInSubcategory(category, subcategory);
-    const prev = approvedNominees.find(n => n.id === prevId);
-    alert(`You already voted for "${prev ? prev.name : 'someone'}" in "${subcategory || category}". One vote per subcategory.`);
-    return;
-  }
+ const prevId = getVoteInSubcategory(category, subcategory);
+ const prev = approvedNominees.find(n => n.id === prevId);
+ alert(`You already voted for "${prev ? prev.name : 'someone'}" in "${subcategory || category}". You can only vote once per subcategory.`);
+ return;
+}
 
   // Send to Google Sheets
   const params = new URLSearchParams({

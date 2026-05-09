@@ -461,9 +461,6 @@
 <script>
 'use strict';
 
-/* ============================================
-   NOMINEES DATA
-   ============================================ */
 const approvedNominees = [
   {"id":1,"name":"Dr Kamara Saidu","nationality":"🇸🇱 Sierra Leone","category":"Long-Term Dedication","subcategory":"Mentorship Legacy","contributions":["Has been pivotal in mentoring young scientists","Vice President of the Wenzhou African Union"],"votes":0,"photo":"nominees/drkamarasaidu.jpg"},
   {"id":2,"name":"Dr Percy Akuetteh","nationality":"🇬🇭 Ghana","category":"Long-Term Dedication","subcategory":"Mentorship Legacy","contributions":["Has been responsible for many students gaining entrepreneurial opportunities","Holds eldership role not only at church but in the community"],"votes":0,"photo":"nominees/drpercykean.jpg"},
@@ -516,6 +513,56 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbyIcfynjJtUtU4hLzTZAN_q
 const VOTE_START = new Date('2026-05-09T00:00:00');
 const VOTE_END   = new Date('2026-05-19T23:59:59');
 const GALA       = new Date('2026-05-23T18:00:00');
+
+/* ============================================
+   STORAGE KEYS
+   ============================================ */
+const VOTER_CODE_KEY    = 'wau_voter_code';
+const VOTER_INFO_KEY    = 'wau_voter_info';
+const DEVICE_FP_KEY     = 'wau_device_fp_2026';
+const DEVICE_LOCK_KEY   = 'wau_device_registered_2026'; // permanent: one account per device
+const VOTES_KEY         = 'wau_votes_2026';             // all-time votes (never reset)
+const DAILY_KEY         = 'wau_daily_voted_2026';       // tracks which subcategories voted today
+
+/* ============================================
+   DATE HELPERS
+   ============================================ */
+function getTodayString() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+}
+
+/* ============================================
+   PHONE VALIDATION
+   ============================================ */
+function validatePhone(phone) {
+  // Remove all spaces, dashes, brackets
+  const cleaned = phone.replace(/[\s\-\(\)]/g, '');
+
+  // Must be a valid international or local format
+  // Accepts: +86..., +1..., +27..., etc or 10-15 digit numbers
+  const intlPattern = /^\+?[1-9]\d{7,14}$/;
+
+  if (!intlPattern.test(cleaned)) {
+    return { valid: false, message: 'Please enter a valid phone number (e.g. +86 138 0000 0000)' };
+  }
+
+  // Reject obviously fake numbers
+  const digitsOnly = cleaned.replace('+','');
+  const allSame = /^(\d)\1+$/.test(digitsOnly);
+  if (allSame) {
+    return { valid: false, message: 'Please enter a real phone number' };
+  }
+
+  // Reject sequential numbers like 1234567890
+  const sequential = '0123456789012345678901234567890';
+  const reverseSeq = '9876543210987654321098765432109';
+  if (sequential.includes(digitsOnly) || reverseSeq.includes(digitsOnly)) {
+    return { valid: false, message: 'Please enter a real phone number' };
+  }
+
+  return { valid: true, cleaned };
+}
 
 /* ============================================
    DEVICE FINGERPRINTING
@@ -574,9 +621,9 @@ function getWebGLFingerprint() {
 
 async function getAudioFingerprint() {
   try {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return 'no_audio';
-    const ctx = new AC();
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return 'no_audio';
+    const ctx = new AudioContext();
     const oscillator = ctx.createOscillator();
     const analyser = ctx.createAnalyser();
     const gain = ctx.createGain();
@@ -602,7 +649,8 @@ async function hashString(str) {
   } catch(e) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
-      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
       hash = hash & hash;
     }
     return Math.abs(hash).toString(16).padStart(32,'0');
@@ -610,7 +658,7 @@ async function hashString(str) {
 }
 
 /* ============================================
-   IP ADDRESS CAPTURE
+   IP ADDRESS
    ============================================ */
 let cachedIP = 'unknown';
 let cachedIPData = {};
@@ -619,29 +667,104 @@ async function getIPAddress() {
   if (cachedIP !== 'unknown') return cachedIP;
   const services = [
     'https://api.ipify.org?format=json',
+    'https://api.ip.sb/jsonip',
     'https://api64.ipify.org?format=json'
   ];
   for (const service of services) {
     try {
-      const res = await fetch(service);
+      const res = await fetch(service, { signal: AbortSignal.timeout(3000) });
       const data = await res.json();
-      cachedIP = data.ip || 'unknown';
+      cachedIP = data.ip || data.IP || 'unknown';
       if (cachedIP !== 'unknown') break;
     } catch(e) { continue; }
   }
   try {
-    const geoRes = await fetch(`https://ipapi.co/${cachedIP}/json/`);
+    const geoRes = await fetch(`https://ipapi.co/${cachedIP}/json/`, { signal: AbortSignal.timeout(3000) });
     cachedIPData = await geoRes.json();
   } catch(e) {}
   return cachedIP;
 }
 
-// Pre-compute and cache fingerprint
-let cachedFingerprint = null;
-async function getFingerprint() {
-  if (cachedFingerprint) return cachedFingerprint;
-  cachedFingerprint = await getDeviceFingerprint();
-  return cachedFingerprint;
+function getStoredFingerprint() {
+  return localStorage.getItem(DEVICE_FP_KEY) || '';
+}
+
+/* ============================================
+   DEVICE REGISTRATION LOCK
+   One account per device — permanent
+   ============================================ */
+function isDeviceAlreadyRegistered() {
+  return localStorage.getItem(DEVICE_LOCK_KEY) !== null;
+}
+
+function getDeviceRegistration() {
+  return JSON.parse(localStorage.getItem(DEVICE_LOCK_KEY) || 'null');
+}
+
+function lockDeviceToAccount(fingerprint, votingCode, phone) {
+  // Permanently bind this device to one account
+  localStorage.setItem(DEVICE_LOCK_KEY, JSON.stringify({
+    fingerprint,
+    votingCode,
+    phone,
+    registeredAt: new Date().toISOString()
+  }));
+  localStorage.setItem(DEVICE_FP_KEY, fingerprint);
+}
+
+/* ============================================
+   DAILY VOTE TRACKING
+   Tracks which subcategories voted per day
+   Votes accumulate in Google Sheets — never reset locally
+   ============================================ */
+function getDailyRecord() {
+  return JSON.parse(localStorage.getItem(DAILY_KEY) || '{}');
+}
+
+function saveDailyRecord(record) {
+  localStorage.setItem(DAILY_KEY, JSON.stringify(record));
+}
+
+function hasVotedTodayInSubcategory(category, subcategory) {
+  const record = getDailyRecord();
+  const today = getTodayString();
+  const key = getSubKey(category, subcategory);
+  return record[today] && record[today][key] !== undefined;
+}
+
+function recordDailyVote(category, subcategory, nomineeId) {
+  const record = getDailyRecord();
+  const today = getTodayString();
+  if (!record[today]) record[today] = {};
+  record[today][getSubKey(category, subcategory)] = nomineeId;
+
+  // Clean up old dates (keep only last 11 days max)
+  const dates = Object.keys(record).sort();
+  if (dates.length > 11) {
+    dates.slice(0, dates.length - 11).forEach(d => delete record[d]);
+  }
+  saveDailyRecord(record);
+}
+
+function getTodayVotedSubcategoryNominee(category, subcategory) {
+  const record = getDailyRecord();
+  const today = getTodayString();
+  if (!record[today]) return undefined;
+  return record[today][getSubKey(category, subcategory)];
+}
+
+/* ============================================
+   VOTE STORAGE — All-time, never reset
+   Only used for local UI display between sessions
+   ============================================ */
+function getVotes() {
+  return JSON.parse(localStorage.getItem(VOTES_KEY) || '{}');
+}
+function saveVotes(v) {
+  localStorage.setItem(VOTES_KEY, JSON.stringify(v));
+}
+function getSubKey(category, subcategory) {
+  return 'sub_' + category + '_' + (subcategory || 'none');
 }
 
 /* ============================================
@@ -715,65 +838,60 @@ function generateVotingCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 function isVoterRegistered() {
-  return localStorage.getItem('wau_voter_code') !== null;
+  return localStorage.getItem(VOTER_CODE_KEY) !== null;
 }
 function getCurrentVoter() {
-  return JSON.parse(localStorage.getItem('wau_voter_info') || '{}');
+  return JSON.parse(localStorage.getItem(VOTER_INFO_KEY) || '{}');
 }
 
 async function registerVoter(name, phone) {
   const submitBtn = document.querySelector('#registration-form button[type="submit"]');
   const originalText = submitBtn.textContent;
-  submitBtn.textContent = '⏳ Verifying device...';
+  submitBtn.textContent = '⏳ Verifying...';
   submitBtn.disabled = true;
 
   try {
     const [fingerprint, ip] = await Promise.all([
-      getFingerprint(),
+      getDeviceFingerprint(),
       getIPAddress()
     ]);
 
     const votingCode = generateVotingCode();
     const voterInfo = {
-      name, phone, code: votingCode,
+      name,
+      phone,
+      code: votingCode,
       registeredAt: new Date().toISOString(),
-      fingerprint, ip
+      fingerprint,
+      ip
     };
 
-    localStorage.setItem('wau_voter_code', votingCode);
-    localStorage.setItem('wau_voter_info', JSON.stringify(voterInfo));
+    // Permanently lock this device to this account
+    lockDeviceToAccount(fingerprint, votingCode, phone);
 
-    // Send registration via JSONP so we get a response
-    return new Promise((resolve) => {
-      const cb = 'wauReg_' + Date.now();
-      window[cb] = function(data) {
-        const s = document.getElementById(cb);
-        if (s) s.remove();
-        delete window[cb];
-        resolve(voterInfo);
-      };
-      const params = new URLSearchParams({
-        action: 'register_voter',
-        callback: cb,
-        name, phone, votingCode,
-        timestamp: new Date().toISOString(),
-        deviceFingerprint: fingerprint,
-        ipAddress: ip,
-        userAgent: navigator.userAgent.slice(0,200),
-        screenRes: screen.width + 'x' + screen.height,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        language: navigator.language,
-        country: cachedIPData.country_name || 'unknown',
-        city: cachedIPData.city || 'unknown'
-      }).toString();
-      const script = document.createElement('script');
-      script.id = cb;
-      script.src = API_URL + '?' + params;
-      script.onerror = () => resolve(voterInfo);
-      document.body.appendChild(script);
-      // Failsafe
-      setTimeout(() => { if (window[cb]) window[cb]({}); }, 8000);
-    });
+    localStorage.setItem(VOTER_CODE_KEY, votingCode);
+    localStorage.setItem(VOTER_INFO_KEY, JSON.stringify(voterInfo));
+
+    // Send full registration data to Google Sheets
+    const params = new URLSearchParams({
+      action: 'register_voter',
+      name,
+      phone,
+      votingCode,
+      timestamp: new Date().toISOString(),
+      deviceFingerprint: fingerprint,
+      ipAddress: ip,
+      userAgent: navigator.userAgent.slice(0,200),
+      screenRes: screen.width + 'x' + screen.height,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      language: navigator.language,
+      country: cachedIPData.country_name || 'unknown',
+      city: cachedIPData.city || 'unknown'
+    }).toString();
+
+    fetch(API_URL + '?' + params, { method:'GET', mode:'no-cors' }).catch(() => {});
+
+    return voterInfo;
   } finally {
     submitBtn.textContent = originalText;
     submitBtn.disabled = false;
@@ -781,7 +899,68 @@ async function registerVoter(name, phone) {
 }
 
 function openRegistration() {
+  // Device already has an account — restore it and go to voting
+  if (isDeviceAlreadyRegistered()) {
+    const reg = getDeviceRegistration();
+    // If voter info is still in storage, go straight to voting
+    if (isVoterRegistered()) {
+      showVotingInterface();
+    } else {
+      // Voter info was cleared but device is still registered
+      // Restore minimum info so they can vote
+      showDeviceAlreadyRegisteredModal(reg);
+    }
+    return;
+  }
   document.getElementById('registration-modal').classList.remove('hidden');
+}
+
+function showDeviceAlreadyRegisteredModal(reg) {
+  const existing = document.getElementById('device-restore-modal');
+  if (existing) existing.remove();
+  const modal = document.createElement('div');
+  modal.id = 'device-restore-modal';
+  modal.className = 'fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4';
+  modal.innerHTML = `
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center">
+      <div class="text-6xl mb-4">🔒</div>
+      <h3 class="text-2xl font-bold text-red-700 mb-2">Device Already Registered</h3>
+      <p class="text-gray-600 mb-4">This device is already linked to an existing account.</p>
+      <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 text-left">
+        <p class="text-sm text-gray-700"><span class="font-bold">Phone:</span> ${reg.phone || 'N/A'}</p>
+        <p class="text-sm text-gray-700 mt-1"><span class="font-bold">Code:</span> ${reg.votingCode || 'N/A'}</p>
+        <p class="text-xs text-red-600 mt-2">⚠️ Each device can only have one account. You cannot create a new one.</p>
+      </div>
+      <button onclick="restoreAccountFromDevice()" 
+        class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-all mb-3">
+        Continue with Existing Account
+      </button>
+      <button onclick="document.getElementById('device-restore-modal').remove();" 
+        class="w-full bg-gray-100 text-gray-700 font-semibold py-3 rounded-lg hover:bg-gray-200 transition-all">
+        Cancel
+      </button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+function restoreAccountFromDevice() {
+  const reg = getDeviceRegistration();
+  if (!reg) return;
+  // Restore minimal voter info from device registration
+  const voterInfo = {
+    name: 'Returning Voter',
+    phone: reg.phone || '',
+    code: reg.votingCode || '',
+    registeredAt: reg.registeredAt || new Date().toISOString(),
+    fingerprint: reg.fingerprint || '',
+    ip: cachedIP
+  };
+  localStorage.setItem(VOTER_CODE_KEY, reg.votingCode);
+  localStorage.setItem(VOTER_INFO_KEY, JSON.stringify(voterInfo));
+  const modal = document.getElementById('device-restore-modal');
+  if (modal) modal.remove();
+  showVotingInterface();
 }
 
 function startVoting() {
@@ -790,7 +969,12 @@ function startVoting() {
 }
 
 function logoutVoter() {
-  alert('🔒 Logout is disabled during the voting period to ensure fairness. Each device gets one vote per subcategory.');
+  if (confirm('Logout? Your device remains linked to your account. You cannot create a new one on this device.')) {
+    localStorage.removeItem(VOTER_CODE_KEY);
+    localStorage.removeItem(VOTER_INFO_KEY);
+    // NEVER remove DEVICE_LOCK_KEY, DEVICE_FP_KEY, VOTES_KEY, or DAILY_KEY
+    location.reload();
+  }
 }
 
 function showVotingInterface() {
@@ -799,15 +983,100 @@ function showVotingInterface() {
   const voter = getCurrentVoter();
   document.getElementById('voting-as-name').textContent = voter.name;
   document.getElementById('voting-code-display').textContent = voter.code;
+  injectDailyStatusBanner();
   renderVoting();
 }
 
+function injectDailyStatusBanner() {
+  const existing = document.getElementById('daily-status-banner');
+  if (existing) existing.remove();
+  const voterBar = document.querySelector('#voting-interface > div:first-child');
+  if (!voterBar) return;
+
+  const today = new Date();
+  const todayStr = today.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
+  const midnight = new Date(today); midnight.setHours(24,0,0,0);
+  const msLeft = midnight - today;
+  const hLeft = Math.floor(msLeft/36e5);
+  const mLeft = Math.floor((msLeft%36e5)/6e4);
+  const daysToEnd = Math.max(0, Math.ceil((VOTE_END - today)/864e5));
+
+  const banner = document.createElement('div');
+  banner.id = 'daily-status-banner';
+  banner.className = 'bg-gradient-to-r from-blue-50 to-green-50 border-2 border-blue-200 rounded-xl p-4 mb-6 flex flex-wrap items-center justify-between gap-3';
+  banner.innerHTML = `
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">🗓️</span>
+      <div>
+        <p class="text-xs text-blue-600 font-bold uppercase tracking-wide">Today — ${todayStr}</p>
+        <p class="text-sm font-semibold text-gray-700">Votes reset in <strong>${hLeft}h ${mLeft}m</strong></p>
+      </div>
+    </div>
+    <div class="text-right">
+      <p class="text-xs font-bold text-green-700">${daysToEnd} day${daysToEnd !== 1 ? 's' : ''} left to vote</p>
+      <p class="text-xs text-gray-500">1 vote per subcategory per day</p>
+    </div>
+  `;
+  voterBar.insertAdjacentElement('afterend', banner);
+}
+
+/* ============================================
+   REGISTRATION FORM + PAGE LOAD
+   ============================================ */
 document.addEventListener('DOMContentLoaded', function() {
+
+  // Phone number live validation feedback
+  const phoneInput = document.getElementById('voter-phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function() {
+      const result = validatePhone(this.value);
+      let feedback = document.getElementById('phone-feedback');
+      if (!feedback) {
+        feedback = document.createElement('p');
+        feedback.id = 'phone-feedback';
+        feedback.className = 'text-xs mt-1';
+        this.parentElement.appendChild(feedback);
+      }
+      if (this.value.length < 5) {
+        feedback.textContent = '';
+        return;
+      }
+      if (result.valid) {
+        feedback.textContent = '✅ Valid phone number';
+        feedback.className = 'text-xs mt-1 text-green-600';
+        this.classList.remove('border-red-500');
+        this.classList.add('border-green-500');
+      } else {
+        feedback.textContent = '❌ ' + result.message;
+        feedback.className = 'text-xs mt-1 text-red-500';
+        this.classList.remove('border-green-500');
+        this.classList.add('border-red-500');
+      }
+    });
+  }
+
   document.getElementById('registration-form').addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Block if device already has an account
+    if (isDeviceAlreadyRegistered()) {
+      document.getElementById('registration-modal').classList.add('hidden');
+      const reg = getDeviceRegistration();
+      showDeviceAlreadyRegisteredModal(reg);
+      return;
+    }
+
     const name = document.getElementById('voter-name').value.trim();
     const phone = document.getElementById('voter-phone').value.trim();
+
     if (!name || !phone) { alert('Please fill in all fields'); return; }
+
+    // Validate phone
+    const phoneCheck = validatePhone(phone);
+    if (!phoneCheck.valid) {
+      alert('❌ ' + phoneCheck.message);
+      return;
+    }
 
     try {
       const voterInfo = await registerVoter(name, phone);
@@ -822,36 +1091,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  if (isVoterRegistered()) showVotingInterface();
+  // Page load — decide what to show
+  if (isDeviceAlreadyRegistered() && isVoterRegistered()) {
+    // Fully set up — go straight to voting
+    showVotingInterface();
+  } else if (isDeviceAlreadyRegistered() && !isVoterRegistered()) {
+    // Device registered but info cleared (e.g. after logout)
+    restoreAccountFromDevice();
+  } else if (isVoterRegistered()) {
+    // Old session without device lock — add device lock now
+    getDeviceFingerprint().then(fp => {
+      const voter = getCurrentVoter();
+      lockDeviceToAccount(fp, voter.code, voter.phone);
+      showVotingInterface();
+    });
+  }
+  // else: show registration CTA (fresh user)
 
-  // Pre-fetch IP and fingerprint in background
   getIPAddress().catch(() => {});
-  getFingerprint().catch(() => {});
-
   initializeResults();
 });
 
 /* ============================================
-   VOTING STORAGE (cache only — server is truth)
-   ============================================ */
-function getVotes() { return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}'); }
-function saveVotes(v) { localStorage.setItem('wau_votes_2026', JSON.stringify(v)); }
-function getSubKey(category, subcategory) {
-  return 'sub_' + category + '_' + (subcategory || 'none');
-}
-function hasVotedInSubcategory(category, subcategory) {
-  return getVotes()[getSubKey(category, subcategory)] !== undefined;
-}
-function getVoteInSubcategory(category, subcategory) {
-  return getVotes()[getSubKey(category, subcategory)];
-}
-
-/* ============================================
-   RENDER VOTING
+   RENDER VOTING — Shows today's status per subcategory
    ============================================ */
 function renderVoting() {
   const grid = document.getElementById('vote-grid');
-  const votes = getVotes();
   const votingOpen = periodStatus(VOTE_START, VOTE_END) === 'active';
 
   const grouped = {};
@@ -866,9 +1131,9 @@ function renderVoting() {
   Object.entries(grouped).forEach(([category, subcategories]) => {
     html += `<div class="category-header mb-2"><h3 class="text-2xl font-black text-white flex items-center gap-2">🏆 ${category}</h3></div>`;
     Object.entries(subcategories).forEach(([subcategory, nominees]) => {
-      const subKey = getSubKey(category, subcategory === 'General' ? '' : subcategory);
-      const alreadyVotedId = votes[subKey];
-      const votedInThisSub = alreadyVotedId !== undefined;
+      // Check TODAY's votes for this subcategory
+      const votedTodayId = getTodayVotedSubcategoryNominee(category, subcategory === 'General' ? '' : subcategory);
+      const votedToday = votedTodayId !== undefined;
 
       html += `
         <div class="subcategory-header flex items-center justify-between mb-4">
@@ -877,22 +1142,25 @@ function renderVoting() {
             <h4 class="text-lg font-bold text-gray-800">${subcategory === 'General' ? category : subcategory}</h4>
           </div>
           <div class="text-right">
-            ${votedInThisSub
-              ? '<span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold">✅ Voted</span>'
+            ${votedToday
+              ? '<span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold">✅ Voted Today</span>'
               : votingOpen
               ? '<span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-bold">Pick 1</span>'
-              : '<span class="text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full font-bold">Closed</span>'}
+              : '<span class="text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full font-bold">Closed</span>'
+            }
           </div>
-        </div>`;
+        </div>
+      `;
 
       html += `<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">`;
       nominees.forEach(n => {
-        const hasVoted = alreadyVotedId === n.id;
+        const votedThisToday = votedTodayId === n.id;
         const voteCount = n.votes || 0;
+
         html += `
-          <div class="vote-card ${hasVoted ? 'voted' : ''}">
+          <div class="vote-card ${votedThisToday ? 'voted' : ''}">
             <div class="photo-wrap">
-              ${hasVoted ? '<span class="voted-badge">✅ YOUR VOTE</span>' : ''}
+              ${votedThisToday ? '<span class="voted-badge">✅ TODAY</span>' : ''}
               ${n.photo
                 ? `<img src="${n.photo}" alt="${n.name}" onerror="this.style.display='none';this.parentElement.innerHTML+='<div class=\\'w-full h-full flex items-center justify-center text-5xl\\'>👤</div>';"/>`
                 : '<div class="w-full h-full flex items-center justify-center text-5xl bg-green-50">👤</div>'}
@@ -913,16 +1181,18 @@ function renderVoting() {
                   <span class="text-lg font-bold text-green-700">${voteCount}</span>
                   <span class="text-xs text-gray-400">${voteCount === 1 ? 'vote' : 'votes'}</span>
                 </div>
-                ${votingOpen && !votedInThisSub
+                ${votingOpen && !votedToday
                   ? `<button onclick="castVote(${n.id})" class="vote-btn px-5 py-2 bg-green-600 text-white rounded-lg font-bold text-sm hover:bg-green-700 shadow-sm">Vote</button>`
-                  : hasVoted
-                  ? '<span class="text-sm font-bold text-green-600">✅ Your Vote</span>'
-                  : votedInThisSub
-                  ? '<span class="text-xs text-gray-400 font-medium">Already voted here</span>'
-                  : '<span class="text-xs text-gray-400 font-medium">Voting closed</span>'}
+                  : votedThisToday
+                  ? '<span class="text-sm font-bold text-green-600">✅ Your Vote Today</span>'
+                  : votedToday
+                  ? '<span class="text-xs text-gray-400 font-medium">Voted today</span>'
+                  : '<span class="text-xs text-gray-400 font-medium">Voting closed</span>'
+                }
               </div>
             </div>
-          </div>`;
+          </div>
+        `;
       });
       html += `</div>`;
     });
@@ -933,7 +1203,7 @@ function renderVoting() {
 }
 
 /* ============================================
-   CAST VOTE — uses JSONP so server can REJECT duplicates
+   CAST VOTE
    ============================================ */
 async function castVote(id) {
   if (!isVoterRegistered()) { openRegistration(); return; }
@@ -943,91 +1213,86 @@ async function castVote(id) {
 
   const category = nominee.category;
   const subcategory = nominee.subcategory || '';
-  const subKey = getSubKey(category, subcategory || 'none');
-  const votes = getVotes();
   const voter = getCurrentVoter();
 
-  if (hasVotedInSubcategory(category, subcategory)) {
-    const prevId = getVoteInSubcategory(category, subcategory);
+  // Check if already voted TODAY in this subcategory
+  if (hasVotedTodayInSubcategory(category, subcategory)) {
+    const prevId = getTodayVotedSubcategoryNominee(category, subcategory);
     const prev = approvedNominees.find(n => n.id === prevId);
-    alert(`You already voted for "${prev ? prev.name : 'someone'}" in "${subcategory || category}". One vote per subcategory.`);
+
+    // Show "come back tomorrow" modal
+    showAlreadyVotedTodayModal(prev ? prev.name : 'someone', subcategory || category);
     return;
   }
 
-  // Find the button and show loading
-  const btn = document.querySelector(`button[onclick="castVote(${id})"]`);
-  const originalLabel = btn ? btn.textContent : '';
-  if (btn) { btn.textContent = '⏳'; btn.disabled = true; }
-
   const ip = await getIPAddress();
-  const fingerprint = await getFingerprint();
+  const fingerprint = getStoredFingerprint() || await getDeviceFingerprint();
 
-  // JSONP vote so server can reject
-  const cb = 'wauVote_' + Date.now();
-  window[cb] = function(data) {
-    const s = document.getElementById(cb);
-    if (s) s.remove();
-    delete window[cb];
-
-    if (btn) { btn.textContent = originalLabel; btn.disabled = false; }
-
-    if (data && data.status === 'success') {
-      votes[subKey] = id;
-      saveVotes(votes);
-      nominee.votes = (nominee.votes || 0) + 1;
-      showVoteToast(nominee.name, subcategory || category);
-      renderVoting();
-    } else if (data && data.status === 'duplicate') {
-      alert(`⚠️ ${data.message || 'This device or network has already voted in this subcategory. Multiple voting is not allowed.'}`);
-      // Sync local cache so the UI shows "Already voted"
-      if (data.previousNomineeId) {
-        votes[subKey] = data.previousNomineeId;
-        saveVotes(votes);
-      }
-      renderVoting();
-    } else {
-      alert('Could not submit vote. Please try again.');
-    }
-  };
-
+  // Send to Google Sheets — votes accumulate server-side
   const params = new URLSearchParams({
     action: 'vote',
-    callback: cb,
     votingCode: voter.code,
     voterName: voter.name,
-    voterPhone: voter.phone || '',
     nomineeId: id,
     nomineeName: nominee.name,
-    category: category,
-    subcategory: subcategory,
+    category,
+    subcategory,
     timestamp: new Date().toISOString(),
+    voteDate: getTodayString(),
     deviceFingerprint: fingerprint,
     ipAddress: ip,
     userAgent: navigator.userAgent.slice(0,200)
   }).toString();
 
-  const script = document.createElement('script');
-  script.id = cb;
-  script.src = API_URL + '?' + params;
-  script.onerror = function() {
-    if (btn) { btn.textContent = originalLabel; btn.disabled = false; }
-    alert('Network error. Please try again.');
-    const s = document.getElementById(cb);
-    if (s) s.remove();
-    delete window[cb];
-  };
-  document.body.appendChild(script);
+  fetch(API_URL + '?' + params, { method:'GET', mode:'no-cors' }).catch(() => {});
 
-  // Failsafe in case server never responds
-  setTimeout(() => {
-    if (window[cb]) {
-      if (btn) { btn.textContent = originalLabel; btn.disabled = false; }
-      alert('Vote timed out. Please try again.');
-      const s = document.getElementById(cb);
-      if (s) s.remove();
-      delete window[cb];
-    }
-  }, 12000);
+  // Record in daily tracker (not cumulative — just today's record)
+  recordDailyVote(category, subcategory, id);
+
+  // Update cumulative local display count
+  const votes = getVotes();
+  votes['count_' + id] = (votes['count_' + id] || 0) + 1;
+  saveVotes(votes);
+  nominee.votes = (nominee.votes || 0) + 1;
+
+  showVoteToast(nominee.name, subcategory || category);
+  renderVoting();
+}
+
+function showAlreadyVotedTodayModal(prevName, subcategory) {
+  const existing = document.getElementById('voted-today-modal');
+  if (existing) existing.remove();
+
+  const now = new Date();
+  const midnight = new Date(now); midnight.setHours(24,0,0,0);
+  const msLeft = midnight - now;
+  const hLeft = Math.floor(msLeft/36e5);
+  const mLeft = Math.floor((msLeft%36e5)/6e4);
+
+  const modal = document.createElement('div');
+  modal.id = 'voted-today-modal';
+  modal.className = 'fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4';
+  modal.innerHTML = `
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center">
+      <div class="text-6xl mb-4">🗓️</div>
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2">Already Voted Today!</h3>
+      <p class="text-gray-600 mb-2">You voted for <strong>${prevName}</strong> in <strong>${subcategory}</strong> today.</p>
+      <div class="bg-yellow-50 border border-yellow-300 rounded-lg p-4 mb-4">
+        <p class="text-sm text-yellow-800 font-semibold">⏰ Next vote available in:</p>
+        <p class="text-3xl font-black text-yellow-700 mt-1">${hLeft}h ${mLeft}m</p>
+        <p class="text-xs text-yellow-600 mt-1">Votes reset at midnight — come back tomorrow!</p>
+      </div>
+      <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-6">
+        <p class="text-xs text-green-700 font-semibold">✅ Your previous votes are saved and accumulating</p>
+        <p class="text-xs text-green-600 mt-1">Every day you vote adds to the total count</p>
+      </div>
+      <button onclick="document.getElementById('voted-today-modal').remove();"
+        class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-all">
+        Got it! I'll come back tomorrow 👍
+      </button>
+    </div>
+  `;
+  document.body.appendChild(modal);
 }
 
 /* ============================================
@@ -1059,7 +1324,6 @@ function initializeResults() {
 function fetchVotesFromSheets() {
   const lastUpdatedEl = document.getElementById('last-updated');
   if (lastUpdatedEl) lastUpdatedEl.textContent = 'Fetching from Google Sheet...';
-
   const callbackName = 'wauVotesCallback_' + Date.now();
   window[callbackName] = function(data) {
     try {
@@ -1079,7 +1343,6 @@ function fetchVotesFromSheets() {
       delete window[callbackName];
     }
   };
-
   const script = document.createElement('script');
   script.id = callbackName;
   script.src = API_URL + '?action=get_votes&callback=' + callbackName + '&_=' + Date.now();
@@ -1117,7 +1380,6 @@ function filterResults(cat) {
 function updateLiveResults() {
   const grid = document.getElementById('results-grid');
   if (!grid) return;
-
   const grouped = {};
   approvedNominees.forEach(n => {
     if (!grouped[n.category]) grouped[n.category] = {};
@@ -1125,68 +1387,74 @@ function updateLiveResults() {
     if (!grouped[n.category][sub]) grouped[n.category][sub] = [];
     grouped[n.category][sub].push(n);
   });
-
   let html = '';
   Object.entries(grouped).forEach(([category, subcategories]) => {
     const catTotal = approvedNominees.filter(n => n.category === category).reduce((sum, n) => sum + (n.votes || 0), 0);
-    html += `<div class="result-section mb-10" data-cat="${category}">
-      <div class="bg-gradient-to-r from-green-700 to-green-600 text-white px-6 py-4 rounded-xl font-bold text-xl flex items-center justify-between mb-4">
-        <span>🏆 ${category}</span>
-        <span class="text-sm font-normal opacity-80">${catTotal} total vote${catTotal !== 1 ? 's' : ''}</span>
-      </div>`;
+    html += `
+      <div class="result-section mb-10" data-cat="${category}">
+        <div class="bg-gradient-to-r from-green-700 to-green-600 text-white px-6 py-4 rounded-xl font-bold text-xl flex items-center justify-between mb-4">
+          <span>🏆 ${category}</span>
+          <span class="text-sm font-normal opacity-80">${catTotal} total vote${catTotal !== 1 ? 's' : ''}</span>
+        </div>
+    `;
     Object.entries(subcategories).forEach(([subcategory, nominees]) => {
       const subTotal = nominees.reduce((sum, n) => sum + (n.votes || 0), 0);
       const sorted = [...nominees].sort((a, b) => (b.votes || 0) - (a.votes || 0));
       const winner = sorted[0];
       const hasVotes = subTotal > 0;
-      html += `<div class="bg-white rounded-xl shadow border border-gray-200 mb-6 overflow-hidden">
-        <div class="bg-gradient-to-r from-green-50 to-yellow-50 border-l-4 border-green-500 px-5 py-3 flex items-center justify-between">
-          <div>
-            <p class="text-xs text-green-600 font-bold uppercase tracking-wider">Subcategory</p>
-            <h5 class="text-lg font-bold text-gray-800">${subcategory === 'General' ? category : subcategory}</h5>
+      html += `
+        <div class="bg-white rounded-xl shadow border border-gray-200 mb-6 overflow-hidden">
+          <div class="bg-gradient-to-r from-green-50 to-yellow-50 border-l-4 border-green-500 px-5 py-3 flex items-center justify-between">
+            <div>
+              <p class="text-xs text-green-600 font-bold uppercase tracking-wider">Subcategory</p>
+              <h5 class="text-lg font-bold text-gray-800">${subcategory === 'General' ? category : subcategory}</h5>
+            </div>
+            <span class="text-sm text-gray-500 font-semibold">${subTotal} vote${subTotal !== 1 ? 's' : ''} total</span>
           </div>
-          <span class="text-sm text-gray-500 font-semibold">${subTotal} vote${subTotal !== 1 ? 's' : ''} total</span>
-        </div>
-        ${hasVotes ? `<div class="bg-yellow-400 px-5 py-3 flex items-center gap-3">
-          <span class="text-2xl">🥇</span>
-          <div>
-            <p class="text-xs font-bold text-yellow-900 uppercase tracking-wider">Current Leader</p>
-            <p class="text-lg font-black text-yellow-900">${winner.name}</p>
-          </div>
-          <div class="ml-auto text-right">
-            <p class="text-3xl font-black text-yellow-900">${winner.votes}</p>
-            <p class="text-xs text-yellow-800">votes</p>
-          </div>
-        </div>` : `<div class="bg-gray-100 px-5 py-3 text-center text-gray-500 text-sm font-semibold">No votes yet</div>`}
-        <div class="p-4 space-y-3">
-          ${sorted.map((n, index) => {
-            const voteCount = n.votes || 0;
-            const percentage = subTotal > 0 ? Math.round((voteCount / subTotal) * 100) : 0;
-            let medal = '', rowBg = 'bg-gray-50', barColor = 'bg-green-400';
-            if (index === 0 && voteCount > 0) { medal = '🥇'; rowBg = 'bg-yellow-50 border border-yellow-300'; barColor = 'bg-yellow-400'; }
-            else if (index === 1 && voteCount > 0) { medal = '🥈'; rowBg = 'bg-gray-100 border border-gray-300'; barColor = 'bg-gray-400'; }
-            else if (index === 2 && voteCount > 0) { medal = '🥉'; rowBg = 'bg-orange-50 border border-orange-200'; barColor = 'bg-orange-400'; }
-            else { medal = `${index + 1}.`; }
-            return `<div class="flex items-center gap-3 p-3 rounded-lg ${rowBg}">
-              ${n.photo ? `<img src="${n.photo}" alt="${n.name}" class="w-12 h-12 rounded-lg object-cover border-2 border-white shadow flex-shrink-0" onerror="this.style.display='none'"/>` : '<div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center text-xl flex-shrink-0">👤</div>'}
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="font-bold text-gray-800 text-sm">${medal} ${n.name}</span>
-                  <div class="flex items-baseline gap-1 ml-2 flex-shrink-0">
-                    <span class="text-xl font-black text-green-700">${voteCount}</span>
-                    <span class="text-xs text-gray-400">votes</span>
+          ${hasVotes ? `
+          <div class="bg-yellow-400 px-5 py-3 flex items-center gap-3">
+            <span class="text-2xl">🥇</span>
+            <div>
+              <p class="text-xs font-bold text-yellow-900 uppercase tracking-wider">Current Leader</p>
+              <p class="text-lg font-black text-yellow-900">${winner.name}</p>
+            </div>
+            <div class="ml-auto text-right">
+              <p class="text-3xl font-black text-yellow-900">${winner.votes}</p>
+              <p class="text-xs text-yellow-800">votes</p>
+            </div>
+          </div>` : `<div class="bg-gray-100 px-5 py-3 text-center text-gray-500 text-sm font-semibold">No votes yet</div>`}
+          <div class="p-4 space-y-3">
+            ${sorted.map((n, index) => {
+              const voteCount = n.votes || 0;
+              const percentage = subTotal > 0 ? Math.round((voteCount / subTotal) * 100) : 0;
+              let medal = '', rowBg = 'bg-gray-50', barColor = 'bg-green-400';
+              if (index === 0 && voteCount > 0) { medal = '🥇'; rowBg = 'bg-yellow-50 border border-yellow-300'; barColor = 'bg-yellow-400'; }
+              else if (index === 1 && voteCount > 0) { medal = '🥈'; rowBg = 'bg-gray-100 border border-gray-300'; barColor = 'bg-gray-400'; }
+              else if (index === 2 && voteCount > 0) { medal = '🥉'; rowBg = 'bg-orange-50 border border-orange-200'; barColor = 'bg-orange-400'; }
+              else { medal = `${index + 1}.`; }
+              return `
+                <div class="flex items-center gap-3 p-3 rounded-lg ${rowBg}">
+                  ${n.photo ? `<img src="${n.photo}" alt="${n.name}" class="w-12 h-12 rounded-lg object-cover border-2 border-white shadow flex-shrink-0" onerror="this.style.display='none'"/>` : '<div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center text-xl flex-shrink-0">👤</div>'}
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="font-bold text-gray-800 text-sm">${medal} ${n.name}</span>
+                      <div class="flex items-baseline gap-1 ml-2 flex-shrink-0">
+                        <span class="text-xl font-black text-green-700">${voteCount}</span>
+                        <span class="text-xs text-gray-400">votes</span>
+                      </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mb-1">${n.nationality}</p>
+                    <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                      <div class="${barColor} h-full rounded-full transition-all duration-700" style="width:${percentage}%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-0.5 font-semibold">${percentage}% of votes in this subcategory</p>
                   </div>
                 </div>
-                <p class="text-xs text-gray-400 mb-1">${n.nationality}</p>
-                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                  <div class="${barColor} h-full rounded-full transition-all duration-700" style="width:${percentage}%"></div>
-                </div>
-                <p class="text-xs text-gray-500 mt-0.5 font-semibold">${percentage}% of votes in this subcategory</p>
-              </div>
-            </div>`;
-          }).join('')}
+              `;
+            }).join('')}
+          </div>
         </div>
-      </div>`;
+      `;
     });
     html += `</div>`;
   });
@@ -1198,7 +1466,7 @@ window.addEventListener('beforeunload', () => {
 });
 
 /* ============================================
-   SCROLL REVEAL + ACTIVE NAV
+   SCROLL REVEAL
    ============================================ */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {

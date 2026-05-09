@@ -477,7 +477,7 @@ const approvedNominees = [
   {"id":10,"name":"Dr Tinotenda B Madzikatire","nationality":"🇿🇼 Zimbabwe","category":"Long-Term Dedication","subcategory":"Community Leadership","contributions":["One of the founders and current serving President of the Zimbabwean Association Wenzhou","Established mental health support groups"],"votes":0,"photo":"nominees/drtinotendabmadzikatire.jpg"},
   {"id":11,"name":"Dr Tinotenda B Madzikatire","nationality":"🇿🇼 Zimbabwe","category":"Long-Term Dedication","subcategory":"Consistent Service","contributions":["Part of the founders and first leadership of Wenzhou AU","Organized quarterly wellness check-ins"],"votes":0,"photo":"nominees/drtinotendabmadzikatire.jpg"},
   {"id":12,"name":"Jenifer Asoh","nationality":"🇳🇬 Nigeria","category":"African Talent of the Year","subcategory":"Social Media","contributions":[],"votes":0,"photo":"nominees/jeniferasoh.jpg"},
-  {"id":13,"name":"LaYouthy Events","nationality":"🇿🇼 Zimbabwe 🇱🇸Lesotho","category":"Business of the Year","subcategory":"Event Planning & Decor","contributions":[],"votes":0,"photo":"nominees/layouthyevents.jpg"},
+  {"id":13,"name":"LaYouthy Events","nationality":"🇿🇼 Zimbabwe 🇱🇸 Lesotho","category":"Business of the Year","subcategory":"Event Planning & Decor","contributions":[],"votes":0,"photo":"nominees/layouthyevents.jpg"},
   {"id":14,"name":"LetsTalkMedicine","nationality":"🌍 Africa","category":"Social Impact Award","subcategory":"Volunteer of the Year","contributions":["Organized 10+ free health screening camps, CPR trainings","Volunteered 500+ hours of medical consultation"],"votes":0,"photo":"nominees/letstalkmedicine.jpg"},
   {"id":15,"name":"LetsTalkMedicine","nationality":"🌍 Africa","category":"Health & Fitness Excellence","subcategory":"Wellness Advocate","contributions":["Launched numerous wellness awareness campaigns reaching 200+ people","Provided free fitness and nutrition workshops"],"votes":0,"photo":"nominees/letstalkmedicine.jpg"},
   {"id":16,"name":"Mukudzei Makurira","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Music","contributions":[],"votes":0,"photo":"nominees/mukudzei.jpg"},
@@ -504,9 +504,9 @@ const approvedNominees = [
   {"id":37,"name":"Nandi (NmVHair)","nationality":"🇿🇲 Zambia","category":"Business of the Year","subcategory":"Hair & Beauty","contributions":[],"votes":0,"photo":"nominees/nmvhair.jpg"},
   {"id":38,"name":"Mukudzei Makurira","nationality":"🇿🇼 Zimbabwe","category":"Health & Fitness Excellence","subcategory":"Personal Trainer","contributions":[],"votes":0,"photo":"nominees/mukudzei.jpg"},
   {"id":39,"name":"Lebo","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Sports","contributions":[],"votes":0,"photo":"nominees/lebo.jpg"},
-  {"id":40,"name":"Marcelo","nationality":"🇰🇪 Kenya","category":"African Talent of the Year","subcategory":"Sports","contributions":[],"votes": 0, "photo":"nominees/marcelo.jpg"},
-  {"id":41,"name":"Tana.Vuka.Haven","nationality":"🇿🇼 Zimbabwe","category":"Business of the Year","subcategory":"Hair & Beauty","contributions":[],"votes": 0,"photo":"nominees/tana.jpg"},
-  {"id":42,"name":"Craig","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Dance","contributions":[],"votes": 0,"photo":"nominees/craig.jpg"}
+  {"id":40,"name":"Marcelo","nationality":"🇰🇪 Kenya","category":"African Talent of the Year","subcategory":"Sports","contributions":[],"votes":0,"photo":"nominees/marcelo.jpg"},
+  {"id":41,"name":"Tana.Vuka.Haven","nationality":"🇿🇼 Zimbabwe","category":"Business of the Year","subcategory":"Hair & Beauty","contributions":[],"votes":0,"photo":"nominees/tana.jpg"},
+  {"id":42,"name":"Craig","nationality":"🇿🇼 Zimbabwe","category":"African Talent of the Year","subcategory":"Dance","contributions":[],"votes":0,"photo":"nominees/craig.jpg"}
 ];
 
 /* ============================================
@@ -516,6 +516,133 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbyIcfynjJtUtU4hLzTZAN_q
 const VOTE_START = new Date('2026-05-09T00:00:00');
 const VOTE_END   = new Date('2026-05-19T23:59:59');
 const GALA       = new Date('2026-05-23T18:00:00');
+
+/* ============================================
+   DEVICE FINGERPRINTING
+   ============================================ */
+async function getDeviceFingerprint() {
+  const components = [
+    navigator.userAgent,
+    navigator.language,
+    navigator.languages ? navigator.languages.join(',') : '',
+    screen.width + 'x' + screen.height,
+    screen.colorDepth,
+    new Date().getTimezoneOffset(),
+    navigator.hardwareConcurrency || '',
+    navigator.deviceMemory || '',
+    navigator.platform || '',
+    navigator.vendor || '',
+    getCanvasFingerprint(),
+    getWebGLFingerprint(),
+    navigator.plugins ? navigator.plugins.length : 0,
+    'ontouchstart' in window,
+    await getAudioFingerprint()
+  ];
+  const raw = components.join('|||');
+  return await hashString(raw);
+}
+
+function getCanvasFingerprint() {
+  try {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(125, 1, 62, 20);
+    ctx.fillStyle = '#069';
+    ctx.fillText('WAU2026🌍', 2, 15);
+    ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
+    ctx.fillText('WAU2026🌍', 4, 17);
+    return canvas.toDataURL().slice(-50);
+  } catch(e) { return 'canvas_err'; }
+}
+
+function getWebGLFingerprint() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return 'no_webgl';
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    if (debugInfo) {
+      return gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) + '~' +
+             gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+    }
+    return gl.getParameter(gl.RENDERER);
+  } catch(e) { return 'webgl_err'; }
+}
+
+async function getAudioFingerprint() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return 'no_audio';
+    const ctx = new AC();
+    const oscillator = ctx.createOscillator();
+    const analyser = ctx.createAnalyser();
+    const gain = ctx.createGain();
+    gain.gain.value = 0;
+    oscillator.connect(analyser);
+    analyser.connect(gain);
+    gain.connect(ctx.destination);
+    oscillator.start(0);
+    const data = new Float32Array(analyser.frequencyBinCount);
+    analyser.getFloatFrequencyData(data);
+    oscillator.stop();
+    await ctx.close();
+    return data.slice(0,5).join(',');
+  } catch(e) { return 'audio_err'; }
+}
+
+async function hashString(str) {
+  try {
+    const msgBuffer = new TextEncoder().encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2,'0')).join('').slice(0,32);
+  } catch(e) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash = hash & hash;
+    }
+    return Math.abs(hash).toString(16).padStart(32,'0');
+  }
+}
+
+/* ============================================
+   IP ADDRESS CAPTURE
+   ============================================ */
+let cachedIP = 'unknown';
+let cachedIPData = {};
+
+async function getIPAddress() {
+  if (cachedIP !== 'unknown') return cachedIP;
+  const services = [
+    'https://api.ipify.org?format=json',
+    'https://api64.ipify.org?format=json'
+  ];
+  for (const service of services) {
+    try {
+      const res = await fetch(service);
+      const data = await res.json();
+      cachedIP = data.ip || 'unknown';
+      if (cachedIP !== 'unknown') break;
+    } catch(e) { continue; }
+  }
+  try {
+    const geoRes = await fetch(`https://ipapi.co/${cachedIP}/json/`);
+    cachedIPData = await geoRes.json();
+  } catch(e) {}
+  return cachedIP;
+}
+
+// Pre-compute and cache fingerprint
+let cachedFingerprint = null;
+async function getFingerprint() {
+  if (cachedFingerprint) return cachedFingerprint;
+  cachedFingerprint = await getDeviceFingerprint();
+  return cachedFingerprint;
+}
 
 /* ============================================
    MOBILE MENU
@@ -593,28 +720,79 @@ function isVoterRegistered() {
 function getCurrentVoter() {
   return JSON.parse(localStorage.getItem('wau_voter_info') || '{}');
 }
-function registerVoter(name, phone) {
-  const votingCode = generateVotingCode();
-  const voterInfo = { name, phone, code: votingCode, registeredAt: new Date().toISOString() };
-  localStorage.setItem('wau_voter_code', votingCode);
-  localStorage.setItem('wau_voter_info', JSON.stringify(voterInfo));
-  const params = new URLSearchParams({ action:'register_voter', name, phone, votingCode, timestamp: new Date().toISOString() }).toString();
-  fetch(API_URL + '?' + params, { method:'GET', mode:'no-cors' }).catch(() => {});
-  return voterInfo;
+
+async function registerVoter(name, phone) {
+  const submitBtn = document.querySelector('#registration-form button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = '⏳ Verifying device...';
+  submitBtn.disabled = true;
+
+  try {
+    const [fingerprint, ip] = await Promise.all([
+      getFingerprint(),
+      getIPAddress()
+    ]);
+
+    const votingCode = generateVotingCode();
+    const voterInfo = {
+      name, phone, code: votingCode,
+      registeredAt: new Date().toISOString(),
+      fingerprint, ip
+    };
+
+    localStorage.setItem('wau_voter_code', votingCode);
+    localStorage.setItem('wau_voter_info', JSON.stringify(voterInfo));
+
+    // Send registration via JSONP so we get a response
+    return new Promise((resolve) => {
+      const cb = 'wauReg_' + Date.now();
+      window[cb] = function(data) {
+        const s = document.getElementById(cb);
+        if (s) s.remove();
+        delete window[cb];
+        resolve(voterInfo);
+      };
+      const params = new URLSearchParams({
+        action: 'register_voter',
+        callback: cb,
+        name, phone, votingCode,
+        timestamp: new Date().toISOString(),
+        deviceFingerprint: fingerprint,
+        ipAddress: ip,
+        userAgent: navigator.userAgent.slice(0,200),
+        screenRes: screen.width + 'x' + screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        language: navigator.language,
+        country: cachedIPData.country_name || 'unknown',
+        city: cachedIPData.city || 'unknown'
+      }).toString();
+      const script = document.createElement('script');
+      script.id = cb;
+      script.src = API_URL + '?' + params;
+      script.onerror = () => resolve(voterInfo);
+      document.body.appendChild(script);
+      // Failsafe
+      setTimeout(() => { if (window[cb]) window[cb]({}); }, 8000);
+    });
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
 }
+
 function openRegistration() {
   document.getElementById('registration-modal').classList.remove('hidden');
 }
+
 function startVoting() {
   document.getElementById('code-display-modal').classList.add('hidden');
   showVotingInterface();
 }
+
 function logoutVoter() {
-  if (confirm('Logout? You will need to register again to vote.')) {
-    ['wau_voter_code','wau_voter_info','wau_votes_2026'].forEach(k => localStorage.removeItem(k));
-    location.reload();
-  }
+  alert('🔒 Logout is disabled during the voting period to ensure fairness. Each device gets one vote per subcategory.');
 }
+
 function showVotingInterface() {
   document.getElementById('registration-cta').classList.add('hidden');
   document.getElementById('voting-interface').classList.remove('hidden');
@@ -625,28 +803,39 @@ function showVotingInterface() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('registration-form').addEventListener('submit', function(e) {
+  document.getElementById('registration-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('voter-name').value.trim();
     const phone = document.getElementById('voter-phone').value.trim();
     if (!name || !phone) { alert('Please fill in all fields'); return; }
-    const voterInfo = registerVoter(name, phone);
-    document.getElementById('registration-modal').classList.add('hidden');
-    document.getElementById('code-display-modal').classList.remove('hidden');
-    document.getElementById('display-code').textContent = voterInfo.code;
-    document.getElementById('display-name').textContent = voterInfo.name;
-    document.getElementById('display-phone').textContent = voterInfo.phone;
+
+    try {
+      const voterInfo = await registerVoter(name, phone);
+      document.getElementById('registration-modal').classList.add('hidden');
+      document.getElementById('code-display-modal').classList.remove('hidden');
+      document.getElementById('display-code').textContent = voterInfo.code;
+      document.getElementById('display-name').textContent = voterInfo.name;
+      document.getElementById('display-phone').textContent = voterInfo.phone;
+    } catch(err) {
+      alert('Registration failed. Please try again.');
+      console.error(err);
+    }
   });
+
   if (isVoterRegistered()) showVotingInterface();
+
+  // Pre-fetch IP and fingerprint in background
+  getIPAddress().catch(() => {});
+  getFingerprint().catch(() => {});
+
   initializeResults();
 });
 
 /* ============================================
-   VOTING STORAGE
+   VOTING STORAGE (cache only — server is truth)
    ============================================ */
 function getVotes() { return JSON.parse(localStorage.getItem('wau_votes_2026') || '{}'); }
 function saveVotes(v) { localStorage.setItem('wau_votes_2026', JSON.stringify(v)); }
-
 function getSubKey(category, subcategory) {
   return 'sub_' + category + '_' + (subcategory || 'none');
 }
@@ -658,14 +847,13 @@ function getVoteInSubcategory(category, subcategory) {
 }
 
 /* ============================================
-   RENDER VOTING - GROUPED BY CATEGORY & SUBCATEGORY
+   RENDER VOTING
    ============================================ */
 function renderVoting() {
   const grid = document.getElementById('vote-grid');
   const votes = getVotes();
   const votingOpen = periodStatus(VOTE_START, VOTE_END) === 'active';
 
-  // Group by category then subcategory
   const grouped = {};
   approvedNominees.forEach(n => {
     if (!grouped[n.category]) grouped[n.category] = {};
@@ -675,21 +863,13 @@ function renderVoting() {
   });
 
   let html = '';
-
   Object.entries(grouped).forEach(([category, subcategories]) => {
-    // Category header
-    html += `
-      <div class="category-header mb-2">
-        <h3 class="text-2xl font-black text-white flex items-center gap-2">🏆 ${category}</h3>
-      </div>
-    `;
-
+    html += `<div class="category-header mb-2"><h3 class="text-2xl font-black text-white flex items-center gap-2">🏆 ${category}</h3></div>`;
     Object.entries(subcategories).forEach(([subcategory, nominees]) => {
       const subKey = getSubKey(category, subcategory === 'General' ? '' : subcategory);
       const alreadyVotedId = votes[subKey];
       const votedInThisSub = alreadyVotedId !== undefined;
 
-      // Subcategory header
       html += `
         <div class="subcategory-header flex items-center justify-between mb-4">
           <div>
@@ -701,19 +881,14 @@ function renderVoting() {
               ? '<span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold">✅ Voted</span>'
               : votingOpen
               ? '<span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-bold">Pick 1</span>'
-              : '<span class="text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full font-bold">Closed</span>'
-            }
+              : '<span class="text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full font-bold">Closed</span>'}
           </div>
-        </div>
-      `;
+        </div>`;
 
-      // Nominees grid for this subcategory
       html += `<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">`;
-
       nominees.forEach(n => {
         const hasVoted = alreadyVotedId === n.id;
         const voteCount = n.votes || 0;
-
         html += `
           <div class="vote-card ${hasVoted ? 'voted' : ''}">
             <div class="photo-wrap">
@@ -744,14 +919,11 @@ function renderVoting() {
                   ? '<span class="text-sm font-bold text-green-600">✅ Your Vote</span>'
                   : votedInThisSub
                   ? '<span class="text-xs text-gray-400 font-medium">Already voted here</span>'
-                  : '<span class="text-xs text-gray-400 font-medium">Voting closed</span>'
-                }
+                  : '<span class="text-xs text-gray-400 font-medium">Voting closed</span>'}
               </div>
             </div>
-          </div>
-        `;
+          </div>`;
       });
-
       html += `</div>`;
     });
   });
@@ -761,9 +933,9 @@ function renderVoting() {
 }
 
 /* ============================================
-   CAST VOTE
+   CAST VOTE — uses JSONP so server can REJECT duplicates
    ============================================ */
-function castVote(id) {
+async function castVote(id) {
   if (!isVoterRegistered()) { openRegistration(); return; }
 
   const nominee = approvedNominees.find(n => n.id === id);
@@ -776,34 +948,86 @@ function castVote(id) {
   const voter = getCurrentVoter();
 
   if (hasVotedInSubcategory(category, subcategory)) {
- const prevId = getVoteInSubcategory(category, subcategory);
- const prev = approvedNominees.find(n => n.id === prevId);
- alert(`You already voted for "${prev ? prev.name : 'someone'}" in "${subcategory || category}". You can only vote once per subcategory.`);
- return;
-}
+    const prevId = getVoteInSubcategory(category, subcategory);
+    const prev = approvedNominees.find(n => n.id === prevId);
+    alert(`You already voted for "${prev ? prev.name : 'someone'}" in "${subcategory || category}". One vote per subcategory.`);
+    return;
+  }
 
-  // Send to Google Sheets
+  // Find the button and show loading
+  const btn = document.querySelector(`button[onclick="castVote(${id})"]`);
+  const originalLabel = btn ? btn.textContent : '';
+  if (btn) { btn.textContent = '⏳'; btn.disabled = true; }
+
+  const ip = await getIPAddress();
+  const fingerprint = await getFingerprint();
+
+  // JSONP vote so server can reject
+  const cb = 'wauVote_' + Date.now();
+  window[cb] = function(data) {
+    const s = document.getElementById(cb);
+    if (s) s.remove();
+    delete window[cb];
+
+    if (btn) { btn.textContent = originalLabel; btn.disabled = false; }
+
+    if (data && data.status === 'success') {
+      votes[subKey] = id;
+      saveVotes(votes);
+      nominee.votes = (nominee.votes || 0) + 1;
+      showVoteToast(nominee.name, subcategory || category);
+      renderVoting();
+    } else if (data && data.status === 'duplicate') {
+      alert(`⚠️ ${data.message || 'This device or network has already voted in this subcategory. Multiple voting is not allowed.'}`);
+      // Sync local cache so the UI shows "Already voted"
+      if (data.previousNomineeId) {
+        votes[subKey] = data.previousNomineeId;
+        saveVotes(votes);
+      }
+      renderVoting();
+    } else {
+      alert('Could not submit vote. Please try again.');
+    }
+  };
+
   const params = new URLSearchParams({
     action: 'vote',
+    callback: cb,
     votingCode: voter.code,
     voterName: voter.name,
+    voterPhone: voter.phone || '',
     nomineeId: id,
     nomineeName: nominee.name,
     category: category,
     subcategory: subcategory,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    deviceFingerprint: fingerprint,
+    ipAddress: ip,
+    userAgent: navigator.userAgent.slice(0,200)
   }).toString();
 
-  fetch(API_URL + '?' + params, { method:'GET', mode:'no-cors' }).catch(() => {});
+  const script = document.createElement('script');
+  script.id = cb;
+  script.src = API_URL + '?' + params;
+  script.onerror = function() {
+    if (btn) { btn.textContent = originalLabel; btn.disabled = false; }
+    alert('Network error. Please try again.');
+    const s = document.getElementById(cb);
+    if (s) s.remove();
+    delete window[cb];
+  };
+  document.body.appendChild(script);
 
-  // Save locally
-  votes[subKey] = id;
-  votes['count_' + id] = (votes['count_' + id] || 0) + 1;
-  saveVotes(votes);
-  nominee.votes = (nominee.votes || 0) + 1;
-
-  showVoteToast(nominee.name, subcategory || category);
-  renderVoting();
+  // Failsafe in case server never responds
+  setTimeout(() => {
+    if (window[cb]) {
+      if (btn) { btn.textContent = originalLabel; btn.disabled = false; }
+      alert('Vote timed out. Please try again.');
+      const s = document.getElementById(cb);
+      if (s) s.remove();
+      delete window[cb];
+    }
+  }, 12000);
 }
 
 /* ============================================
@@ -822,10 +1046,9 @@ function showVoteToast(name, sub) {
 }
 
 /* ============================================
-   LIVE RESULTS - FROM GOOGLE SHEETS
+   LIVE RESULTS
    ============================================ */
 let voteUpdateInterval = null;
-
 function initializeResults() {
   renderResultsFilter();
   fetchVotesFromSheets();
@@ -835,38 +1058,20 @@ function initializeResults() {
 
 function fetchVotesFromSheets() {
   const lastUpdatedEl = document.getElementById('last-updated');
-
-  if (lastUpdatedEl) {
-    lastUpdatedEl.textContent = 'Fetching from Google Sheet...';
-  }
+  if (lastUpdatedEl) lastUpdatedEl.textContent = 'Fetching from Google Sheet...';
 
   const callbackName = 'wauVotesCallback_' + Date.now();
-
   window[callbackName] = function(data) {
     try {
       if (data && (data.status === 'success' || data.status === 'no_votes_sheet')) {
         const sheetVotes = data.votes || {};
-
-        approvedNominees.forEach(n => {
-          n.votes = Number(sheetVotes[String(n.id)] || 0);
-        });
-
+        approvedNominees.forEach(n => { n.votes = Number(sheetVotes[String(n.id)] || 0); });
         updateLiveResults();
-
         const totalEl = document.getElementById('total-votes-count');
-        if (totalEl) {
-          totalEl.textContent = data.totalVotes || 0;
-        }
-
-        if (lastUpdatedEl) {
-          lastUpdatedEl.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
-        }
+        if (totalEl) totalEl.textContent = data.totalVotes || 0;
+        if (lastUpdatedEl) lastUpdatedEl.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
       } else {
-        console.log('Unexpected vote data:', data);
-
-        if (lastUpdatedEl) {
-          lastUpdatedEl.textContent = 'Could not load results';
-        }
+        if (lastUpdatedEl) lastUpdatedEl.textContent = 'Could not load results';
       }
     } finally {
       const oldScript = document.getElementById(callbackName);
@@ -878,19 +1083,12 @@ function fetchVotesFromSheets() {
   const script = document.createElement('script');
   script.id = callbackName;
   script.src = API_URL + '?action=get_votes&callback=' + callbackName + '&_=' + Date.now();
-
   script.onerror = function() {
-    if (lastUpdatedEl) {
-      lastUpdatedEl.textContent = 'Error fetching results';
-    }
-
-    console.error('Could not fetch live results from Google Apps Script.');
-
+    if (lastUpdatedEl) lastUpdatedEl.textContent = 'Error fetching results';
     const oldScript = document.getElementById(callbackName);
     if (oldScript) oldScript.remove();
     delete window[callbackName];
   };
-
   document.body.appendChild(script);
 }
 
@@ -929,114 +1127,69 @@ function updateLiveResults() {
   });
 
   let html = '';
-
   Object.entries(grouped).forEach(([category, subcategories]) => {
-    const catTotal = approvedNominees
-      .filter(n => n.category === category)
-      .reduce((sum, n) => sum + (n.votes || 0), 0);
-
-    html += `
-      <div class="result-section mb-10" data-cat="${category}">
-        <div class="bg-gradient-to-r from-green-700 to-green-600 text-white px-6 py-4 rounded-xl font-bold text-xl flex items-center justify-between mb-4">
-          <span>🏆 ${category}</span>
-          <span class="text-sm font-normal opacity-80">${catTotal} total vote${catTotal !== 1 ? 's' : ''}</span>
-        </div>
-    `;
-
+    const catTotal = approvedNominees.filter(n => n.category === category).reduce((sum, n) => sum + (n.votes || 0), 0);
+    html += `<div class="result-section mb-10" data-cat="${category}">
+      <div class="bg-gradient-to-r from-green-700 to-green-600 text-white px-6 py-4 rounded-xl font-bold text-xl flex items-center justify-between mb-4">
+        <span>🏆 ${category}</span>
+        <span class="text-sm font-normal opacity-80">${catTotal} total vote${catTotal !== 1 ? 's' : ''}</span>
+      </div>`;
     Object.entries(subcategories).forEach(([subcategory, nominees]) => {
       const subTotal = nominees.reduce((sum, n) => sum + (n.votes || 0), 0);
       const sorted = [...nominees].sort((a, b) => (b.votes || 0) - (a.votes || 0));
       const winner = sorted[0];
       const hasVotes = subTotal > 0;
-
-      html += `
-        <div class="bg-white rounded-xl shadow border border-gray-200 mb-6 overflow-hidden">
-          
-          <!-- Subcategory Title -->
-          <div class="bg-gradient-to-r from-green-50 to-yellow-50 border-l-4 border-green-500 px-5 py-3 flex items-center justify-between">
-            <div>
-              <p class="text-xs text-green-600 font-bold uppercase tracking-wider">Subcategory</p>
-              <h5 class="text-lg font-bold text-gray-800">${subcategory === 'General' ? category : subcategory}</h5>
-            </div>
-            <span class="text-sm text-gray-500 font-semibold">${subTotal} vote${subTotal !== 1 ? 's' : ''} total</span>
+      html += `<div class="bg-white rounded-xl shadow border border-gray-200 mb-6 overflow-hidden">
+        <div class="bg-gradient-to-r from-green-50 to-yellow-50 border-l-4 border-green-500 px-5 py-3 flex items-center justify-between">
+          <div>
+            <p class="text-xs text-green-600 font-bold uppercase tracking-wider">Subcategory</p>
+            <h5 class="text-lg font-bold text-gray-800">${subcategory === 'General' ? category : subcategory}</h5>
           </div>
-
-          <!-- WINNER BANNER -->
-          ${hasVotes ? `
-          <div class="bg-yellow-400 px-5 py-3 flex items-center gap-3">
-            <span class="text-2xl">🥇</span>
-            <div>
-              <p class="text-xs font-bold text-yellow-900 uppercase tracking-wider">Current Leader</p>
-              <p class="text-lg font-black text-yellow-900">${winner.name}</p>
-            </div>
-            <div class="ml-auto text-right">
-              <p class="text-3xl font-black text-yellow-900">${winner.votes}</p>
-              <p class="text-xs text-yellow-800">votes</p>
-            </div>
+          <span class="text-sm text-gray-500 font-semibold">${subTotal} vote${subTotal !== 1 ? 's' : ''} total</span>
+        </div>
+        ${hasVotes ? `<div class="bg-yellow-400 px-5 py-3 flex items-center gap-3">
+          <span class="text-2xl">🥇</span>
+          <div>
+            <p class="text-xs font-bold text-yellow-900 uppercase tracking-wider">Current Leader</p>
+            <p class="text-lg font-black text-yellow-900">${winner.name}</p>
           </div>
-          ` : `
-          <div class="bg-gray-100 px-5 py-3 text-center text-gray-500 text-sm font-semibold">
-            No votes yet
+          <div class="ml-auto text-right">
+            <p class="text-3xl font-black text-yellow-900">${winner.votes}</p>
+            <p class="text-xs text-yellow-800">votes</p>
           </div>
-          `}
-
-          <!-- All Nominees Ranked -->
-          <div class="p-4 space-y-3">
-            ${sorted.map((n, index) => {
-              const voteCount = n.votes || 0;
-              const percentage = subTotal > 0 ? Math.round((voteCount / subTotal) * 100) : 0;
-              
-              let medal = '';
-              let rowBg = 'bg-gray-50';
-              let barColor = 'bg-green-400';
-
-              if (index === 0 && voteCount > 0) {
-                medal = '🥇';
-                rowBg = 'bg-yellow-50 border border-yellow-300';
-                barColor = 'bg-yellow-400';
-              } else if (index === 1 && voteCount > 0) {
-                medal = '🥈';
-                rowBg = 'bg-gray-100 border border-gray-300';
-                barColor = 'bg-gray-400';
-              } else if (index === 2 && voteCount > 0) {
-                medal = '🥉';
-                rowBg = 'bg-orange-50 border border-orange-200';
-                barColor = 'bg-orange-400';
-              } else {
-                medal = `${index + 1}.`;
-              }
-
-              return `
-                <div class="flex items-center gap-3 p-3 rounded-lg ${rowBg}">
-                  ${n.photo
-                    ? `<img src="${n.photo}" alt="${n.name}" class="w-12 h-12 rounded-lg object-cover border-2 border-white shadow flex-shrink-0" onerror="this.style.display='none'"/>`
-                    : '<div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center text-xl flex-shrink-0">👤</div>'
-                  }
-                  <div class="flex-1 min-w-0">
-                    <div class="flex items-center justify-between mb-1">
-                      <span class="font-bold text-gray-800 text-sm">${medal} ${n.name}</span>
-                      <div class="flex items-baseline gap-1 ml-2 flex-shrink-0">
-                        <span class="text-xl font-black text-green-700">${voteCount}</span>
-                        <span class="text-xs text-gray-400">votes</span>
-                      </div>
-                    </div>
-                    <p class="text-xs text-gray-400 mb-1">${n.nationality}</p>
-                    <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                      <div class="${barColor} h-full rounded-full transition-all duration-700" style="width:${percentage}%"></div>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-0.5 font-semibold">${percentage}% of votes in this subcategory</p>
+        </div>` : `<div class="bg-gray-100 px-5 py-3 text-center text-gray-500 text-sm font-semibold">No votes yet</div>`}
+        <div class="p-4 space-y-3">
+          ${sorted.map((n, index) => {
+            const voteCount = n.votes || 0;
+            const percentage = subTotal > 0 ? Math.round((voteCount / subTotal) * 100) : 0;
+            let medal = '', rowBg = 'bg-gray-50', barColor = 'bg-green-400';
+            if (index === 0 && voteCount > 0) { medal = '🥇'; rowBg = 'bg-yellow-50 border border-yellow-300'; barColor = 'bg-yellow-400'; }
+            else if (index === 1 && voteCount > 0) { medal = '🥈'; rowBg = 'bg-gray-100 border border-gray-300'; barColor = 'bg-gray-400'; }
+            else if (index === 2 && voteCount > 0) { medal = '🥉'; rowBg = 'bg-orange-50 border border-orange-200'; barColor = 'bg-orange-400'; }
+            else { medal = `${index + 1}.`; }
+            return `<div class="flex items-center gap-3 p-3 rounded-lg ${rowBg}">
+              ${n.photo ? `<img src="${n.photo}" alt="${n.name}" class="w-12 h-12 rounded-lg object-cover border-2 border-white shadow flex-shrink-0" onerror="this.style.display='none'"/>` : '<div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center text-xl flex-shrink-0">👤</div>'}
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-bold text-gray-800 text-sm">${medal} ${n.name}</span>
+                  <div class="flex items-baseline gap-1 ml-2 flex-shrink-0">
+                    <span class="text-xl font-black text-green-700">${voteCount}</span>
+                    <span class="text-xs text-gray-400">votes</span>
                   </div>
                 </div>
-              `;
-            }).join('')}
-          </div>
+                <p class="text-xs text-gray-400 mb-1">${n.nationality}</p>
+                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div class="${barColor} h-full rounded-full transition-all duration-700" style="width:${percentage}%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-0.5 font-semibold">${percentage}% of votes in this subcategory</p>
+              </div>
+            </div>`;
+          }).join('')}
         </div>
-      `;
+      </div>`;
     });
-
     html += `</div>`;
   });
-
   grid.innerHTML = html;
 }
 
@@ -1045,7 +1198,7 @@ window.addEventListener('beforeunload', () => {
 });
 
 /* ============================================
-   SCROLL REVEAL
+   SCROLL REVEAL + ACTIVE NAV
    ============================================ */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
@@ -1058,7 +1211,6 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ACTIVE NAV */
 window.addEventListener('scroll', () => {
   let c = '';
   document.querySelectorAll('section[id]').forEach(s => { if (scrollY >= s.offsetTop - 120) c = s.id; });
@@ -1067,7 +1219,6 @@ window.addEventListener('scroll', () => {
     a.classList.toggle('font-bold', a.getAttribute('href') === '#' + c);
   });
 }, { passive: true });
-
 window.addEventListener('scroll', () => {
   document.getElementById('main-header').classList.toggle('shadow-xl', scrollY > 20);
 }, { passive: true });
